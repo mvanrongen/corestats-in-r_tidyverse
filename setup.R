@@ -1,0 +1,13 @@
+# essential libraries
+library(knitr)
+suppressPackageStartupMessages(library(kableExtra))
+#suppressPackageStartupMessages(library(car))
+#suppressPackageStartupMessages(library(dunn.test))
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(broom))
+suppressPackageStartupMessages(library(rstatix))
+suppressPackageStartupMessages(library(patchwork))
+suppressPackageStartupMessages(library(ggResidpanel))
+library(pwr)
+library(powerAnalysis)
+theme_set(theme_bw())

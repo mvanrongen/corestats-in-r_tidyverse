@@ -278,10 +278,8 @@ Perform an ANOVA test on the data:
 anova(lm_oystercatcher)
 ```
 
-The first line fits a linear model to the data (i.e. finds the means of the three groups and calculates a load of intermediary data that we need for the statistical analysis) and stores this information in an R object (which I’ve called `lm_oystercatchers`, but which you can call what you like). The second line actually carries out the ANOVA analysis.
+This fits a linear model to the data (i.e. finds the means of the three groups and calculates a load of intermediary data that we need for the statistical analysis) and stores this information in an R object (which I’ve called `lm_oystercatchers`, but which you can call what you like). The second line actually carries out the ANOVA analysis.
 
--	The first argument must be in the formula format: `response ~ predictor`
--	If the data are stored in stacked format, then the second argument must be the name of the data frame
 -	The `anova()` command takes a linear model object as its main argument
 
 ## Interpret output and report results

@@ -375,6 +375,12 @@
 <li><a class="" href="introduction-4.html"><span class="header-section-number">23</span> Introduction</a></li>
 <li><a class="" href="linear-models.html"><span class="header-section-number">24</span> Linear models</a></li>
 <li><a class="" href="model-comparisons.html"><span class="header-section-number">25</span> Model comparisons</a></li>
+<li class="book-part">CoreStats 6: Power analysis</li>
+<li><a class="" href="cs6-intro.html"><span class="header-section-number">26</span> Introduction</a></li>
+<li class="book-part">CoreStats 6 (Practicals)</li>
+<li><a class="" href="introduction-5.html"><span class="header-section-number">27</span> Introduction</a></li>
+<li><a class="" href="power-analysis.html"><span class="header-section-number">28</span> Power analysis</a></li>
+<li><a class="" href="statistical-reporting.html"><span class="header-section-number">29</span> Statistical reporting</a></li>
 </ul>
 
         <div class="book-extra">
@@ -644,11 +650,8 @@ par(mfrow = c(1,1))</a></code></pre>
 <p>Perform an ANOVA test on the data:</p>
 <div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_oystercatcher</span><span class="op">)</span></code></pre></div>
-<p>The first line fits a linear model to the data (i.e. finds the means of the three groups and calculates a load of intermediary data that we need for the statistical analysis) and stores this information in an R object (which I’ve called <code>lm_oystercatchers</code>, but which you can call what you like). The second line actually carries out the ANOVA analysis.</p>
+<p>This fits a linear model to the data (i.e. finds the means of the three groups and calculates a load of intermediary data that we need for the statistical analysis) and stores this information in an R object (which I’ve called <code>lm_oystercatchers</code>, but which you can call what you like). The second line actually carries out the ANOVA analysis.</p>
 <ul>
-<li>The first argument must be in the formula format: <code>response ~ predictor</code>
-</li>
-<li>If the data are stored in stacked format, then the second argument must be the name of the data frame</li>
 <li>The <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> command takes a linear model object as its main argument</li>
 </ul>
 </div>
