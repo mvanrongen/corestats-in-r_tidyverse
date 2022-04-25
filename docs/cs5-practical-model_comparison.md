@@ -274,16 +274,10 @@ This BSE approach only gets as far as the first step (trying to drop the interac
 
 ```
 ## Rows: 16 Columns: 4
-```
-
-```
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: ","
 ## chr (1): treatment_plant
 ## dbl (3): id, daily_temp, hydrogen_sulfide
-```
-
-```
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.

@@ -716,11 +716,11 @@ lm_lobsters %>%
 
 ```
 ## # A tibble: 3 × 9
-##   term  group1  group2  null.value estimate conf.low conf.high p.adj p.adj.signif
-## * <chr> <chr>   <chr>        <dbl>    <dbl>    <dbl>     <dbl> <dbl> <chr>       
-## 1 diet  Flakes  Mussels          0    21.9     -9.66      53.5 0.202 ns          
-## 2 diet  Flakes  Pellets          0    14.0    -20.3       48.4 0.551 ns          
-## 3 diet  Mussels Pellets          0    -7.85   -41.1       25.4 0.815 ns
+##   term  group1  group2 null.value estimate conf.low conf.high p.adj p.adj.signif
+## * <chr> <chr>   <chr>       <dbl>    <dbl>    <dbl>     <dbl> <dbl> <chr>       
+## 1 diet  Flakes  Musse…          0    21.9     -9.66      53.5 0.202 ns          
+## 2 diet  Flakes  Pelle…          0    14.0    -20.3       48.4 0.551 ns          
+## 3 diet  Mussels Pelle…          0    -7.85   -41.1       25.4 0.815 ns
 ```
 
 Here we can see that actually, there is no significant difference between any of the pairs of groups in this dataset.

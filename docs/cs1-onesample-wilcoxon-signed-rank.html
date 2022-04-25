@@ -6,7 +6,7 @@
 <title>Chapter 5 Wilcoxon signed-rank test | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
 <meta name="description" content="This test also considers a single sample, however for this test (in contrast to the one sample t-test) we don’t have to assume that the parent distribution is normally distributed. We do still...">
-<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta name="generator" content="bookdown 0.25 with bs4_book()">
 <meta property="og:title" content="Chapter 5 Wilcoxon signed-rank test | Core Statistics in R">
 <meta property="og:type" content="book">
 <meta property="og:description" content="This test also considers a single sample, however for this test (in contrast to the one sample t-test) we don’t have to assume that the parent distribution is normally distributed. We do still...">
@@ -19,9 +19,9 @@
 <!-- CSS : implied media="all" --><link rel="stylesheet" href="stylesheets/full-stylesheet.css">
 <link rel="stylesheet" href="stylesheets/styleguide.css">
 <link rel="stylesheet" href="stylesheets/style.css">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><script type="text/javascript" src="//use.typekit.com/hyb5bko.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script><script type="text/javascript">  document.documentElement.className += " js";</script>
 </head>
@@ -436,14 +436,14 @@
 <p>Plot a histogram and a boxplot of the data:</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create a histogram</span>
-<span class="va">fishlengthDF</span> <span class="op">%&gt;%</span> 
-  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_histogram</span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
+<span class="va">fishlengthDF</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 
 <span class="co"># create boxplot</span>
-<span class="va">fishlengthDF</span> <span class="op">%&gt;%</span> 
-  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_boxplot</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<span class="va">fishlengthDF</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>You get the following plots (we’ll learn how to create panels like this later!):</p>
 <div class="inline-figure"><img src="cs1-practical-one_sample_wilcoxon_files/figure-html/cs1-one-sample-wilcoxon-assumptions2-1.png" width="672"></div>
 <p>Here we can see that whilst the distribution isn’t perfectly symmetric, neither is it heavily skewed to the left or right and we can make the call that the distribution is <em>symmetric enough</em> for us to be happy with the results of the test.</p>
@@ -454,7 +454,7 @@
 </h2>
 <p>Perform a one-sample, two-tailed Wilcoxon signed-rank test:</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">fishlengthDF</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">fishlengthDF</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_test.html">wilcox_test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="fl">1</span>,
               mu <span class="op">=</span> <span class="fl">20</span>,
               alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
@@ -518,7 +518,7 @@ Answer
 <span class="header-section-number">5.6.3</span> Wilcoxon signed-rank test<a class="anchor" aria-label="anchor" href="#wilcoxon-signed-rank-test"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dissolving</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">dissolving</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_test.html">wilcox_test</a></span><span class="op">(</span><span class="va">dissolving_time</span> <span class="op">~</span> <span class="fl">1</span>,
               mu <span class="op">=</span> <span class="fl">45</span>,
               alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
@@ -551,12 +551,12 @@ Answer
 <div class="keypoints">
 <ul>
 <li>One-sample tests are used when you have a single sample of continuous data</li>
-<li>We can summarise the data using the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function and visualise with <code>geom_boxplot()</code>
+<li>We can summarise the data using the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function and visualise with <code><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot()</a></code>
 </li>
 <li>The t-test assumes that the data are normally distributed and independent of each other</li>
 <li>The Wilcoxon signed-rank test does not assume a normal distribution, but does require independent samples</li>
 <li>The <code><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test()</a></code> compares if the <em>mean</em> of the parent distribution differs from a hypothesised value, whereas <code><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_test.html">wilcox_test()</a></code> compares the <em>median</em>.</li>
-<li>A good way of assessing assumptions is to visually check by looking at the distribution with <code>geom_histogram()</code> and quantile-quantile plots with <code>stat_qq()</code> and <code>stat_qqline()</code>
+<li>A good way of assessing assumptions is to visually check by looking at the distribution with <code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram()</a></code> and quantile-quantile plots with <code><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq()</a></code> and <code>stat_qqline()</code>
 </li>
 </ul>
 </div>

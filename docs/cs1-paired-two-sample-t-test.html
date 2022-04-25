@@ -6,7 +6,7 @@
 <title>Chapter 8 Paired two-sample t-test | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
 <meta name="description" content="A paired t-test is used when we have two samples of continuous data that can be paired (examples of these sort of data would be weights of individuals before and after a diet). This test is...">
-<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta name="generator" content="bookdown 0.25 with bs4_book()">
 <meta property="og:title" content="Chapter 8 Paired two-sample t-test | Core Statistics in R">
 <meta property="og:type" content="book">
 <meta property="og:description" content="A paired t-test is used when we have two samples of continuous data that can be paired (examples of these sort of data would be weights of individuals before and after a diet). This test is...">
@@ -19,9 +19,9 @@
 <!-- CSS : implied media="all" --><link rel="stylesheet" href="stylesheets/full-stylesheet.css">
 <link rel="stylesheet" href="stylesheets/styleguide.css">
 <link rel="stylesheet" href="stylesheets/style.css">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><script type="text/javascript" src="//use.typekit.com/hyb5bko.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script><script type="text/javascript">  document.documentElement.className += " js";</script>
 </head>
@@ -408,11 +408,11 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>geom_jitter()</code></td>
+<td align="left"><code><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter()</a></code></td>
 <td align="left">Plots jittered points by adding a small amount of random variation to each point, to handle overplotting</td>
 </tr>
 <tr class="even">
-<td align="left"><code>pivot_wider()</code></td>
+<td align="left"><code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider()</a></code></td>
 <td align="left">“Widens” the data, increasing the number of columns</td>
 </tr>
 </tbody>
@@ -438,9 +438,9 @@
 </ul>
 <p>The data are stored in a tidy format in the file <code>data/tidy/CS1-twopaired.csv</code>.
 Read this into R:</p>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># load the data</span>
-<span class="va">cortisol</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/tidy/CS1-twopaired.csv"</span><span class="op">)</span>
+<span class="va">cortisol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS1-twopaired.csv"</span><span class="op">)</span>
 
 <span class="co"># have a look at the data</span>
 <span class="va">cortisol</span></code></pre></div>
@@ -473,36 +473,36 @@ Read this into R:</p>
 <h2>
 <span class="header-section-number">8.3</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-4"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create a boxplot</span>
-<span class="va">cortisol</span> <span class="op">%&gt;%</span> 
-  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">time</span>, y <span class="op">=</span> <span class="va">cortisol</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_boxplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_jitter</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Cortisol level (nmol/l)"</span><span class="op">)</span></code></pre></div>
+<span class="va">cortisol</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">time</span>, y <span class="op">=</span> <span class="va">cortisol</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Cortisol level (nmol/l)"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-two_sample_paired_t_test_files/figure-html/cs1-pairedt-sumvisual-1.png" width="672"></div>
-<p>Here we use also visualise the actual data points, to get a sense of how these data are spread out. To avoid overlapping the data points (try using <code>geom_point()</code> instead of <code>geom_jitter()</code>), we jitter the data points. What <code>geom_jitter()</code> does is add a small amount of variation to each point.</p>
+<p>Here we use also visualise the actual data points, to get a sense of how these data are spread out. To avoid overlapping the data points (try using <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code> instead of <code><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter()</a></code>), we jitter the data points. What <code><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter()</a></code> does is add a small amount of variation to each point.</p>
 <p>However, this plot does not capture how the cortisol level of each <em>individual</em> subject has changed though. We can explore the individual changes between morning and evening by creating a boxplot of the <em>differences</em> between the two times of measurement.</p>
-<p>To do this, we need to put our data in a wide format, using <code>pivot_wider()</code>.</p>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<p>To do this, we need to put our data in a wide format, using <code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider()</a></code>.</p>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># calculate the difference between evening and morning values</span>
-<span class="va">cortisol_diff</span> <span class="op">&lt;-</span> <span class="va">cortisol</span> <span class="op">%&gt;%</span>
-  <span class="fu">pivot_wider</span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">time</span>, values_from <span class="op">=</span> <span class="va">cortisol</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<span class="va">cortisol_diff</span> <span class="op">&lt;-</span> <span class="va">cortisol</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">time</span>, values_from <span class="op">=</span> <span class="va">cortisol</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>cortisol_change <span class="op">=</span> <span class="va">evening</span> <span class="op">-</span> <span class="va">morning</span><span class="op">)</span>
 
 <span class="co"># plot the data</span>
-  <span class="fu">ggplot</span><span class="op">(</span><span class="va">cortisol_diff</span>, <span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="va">cortisol_change</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_boxplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Change in cortisol (nmol/l)"</span><span class="op">)</span></code></pre></div>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">cortisol_diff</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">cortisol_change</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Change in cortisol (nmol/l)"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-two_sample_paired_t_test_files/figure-html/cs1-pairedt-diff-1.png" width="672"></div>
 <p>The differences in cortisol levels appear to be very much less than zero, (meaning that the evening cortisol levels appear to be much lower than the morning ones). As such we would expect that the test would give a pretty significant result.</p>
 <p>An alternative representation would be to plot the data points for both evening and morning and connect them by patient:</p>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot cortisol levels by patient</span>
-<span class="va">cortisol</span> <span class="op">%&gt;%</span> 
-  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">time</span>, y <span class="op">=</span> <span class="va">cortisol</span>, group <span class="op">=</span> <span class="va">patient_id</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<span class="va">cortisol</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">time</span>, y <span class="op">=</span> <span class="va">cortisol</span>, group <span class="op">=</span> <span class="va">patient_id</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-two_sample_paired_t_test_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
 <p>This gives a similar picture to what the boxplot was telling us, that for most patients the cortisol levels are higher in the morning than in the evening.</p>
 </div>
@@ -517,9 +517,9 @@ Read this into R:</p>
 <span class="header-section-number">8.5</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-3"><i class="fas fa-link"></i></a>
 </h2>
 <p>Perform a two-sample, two-tailed, paired t-test:</p>
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># perform the test</span>
-<span class="va">cortisol</span> <span class="op">%&gt;%</span> 
+<span class="va">cortisol</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test</a></span><span class="op">(</span><span class="va">cortisol</span> <span class="op">~</span> <span class="va">time</span>,
          alternative <span class="op">=</span> <span class="st">"two.sided"</span>,
          paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
@@ -556,20 +556,21 @@ Was a paired t-test an appropriate test?</p>
 Answer
 </summary><p>A paired test is really just a one-sample test in disguise. We actually don’t care too much about the distributions of the individual groups. Instead we care about the properties of the <em>differences</em>. So for a paired t-test to be valid for this dataset, we need the differences between the morning and evening values to be normally distributed.</p>
 <p>Let’s check this with Shapiro-Wilk and Q-Q plots using the <code>cortisol_diff</code> variable we created earlier.</p>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># perform Shapiro-Wilk test on cortisol differences</span>
-<span class="va">cortisol_diff</span> <span class="op">%&gt;%</span> 
+<span class="va">cortisol_diff</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">cortisol_change</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 3
 ##   variable        statistic     p
 ##   &lt;chr&gt;               &lt;dbl&gt; &lt;dbl&gt;
 ## 1 cortisol_change     0.924 0.116</code></pre>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># and create the Q-Q plot</span>
-<span class="va">cortisol_diff</span> <span class="op">%&gt;%</span> 
-  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>sample <span class="op">=</span> <span class="va">cortisol_change</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">stat_qq</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">stat_qq_line</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></code></pre></div>
+<span class="va">lm_cortisol_diff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">cortisol_change</span> <span class="op">~</span> <span class="fl">1</span>,
+                       data <span class="op">=</span> <span class="va">cortisol_diff</span><span class="op">)</span>
+
+<span class="va">lm_cortisol_diff</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="st">"qq"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-two_sample_paired_t_test_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
 <p>The Shapiro-Wilk test says that the data are normal enough and whilst the Q-Q plot is mostly fine, there is some suggestion of snaking at the bottom left. I’m actually OK with this because the suggestion of snaking is actually only due to a single point (the last point on the left). If you cover that point up with your thumb (or finger of your choice) then the remaining points in the Q-Q plot look pretty good, and so the suggestion of snaking is actually driven by only a single point (which can happen by chance). As such I’m actually happy that the assumption of normality is well met in this case. This <strong>single point</strong> check is a useful thing to remember when assessing diagnostic plots.</p>
 <p>So, yep, a paired t-test is appropriate for this dataset.</p>

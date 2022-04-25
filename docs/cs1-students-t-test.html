@@ -6,7 +6,7 @@
 <title>Chapter 6 Student’s t-test | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
 <meta name="description" content="For this test we assume that both sample data sets are normally distributed and have equal variance. We test to see if the means of the two samples differ significantly from each other. The...">
-<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta name="generator" content="bookdown 0.25 with bs4_book()">
 <meta property="og:title" content="Chapter 6 Student’s t-test | Core Statistics in R">
 <meta property="og:type" content="book">
 <meta property="og:description" content="For this test we assume that both sample data sets are normally distributed and have equal variance. We test to see if the means of the two samples differ significantly from each other. The...">
@@ -19,9 +19,9 @@
 <!-- CSS : implied media="all" --><link rel="stylesheet" href="stylesheets/full-stylesheet.css">
 <link rel="stylesheet" href="stylesheets/styleguide.css">
 <link rel="stylesheet" href="stylesheets/style.css">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><script type="text/javascript" src="//use.typekit.com/hyb5bko.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script><script type="text/javascript">  document.documentElement.className += " js";</script>
 </head>
@@ -448,7 +448,7 @@
 <p>The data are stored in the file <code>data/tidy/CS1-twosample.csv</code>.</p>
 <p>Read this into R:</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">rivers</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/tidy/CS1-twosample.csv"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">rivers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS1-twosample.csv"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="cs1-students-sumvisual" class="section level2" number="6.3">
 <h2>
@@ -457,9 +457,9 @@
 <p>Let’s summarise the data…</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># get common summary stats for the length column</span>
-<span class="va">rivers</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">id</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">river</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<span class="va">rivers</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">id</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">river</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/get_summary_stats.html">get_summary_stats</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"common"</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 11
 ##   river   variable     n   min   max median   iqr  mean    sd    se    ci
@@ -468,9 +468,9 @@
 ## 2 Guanapo length      29  11.2  23.3   18.8   2.2  18.3  2.58 0.48  0.983</code></pre>
 <p>and visualise it:</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">rivers</span> <span class="op">%&gt;%</span> 
-  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">river</span>, y <span class="op">=</span> <span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_boxplot</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">rivers</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">river</span>, y <span class="op">=</span> <span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-two_sample_t_test_files/figure-html/cs1-twosample-rivers-boxplot-1.png" width="672"></div>
 <p>The boxplot does appear to suggest that the two samples have different means, and moreover that the guppies in Guanapo may be smaller than the guppies in Aripo. It isn’t immediately obvious that the two populations don’t have equal variances though, so we plough on.</p>
 </div>
@@ -491,8 +491,8 @@ This is where it gets a bit trickier. Although we don’t care if the samples ar
 <p>So we perform a <a href="cs1-one-sample-t-test.html#shapiro-wilk-test">Shapiro-Wilk test</a> on both samples separately.</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># group data by river and perform test</span>
-<span class="va">rivers</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">river</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<span class="va">rivers</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">river</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">length</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 4
 ##   river   variable statistic      p
@@ -511,18 +511,31 @@ This is where it gets a bit trickier. Although we don’t care if the samples ar
 <p>Create the Q-Q plots for the two samples and discuss with your neighbour what you see in light of the results from the above Shapiro-Wilk test.</p>
 <details><summary>
 Answer
-</summary><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># we group the data by river</span>
-<span class="co"># then create a panel per river</span>
-<span class="co"># containing the Q-Q plot for that river</span>
-<span class="va">rivers</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">river</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>sample <span class="op">=</span> <span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">stat_qq</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">stat_qq_line</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">facet_wrap</span><span class="op">(</span>facets <span class="op">=</span> <span class="fu">vars</span><span class="op">(</span><span class="va">river</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+</summary><p>To create the Q-Q plots we need to filter out the relevant data first. If we want to use the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function in pipes, we still need to tell it where the data is coming from. Long story short: because the <code>data =</code> argument is not at the beginning we need to add a <code>.</code> (dot):</p>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># filter out the Guanapo data</span>
+<span class="co"># and define the model</span>
+<span class="va">lm_guanapo</span> <span class="op">&lt;-</span> <span class="va">rivers</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">river</span> <span class="op">==</span> <span class="st">"Guanapo"</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">.</span><span class="op">)</span>
+
+<span class="co"># filter out the Aripo data</span>
+<span class="co"># and define the model</span>
+<span class="va">lm_aripo</span> <span class="op">&lt;-</span> <span class="va">rivers</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">river</span> <span class="op">==</span> <span class="st">"Aripo"</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">.</span><span class="op">)</span>
+
+<span class="co"># Q-Q plot Guanapo</span>
+<span class="va">lm_guanapo</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="st">"qq"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-two_sample_t_test_files/figure-html/cs1-twosample-qqplot-1.png" width="672"></div>
-<p>The Q-Q plots mirror what we found with the Shapiro-Wilk tests: the data for Aripo are pretty normally distributed, whereas the assumption of normality for the Guanapo data is less certain.</p>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Q-Q plot Aripo</span>
+<span class="va">lm_aripo</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="st">"qq"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs1-practical-two_sample_t_test_files/figure-html/cs1-twosample-qqplot-2.png" width="672"></div>
+<p>The Q-Q plots highlight the issue with the Shapiro-Wilk tests: the data for Aripo look pretty normally distributed, whereas the Shapiro-Wilk test suggested that they are not. This is because it’s easy for the test to fail when there is sufficient data. Based on the Q-Q plot I would argue that the assumption of normality for the Guanapo data is less certain than for Aripo, whereas the Shapiro-Wilk test tells us they are likely to be normally distributed.</p>
+<p>What to do? Well, I would rely more on the graphical interpretation that the output of the Shapiro-Wilk test. There is only one data point in the Aripo data set that deviates from the line, but there is no clear snaking around the line. For the Guanapo data there is some drifting away from the Q-Q line at the bottom but no clear snaking. There are a reasonable number of data points too, so I’d be happy to argue that the data are normal <em>enough</em> for me to perform a t-test.</p>
 </details>
 </div>
 <p><br></p>
@@ -535,8 +548,8 @@ Answer
 <p>Remember that statistical tests do not provide answers, they merely suggest patterns. Human interpretation is still a crucial aspect to what we do.</p>
 </div>
 <p>The Shapiro-Wilk test has shown that the data are not normal <em>enough</em> and so in order to test for equality of variance we will use Levene’s test.</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">rivers</span> <span class="op">%&gt;%</span> 
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">rivers</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/levene_test.html">levene_test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 4
 ##     df1   df2 statistic     p
@@ -548,7 +561,7 @@ Answer
 <span class="header-section-number">6.6.1</span> Bartlett’s test<a class="anchor" aria-label="anchor" href="#bartletts-test"><i class="fas fa-link"></i></a>
 </h3>
 <p>If we had wanted to carry out Bartlett’s test (i.e. if the data <em>had</em> been sufficiently normally distributed) then the command would have been:</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>, data <span class="op">=</span> <span class="va">rivers</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
 ##  Bartlett test of homogeneity of variances
@@ -559,14 +572,14 @@ Answer
 <div class="note">
 <p>Here we use <code><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test()</a></code> from base R. Surprisingly, the <code>rstatix</code> package does not have a built-in equivalent.</p>
 <p>If we wanted to get the output of the Bartlett test into a tidy format, we could do the following, where we take the <code>rivers</code> data set and pipe it to the <code><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test()</a></code> function. Note that we need to define the data using a dot (<code>.</code>), because the first input into <code><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test()</a></code> is not the data. We then pipe the output to the <code><a href="https://generics.r-lib.org/reference/tidy.html">tidy()</a></code> function, which is part of the <code>broom</code> library, which kindly converts the output into a tidy format. Handy!</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># load the broom package</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/">broom</a></span><span class="op">)</span>
 
 <span class="co"># perform Bartlett's test on the data and tidy</span>
-<span class="va">rivers</span> <span class="op">%&gt;%</span> 
+<span class="va">rivers</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>,
-                data <span class="op">=</span> <span class="va">.</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+                data <span class="op">=</span> <span class="va">.</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 4
 ##   statistic p.value parameter method                                   
@@ -581,9 +594,9 @@ Answer
 </h2>
 <p>In this case we’re ignoring the fact that the data are not normal enough, according to the Shapiro-Wilk test. However, because the sample sizes are pretty large and the t-test is also pretty robust in this case, we can perform a t-test. Remember, this is only allowed because the variances of the two groups (Aripo and Guanapo) are equal.</p>
 <p>Perform a two-sample, two-tailed, t-test:</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># two-sample, two-tailed t-test</span>
-<span class="va">rivers</span> <span class="op">%&gt;%</span> 
+<span class="va">rivers</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>,
          alternative <span class="op">=</span> <span class="st">"two.sided"</span>,
          var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
@@ -722,9 +735,9 @@ Answer
 <span class="header-section-number">6.9.3</span> Load, summarise and visualise data<a class="anchor" aria-label="anchor" href="#load-summarise-and-visualise-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>I’d always recommend storing data in tidy, stacked format (in fact I can’t think of any situation where I would want to store data in an untidy, unstacked format!) So for this example I manually input the data into Excel in the following layout, saving the data as a CSV file and reading it in:</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># load the data</span>
-<span class="va">turtle</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/tidy/CS1-turtle.csv"</span><span class="op">)</span>
+<span class="va">turtle</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS1-turtle.csv"</span><span class="op">)</span>
 
 <span class="co"># and have a look</span>
 <span class="va">turtle</span></code></pre></div>
@@ -745,11 +758,11 @@ Answer
 ## 12    12  224. Female
 ## 13    13  231. Female</code></pre>
 <p>Let’s summarise the data (although a visualisation is probably much easier to work with):</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create summary statistics for each group</span>
-<span class="va">turtle</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">id</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<span class="va">turtle</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">id</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/get_summary_stats.html">get_summary_stats</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"common"</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 11
 ##   sex    variable     n   min   max median   iqr  mean    sd    se    ci
@@ -757,11 +770,11 @@ Answer
 ## 1 Female serum        6  222.  231.   224.  5.22  226.  3.87  1.58  4.06
 ## 2 Male   serum        7  219.  230.   224.  6.6   224.  4.26  1.61  3.94</code></pre>
 <p>and visualise the data:</p>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># visualise the data</span>
-<span class="va">turtle</span> <span class="op">%&gt;%</span> 
-  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">sex</span>, y <span class="op">=</span> <span class="va">serum</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_boxplot</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<span class="va">turtle</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sex</span>, y <span class="op">=</span> <span class="va">serum</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-two_sample_t_test_files/figure-html/cs1-twosample-turtle-boxplot-1.png" width="672"></div>
 <p>As always we use the plot and summary to assess three things:</p>
 <ol style="list-style-type: decimal">
@@ -789,10 +802,10 @@ Answer
 </h3>
 <p><strong>Normality</strong></p>
 <p>Let’s look at the normality of each of the groups separately. There are several ways of getting at the <code>serum</code> values for Males and Females separately. We’ll use the unstacking method, then use Shapiro-Wilk followed by qqplots.</p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># perform Shapiro-Wilk test on each group</span>
-<span class="va">turtle</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<span class="va">turtle</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">sex</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">serum</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 4
 ##   sex    variable statistic     p
@@ -804,20 +817,34 @@ Answer
 <li>The p-value for the Female group is smaller than for the Male group (suggesting that the Female group is closer to being non-normal than the Male group) which makes sense.</li>
 <li>The Shapiro-Wilk test is generally quite relaxed about normality for small sample sizes (and notoriously strict for very large sample sizes). For a group with only 6 data points in it, the data would actually have to have a really, really skewed distribution. Given that the Female group only has 6 data points in it, it’s not too surprising that the Shapiro-Wilk test came back saying everything is OK.</li>
 </ol>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create Q-Q plots for both groups</span>
-<span class="va">turtle</span> <span class="op">%&gt;%</span> 
-  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>sample <span class="op">=</span> <span class="va">serum</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">stat_qq</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">stat_qq_line</span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">facet_wrap</span><span class="op">(</span>facets <span class="op">=</span> <span class="fu">vars</span><span class="op">(</span><span class="va">sex</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+
+<span class="co"># Females</span>
+<span class="va">lm_turtle_females</span> <span class="op">&lt;-</span> <span class="va">turtle</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"Female"</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">serum</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">.</span><span class="op">)</span>
+
+<span class="co"># Males</span>
+<span class="va">lm_turtle_males</span> <span class="op">&lt;-</span> <span class="va">turtle</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">sex</span> <span class="op">==</span> <span class="st">"Male"</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">serum</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">.</span><span class="op">)</span>
+
+<span class="co"># Q-Q plot Females</span>
+<span class="va">lm_turtle_females</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="st">"qq"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-two_sample_t_test_files/figure-html/cs1-twosample-turtle-qqplot-1.png" width="672"></div>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Q-Q plot Males</span>
+<span class="va">lm_turtle_males</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="st">"qq"</span><span class="op">)</span></code></pre></div>
+<div class="inline-figure"><img src="cs1-practical-two_sample_t_test_files/figure-html/cs1-twosample-turtle-qqplot-2.png" width="672"></div>
 <p>The results from the Q-Q plots echo what we’ve already seen from the Shapiro-Wilk analyses. The Male group doesn’t look too bad whereas the Female group looks somewhat dodgy.</p>
 <p>Overall, the assumption of normality of the data doesn’t appear to be very well met at all, but we do have to bear in mind that there are only a few data points in each group and we might just be seeing this pattern in the data due to random chance rather than because the underlying populations are actually not normally distributed. Personally, though I’d edge towards non-normal here.</p>
 <p><strong>Homogeneity of Variance</strong></p>
 <p>It’s not clear whether the data are normal or not, so it isn’t clear which test to use here. The sensible approach is to do both and hope that they agree (fingers crossed!)</p>
 <p>Bartlett’s test gives us:</p>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># perform Bartlett's test</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test</a></span><span class="op">(</span><span class="va">serum</span> <span class="op">~</span> <span class="va">sex</span>,
               data <span class="op">=</span> <span class="va">turtle</span><span class="op">)</span></code></pre></div>
@@ -827,9 +854,9 @@ Answer
 ## data:  serum by sex
 ## Bartlett's K-squared = 0.045377, df = 1, p-value = 0.8313</code></pre>
 <p>and Levene’s test gives us:</p>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># perform Levene's test</span>
-<span class="va">turtle</span> <span class="op">%&gt;%</span> 
+<span class="va">turtle</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/levene_test.html">levene_test</a></span><span class="op">(</span><span class="va">serum</span> <span class="op">~</span> <span class="va">sex</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 4
 ##     df1   df2 statistic     p
@@ -843,9 +870,9 @@ Answer
 <span class="header-section-number">6.9.5</span> Implement two-sample t-test<a class="anchor" aria-label="anchor" href="#implement-two-sample-t-test"><i class="fas fa-link"></i></a>
 </h3>
 <p>Because of the result of the Bartlett test I know that I can carry out a two-sample Student’s t-test (as opposed to a two-sample Welch’s t-test, if you’re confused, see Figure <a href="introduction.html#fig:fig-cs1-diagram-which-test">3.2</a>)</p>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># perform two-sample t-test</span>
-<span class="va">turtle</span> <span class="op">%&gt;%</span> 
+<span class="va">turtle</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test</a></span><span class="op">(</span><span class="va">serum</span> <span class="op">~</span> <span class="va">sex</span>,
          alternative <span class="op">=</span> <span class="st">"two.sided"</span>,
          var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>

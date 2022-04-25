@@ -6,7 +6,7 @@
 <title>Chapter 24 Linear models | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
 <meta name="description" content="24.1 Objectives  Questions How do I use the linear model framework with three predictor variables? Objectives Be able to expand the linear model framework in R to three predictor variables Define...">
-<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta name="generator" content="bookdown 0.25 with bs4_book()">
 <meta property="og:title" content="Chapter 24 Linear models | Core Statistics in R">
 <meta property="og:type" content="book">
 <meta property="og:description" content="24.1 Objectives  Questions How do I use the linear model framework with three predictor variables? Objectives Be able to expand the linear model framework in R to three predictor variables Define...">
@@ -19,9 +19,9 @@
 <!-- CSS : implied media="all" --><link rel="stylesheet" href="stylesheets/full-stylesheet.css">
 <link rel="stylesheet" href="stylesheets/styleguide.css">
 <link rel="stylesheet" href="stylesheets/style.css">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><script type="text/javascript" src="//use.typekit.com/hyb5bko.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script><script type="text/javascript">  document.documentElement.className += " js";</script>
 </head>
@@ -445,7 +445,7 @@
 <p>Let’s first load the data:</p>
 <div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#load the data</span>
-<span class="va">airpoll</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/tidy/CS5-H2S.csv"</span><span class="op">)</span>
+<span class="va">airpoll</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS5-H2S.csv"</span><span class="op">)</span>
 
 <span class="co"># look at the data</span>
 <span class="va">airpoll</span></code></pre></div>
@@ -482,15 +482,15 @@
 <p>Next, visualise the data:</p>
 <div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot the data</span>
-<span class="va">airpoll</span> <span class="op">%&gt;%</span> 
-  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">daily_temp</span>,
+<span class="va">airpoll</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">daily_temp</span>,
              y <span class="op">=</span> <span class="va">hydrogen_sulfide</span>,
              colour <span class="op">=</span> <span class="va">treatment_plant</span>,
              group <span class="op">=</span> <span class="va">treatment_plant</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="co"># add regression lines</span>
-  <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">scale_color_brewer</span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span></code></pre></div>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_color_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs5-practical-linear_models_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
 <p>It looks as though the variable <code>treatment_plant</code> has an effect on H<sub>2</sub>S emissions (as one cloud of points is higher than the other). There is also a suggestion that the daily temperature might affect emissions (both data sets look like the gradient of the regression line through their respective cloud might not be zero) and it also appears that there might be an interaction between <code>treatment_plant</code> and <code>daily_temperature</code> because the gradient of the two regression lines is not parallel.</p>
 </div>
@@ -553,7 +553,7 @@ treatment\_plantB = 3.4742 + 0.12693 \cdot daily\_temp
 <p>Here we can see that the interaction term appears to be marginally significant, implying that the effect of temperature on hydrogen sulfide production is different for the two different treatment plants.</p>
 <p>We check the assumptions of <code>lm_full</code> using the diagnostic plots:</p>
 <div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">lm_full</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">lm_full</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"resid"</span>, <span class="st">"qq"</span>, <span class="st">"ls"</span>, <span class="st">"cookd"</span><span class="op">)</span>,
               smoother <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs5-practical-linear_models_files/figure-html/unnamed-chunk-7-1.png" width="672"></div>
@@ -663,12 +663,12 @@ H_2S(treatment\_plantB) = 5.7 + 0.036 \cdot daily\_temp
 <p>Construct and analyse only the effect of <code>treatment_plant</code>:</p>
 <div class="sourceCode" id="cb267"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># visualise the data</span>
-<span class="va">airpoll</span> <span class="op">%&gt;%</span> 
-  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">treatment_plant</span>, y <span class="op">=</span> <span class="va">hydrogen_sulfide</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_boxplot</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+<span class="va">airpoll</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">treatment_plant</span>, y <span class="op">=</span> <span class="va">hydrogen_sulfide</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="co"># add the data points and ensure they are jittered</span>
   <span class="co"># so they do not overlap</span>
-  <span class="fu">geom_jitter</span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></code></pre></div>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs5-practical-linear_models_files/figure-html/unnamed-chunk-12-1.png" width="672"></div>
 <div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the linear model</span>
@@ -713,10 +713,10 @@ H_2S(treatment\_plantB) = 5.7 + 0.036 \cdot daily\_temp
 <p>Construct a simple linear regression model, where H2S depends only on the average daily temperature:</p>
 <div class="sourceCode" id="cb271"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot the data</span>
-<span class="va">airpoll</span> <span class="op">%&gt;%</span> 
-  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">daily_temp</span>, y <span class="op">=</span> <span class="va">hydrogen_sulfide</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<span class="va">airpoll</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">daily_temp</span>, y <span class="op">=</span> <span class="va">hydrogen_sulfide</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs5-practical-linear_models_files/figure-html/unnamed-chunk-15-1.png" width="672"></div>
 <div class="sourceCode" id="cb272"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the linear model</span>
@@ -760,9 +760,9 @@ H_2S(treatment\_plantB) = 5.7 + 0.036 \cdot daily\_temp
 <p>Construct and analyse the null model:</p>
 <div class="sourceCode" id="cb275"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># visualise the data</span>
-<span class="va">airpoll</span> <span class="op">%&gt;%</span> 
-  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="va">hydrogen_sulfide</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_boxplot</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<span class="va">airpoll</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">hydrogen_sulfide</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs5-practical-linear_models_files/figure-html/unnamed-chunk-18-1.png" width="672"></div>
 <div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the null model</span>
@@ -841,7 +841,7 @@ Answer
 <p>Here we note that the interaction term just requires us to multiple the three numbers together (we haven’t looked at continuous predictors before in the examples and this exercise was included as a check to see if this whole process was making sense).</p>
 <p>If we look at the diagnostic plots for the model using the following commands we get:</p>
 <div class="sourceCode" id="cb280"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">lm_tree_full</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">lm_tree_full</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"resid"</span>, <span class="st">"qq"</span>, <span class="st">"ls"</span>, <span class="st">"cookd"</span><span class="op">)</span>,
               smoother <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs5-practical-linear_models_files/figure-html/unnamed-chunk-20-1.png" width="672"></div>
@@ -878,7 +878,7 @@ Answer
 <p>Volume = 58.91</p>
 <p>If we look at the diagnostic plots for the model using the following commands we get the following:</p>
 <div class="sourceCode" id="cb283"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">lm_tree_add</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">lm_tree_add</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"resid"</span>, <span class="st">"qq"</span>, <span class="st">"ls"</span>, <span class="st">"cookd"</span><span class="op">)</span>,
               smoother <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs5-practical-linear_models_files/figure-html/unnamed-chunk-22-1.png" width="672"></div>
@@ -916,7 +916,7 @@ Answer
 <p>Volume = 16.28</p>
 <p>If we look at the diagnostic plots for the model using the following commands we get the following:</p>
 <div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">lm_height</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">lm_height</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"resid"</span>, <span class="st">"qq"</span>, <span class="st">"ls"</span>, <span class="st">"cookd"</span><span class="op">)</span>,
               smoother <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs5-practical-linear_models_files/figure-html/unnamed-chunk-24-1.png" width="672"></div>
@@ -953,7 +953,7 @@ Answer
 <p>Volume = 64.37</p>
 <p>If we look at the diagnostic plots for the model using the following commands we get the following:</p>
 <div class="sourceCode" id="cb289"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">lm_girth</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="va">lm_girth</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"resid"</span>, <span class="st">"qq"</span>, <span class="st">"ls"</span>, <span class="st">"cookd"</span><span class="op">)</span>,
               smoother <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs5-practical-linear_models_files/figure-html/unnamed-chunk-26-1.png" width="672"></div>

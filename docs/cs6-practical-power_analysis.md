@@ -676,15 +676,28 @@ Let's load in the data:
 
 
 ```r
-musseldat <- read.csv("data/raw/CS6-shelllength.csv")
+musseldat <- read_csv("data/tidy/CS6-shelllength.csv")
+```
+
+```
+## Rows: 39 Columns: 2
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: ","
+## chr (1): location
+## dbl (1): length
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
 
 Let's just have a quick look at the data to see what we're dealing with:
 
 
 ```r
-boxplot(length ~ location,
-        data = musseldat)
+musseldat %>% 
+  ggplot(aes(x = location,
+             y = length)) +
+  geom_boxplot()
 ```
 
 <img src="cs6-practical-power_analysis_files/figure-html/unnamed-chunk-24-1.png" width="672" />
@@ -696,11 +709,11 @@ Now we fit a linear model:
 
 ```r
 # define the model
-lm.mussel <- lm(length ~ location,
+lm_mussel <- lm(length ~ location,
                 data = musseldat)
 
 # summarise the model
-summary(lm.mussel)
+summary(lm_mussel)
 ```
 
 ```
@@ -778,15 +791,27 @@ Let's load in the data:
 
 
 ```r
-epilepsydat <- read.csv("data/raw/CS6-epilepsy1.csv")
+epilepsydat <- read_csv("data/tidy/CS6-epilepsy1.csv")
+```
+
+```
+## Rows: 236 Columns: 2
+## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: ","
+## dbl (2): age, seizure
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
 
 Let's just have a quick look at the data to see what we're dealing with:
 
 
 ```r
-plot(seizure ~ age,
-     data = epilepsydat)
+epilepsydat %>% 
+  ggplot(aes(x = age,
+             y = seizure)) +
+  geom_point()
 ```
 
 <img src="cs6-practical-power_analysis_files/figure-html/unnamed-chunk-29-1.png" width="672" />
@@ -798,11 +823,11 @@ Now we fit a linear model:
 
 ```r
 # define the model
-lm.epilepsy <- lm(seizure ~ age,
+lm_epilepsy <- lm(seizure ~ age,
                   data = epilepsydat)
 
 # summarise the model
-summary(lm.epilepsy)
+summary(lm_epilepsy)
 ```
 
 ```

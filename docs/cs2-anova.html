@@ -6,7 +6,7 @@
 <title>Chapter 12 ANOVA | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
 <meta name="description" content="12.1 Objectives  Questions How do I analyse multiple samples of continuous data? What is an ANOVA? How do I check for differences between groups? Objectives Be able to perform an ANOVA in R...">
-<meta name="generator" content="bookdown 0.24 with bs4_book()">
+<meta name="generator" content="bookdown 0.25 with bs4_book()">
 <meta property="og:title" content="Chapter 12 ANOVA | Core Statistics in R">
 <meta property="og:type" content="book">
 <meta property="og:description" content="12.1 Objectives  Questions How do I analyse multiple samples of continuous data? What is an ANOVA? How do I check for differences between groups? Objectives Be able to perform an ANOVA in R...">
@@ -19,9 +19,9 @@
 <!-- CSS : implied media="all" --><link rel="stylesheet" href="stylesheets/full-stylesheet.css">
 <link rel="stylesheet" href="stylesheets/styleguide.css">
 <link rel="stylesheet" href="stylesheets/style.css">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/header-attrs-2.11/header-attrs.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.5.3/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.5.3/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.2.4/tabs.js"></script><script src="libs/bs3compat-0.2.4/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><script type="text/javascript" src="//use.typekit.com/hyb5bko.js"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script><script type="text/javascript">  document.documentElement.className += " js";</script>
 </head>
@@ -443,7 +443,7 @@
 </tbody>
 </table></div>
 <p>We also use functionality from a new library, <code>ggResidPanel</code>:</p>
-<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># load ggResidPanel, for ggplot-friendly diagnostics plots</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://goodekat.github.io/ggResidpanel/">ggResidpanel</a></span><span class="op">)</span></code></pre></div>
 </div>
@@ -471,9 +471,9 @@
 <span class="header-section-number">12.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-6"><i class="fas fa-link"></i></a>
 </h2>
 <p>First we read in the data.</p>
-<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># load data</span>
-<span class="va">oystercatcher</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/tidy/CS2-oystercatcher.csv"</span><span class="op">)</span>
+<span class="va">oystercatcher</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS2-oystercatcher.csv"</span><span class="op">)</span>
 
 <span class="co"># and have a look</span>
 <span class="va">oystercatcher</span></code></pre></div>
@@ -503,11 +503,11 @@
 <li>a <code>site</code> column with information on the amount of shelter of the feeding location</li>
 </ol>
 <p>First, we get some basic descriptive statistics:</p>
-<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># get some basic descriptive statistics</span>
-<span class="va">oystercatcher</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">id</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">site</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<span class="va">oystercatcher</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">id</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">site</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/get_summary_stats.html">get_summary_stats</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"common"</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 11
 ##   site      variable     n   min   max median   iqr  mean    sd    se    ci
@@ -516,11 +516,11 @@
 ## 2 Partial   feeding      5  13    20.4   17.4   1.9  17.1  2.73 1.22   3.39
 ## 3 Sheltered feeding      5  21.5  25.3   24.1   2.9  23.6  1.71 0.767  2.13</code></pre>
 <p>Next, we plot the data by <code>site</code>:</p>
-<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot the data</span>
-<span class="va">oystercatcher</span> <span class="op">%&gt;%</span> 
-  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">site</span>, y <span class="op">=</span> <span class="va">feeding</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_boxplot</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<span class="va">oystercatcher</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">site</span>, y <span class="op">=</span> <span class="va">feeding</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
 <p>Looking at the data, there appears to be a noticeable difference in feeding rates between the three sites. We would probably expect a reasonably significant statistical result here.</p>
 </div>
@@ -540,16 +540,16 @@
 <span class="header-section-number">12.6.1</span> Normality<a class="anchor" aria-label="anchor" href="#normality"><i class="fas fa-link"></i></a>
 </h3>
 <p>First we perform a Shapiro-Wilk test on each site separately.</p>
-<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Shapiro-Wilk test on each site</span>
-<span class="va">oystercatcher</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">id</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">site</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<span class="va">oystercatcher</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">id</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">site</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">feeding</span><span class="op">)</span></code></pre></div>
 <p>We can see that all three groups appear to be normally distributed which is good.</p>
 <p>For ANOVA however, considering each group in turn is often considered quite excessive and, in most cases, it is sufficient to consider the normality of the combined set of <em>residuals</em> from the data. We’ll explain residuals properly in the <a href="cs3-intro.html#cs3-intro">next session</a> but effectively they are the difference between each data point and its group mean. The residuals can be obtained directly from a linear model fitted to the data.</p>
 <p>So, we create a linear model, extract the residuals and check their normality:</p>
-<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the model</span>
 <span class="va">lm_oystercatcher</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">feeding</span> <span class="op">~</span> <span class="va">site</span>,
                        data <span class="op">=</span> <span class="va">oystercatcher</span><span class="op">)</span>
@@ -558,7 +558,7 @@
 <span class="va">resid_oyster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">lm_oystercatcher</span><span class="op">)</span>
 
 <span class="co"># perform Shapiro-Wilk test on residuals</span>
-<span class="va">resid_oyster</span> <span class="op">%&gt;%</span> 
+<span class="va">resid_oyster</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 3
 ##   variable statistic p.value
@@ -572,7 +572,7 @@
 </h3>
 <p>We now test for equality of variance using Bartlett’s test (since we’ve just found that all of the individual groups are normally distributed).</p>
 <p>Perform Bartlett’s test on the data:</p>
-<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># check equality of variance</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test</a></span><span class="op">(</span><span class="va">feeding</span> <span class="op">~</span> <span class="va">site</span>,
               data <span class="op">=</span> <span class="va">oystercatcher</span><span class="op">)</span></code></pre></div>
@@ -591,17 +591,17 @@
 <div class="note">
 <p>There are a variety of ways that we can create diagnostic plots. There is no right or wrong - just preference.</p>
 <p>The functionality of <strong>base R</strong> is really helpful, and it’s easy to create diagnostic plots with the built-in functionality. For example, you can create a set of basic diagnostic plots using:</p>
-<pre><code><a href="https://rdrr.io/r/graphics/par.html"># create a neat 2x2 window
+<pre><code># create a neat 2x2 window
 par(mfrow = c(2,2))
 # create the diagnostic plots
 plot(model_name)
 # and return the window back to normal
-par(mfrow = c(1,1))</a></code></pre>
-<p>In the first session we already created diagnostic Q-Q plots directly from our data, using <code>stat_qq()</code> and <code>stat_qq_line()</code>. For more specific plots this becomes a bit cumbersome. There is an option to create ggplot-friendly diagnostic plots, using the <code>ggResidPanel</code> package. For consistency with the <code>tidyverse</code> syntax used, we will use this from now on, but it is equally valid to use the base R functions.</p>
+par(mfrow = c(1,1))</code></pre>
+<p>In the first session we already created diagnostic Q-Q plots directly from our data, using <code><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq()</a></code> and <code><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq_line()</a></code>. For more specific plots this becomes a bit cumbersome. There is an option to create ggplot-friendly diagnostic plots, using the <code>ggResidPanel</code> package. For consistency with the <code>tidyverse</code> syntax used, we will use this from now on, but it is equally valid to use the base R functions.</p>
 </div>
 <p>Create the standard set diagnostic plots using <code>ggResidPanel</code>:</p>
-<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">lm_oystercatcher</span> <span class="op">%&gt;%</span> 
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lm_oystercatcher</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/cs2-anova-oyster-diagnostic-1.png" width="672"></div>
 <ul>
@@ -615,7 +615,7 @@ par(mfrow = c(1,1))</a></code></pre>
 <strong>Histogram</strong>: creates a histogram of the residuals, using <code>bins = 30</code> as default</li>
 </ul>
 <p>The default equivalent in base R is as follows:</p>
-<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create a neat 2x2 window</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="co"># create the diagnostic plots</span>
@@ -623,7 +623,7 @@ par(mfrow = c(1,1))</a></code></pre>
 <pre><code>## hat values (leverages) are all = 0.2
 ##  and there are no factor predictors; no plot no. 5</code></pre>
 <div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/cs2-anova-oyster-diagnostic-results-1.png" width="672"></div>
-<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># and return the window back to normal</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>The second line creates the three diagnostic plots (it actually tries to create four plots but can’t do that for this dataset so you’ll also see some warning text output to the screen (something about hat values). I’ll go through this in the next session where it’s easier to explain).</p>
@@ -648,7 +648,7 @@ par(mfrow = c(1,1))</a></code></pre>
 <span class="header-section-number">12.7</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-5"><i class="fas fa-link"></i></a>
 </h2>
 <p>Perform an ANOVA test on the data:</p>
-<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_oystercatcher</span><span class="op">)</span></code></pre></div>
 <p>This fits a linear model to the data (i.e. finds the means of the three groups and calculates a load of intermediary data that we need for the statistical analysis) and stores this information in an R object (which I’ve called <code>lm_oystercatchers</code>, but which you can call what you like). The second line actually carries out the ANOVA analysis.</p>
 <ul>
@@ -699,9 +699,9 @@ par(mfrow = c(1,1))</a></code></pre>
 <h3>
 <span class="header-section-number">12.9.1</span> Read in the data and plot<a class="anchor" aria-label="anchor" href="#read-in-the-data-and-plot"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># load the data</span>
-<span class="va">tukey</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/tidy/CS2-tukey.csv"</span><span class="op">)</span>
+<span class="va">tukey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS2-tukey.csv"</span><span class="op">)</span>
 
 <span class="co"># have a look at the data</span>
 <span class="va">tukey</span></code></pre></div>
@@ -719,18 +719,18 @@ par(mfrow = c(1,1))</a></code></pre>
 ##  9     9   -0.839 sample1
 ## 10    10   -1.05  sample1
 ## # … with 50 more rows</code></pre>
-<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot the data</span>
-<span class="va">tukey</span> <span class="op">%&gt;%</span> 
-  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">group</span>, y <span class="op">=</span> <span class="va">response</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_boxplot</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<span class="va">tukey</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">group</span>, y <span class="op">=</span> <span class="va">response</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-9-1.png" width="672"></div>
 </div>
 <div id="test-for-a-significant-difference-in-group-means" class="section level3" number="12.9.2">
 <h3>
 <span class="header-section-number">12.9.2</span> Test for a significant difference in group means<a class="anchor" aria-label="anchor" href="#test-for-a-significant-difference-in-group-means"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create a linear model</span>
 <span class="va">lm_tukey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">response</span> <span class="op">~</span> <span class="va">group</span>,
                data <span class="op">=</span> <span class="va">tukey</span><span class="op">)</span>
@@ -752,9 +752,9 @@ par(mfrow = c(1,1))</a></code></pre>
 <h3>
 <span class="header-section-number">12.9.3</span> Performing Tukey’s test<a class="anchor" aria-label="anchor" href="#performing-tukeys-test"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># perform Tukey's range test on linear model</span>
-<span class="va">lm_tukey</span> <span class="op">%&gt;%</span> 
+<span class="va">lm_tukey</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/tukey_hsd.html">tukey_hsd</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 9
 ##   term  group1  group2  null.value estimate conf.low conf.high       p.adj
@@ -912,9 +912,9 @@ Answer
 <span class="header-section-number">12.10.2</span> Import Data, summarise and visualise<a class="anchor" aria-label="anchor" href="#import-data-summarise-and-visualise-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>The data are stored in a <code>.csv</code> file with columns called <code>id</code>, <code>weight</code> and <code>diet</code>.</p>
-<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># load the data</span>
-<span class="va">lobsters</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"data/tidy/CS2-lobsters.csv"</span><span class="op">)</span>
+<span class="va">lobsters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS2-lobsters.csv"</span><span class="op">)</span>
 
 <span class="co"># look at the data</span>
 <span class="va">lobsters</span></code></pre></div>
@@ -939,11 +939,11 @@ Answer
 ## 16    16  133.  Flakes 
 ## 17    17  129.  Flakes 
 ## 18    18  129.  Flakes</code></pre>
-<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create some summary statistics</span>
-<span class="va">lobsters</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">id</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">diet</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<span class="va">lobsters</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">id</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">diet</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/get_summary_stats.html">get_summary_stats</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"common"</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 11
 ##   diet    variable     n   min   max median   iqr  mean    sd    se    ci
@@ -952,10 +952,10 @@ Answer
 ## 2 Mussels weight       7 104.   162.   132.  27.0  136.  20.6  7.79  19.1
 ## 3 Pellets weight       5 110.   175.   118.  17.8  128.  27.2 12.1   33.7</code></pre>
 <p>Next, we visualise the data:</p>
-<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">lobsters</span> <span class="op">%&gt;%</span> 
-  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">diet</span>, y <span class="op">=</span> <span class="va">weight</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu">geom_boxplot</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lobsters</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">diet</span>, y <span class="op">=</span> <span class="va">weight</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-15-1.png" width="672"></div>
 <p>As always we use the plot and summary to assess three things:</p>
 <ol style="list-style-type: decimal">
@@ -984,10 +984,10 @@ Answer
 <p><strong>Normality</strong></p>
 <p>We’ll be really thorough here and consider the normality of each group separately and jointly using the Shapiro-Wilk test, as well as looking at the Q-Q plot. In reality, and after these examples , we’ll only use the Q-Q plot.</p>
 <p>First, we perform the Shapiro-Wilk test on the individual groups:</p>
-<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Shapiro-Wilk on lobster groups</span>
-<span class="va">lobsters</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">diet</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<span class="va">lobsters</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">diet</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 4
 ##   diet    variable statistic      p
@@ -997,7 +997,7 @@ Answer
 ## 3 Pellets weight       0.767 0.0425</code></pre>
 <p><code>Flakes</code> and <code>Mussels</code> are fine, but, as we suspected from earlier, <code>Pellets</code> appears to have a marginally significant Normality test result.</p>
 <p>Let’s look at the Shapiro-Wilk test for all of the data together:</p>
-<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create a linear model</span>
 <span class="va">lm_lobsters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>,
                   data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span>
@@ -1006,16 +1006,16 @@ Answer
 <span class="va">resid_lobsters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html">residuals</a></span><span class="op">(</span><span class="va">lm_lobsters</span><span class="op">)</span>
 
 <span class="co"># and perform the Shapiro-Wilk test on the residuals</span>
-<span class="va">resid_lobsters</span> <span class="op">%&gt;%</span> 
+<span class="va">resid_lobsters</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 3
 ##   variable statistic p.value
 ##   &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;
 ## 1 .            0.948   0.391</code></pre>
 <p>This on the other hand says that everything is fine. Let’s look at Q-Q plot.</p>
-<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Q-Q plots</span>
-<span class="va">lm_lobsters</span> <span class="op">%&gt;%</span> 
+<span class="va">lm_lobsters</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="st">"qq"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-18-1.png" width="672"></div>
 <p>Here, I’ve used an extra argument to the normal diagnostic plots call. The default option is to plot 4 diagnostic plots. You can tell <code><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel()</a></code> to only plot a specific one, using the <code>plots =</code> arguments. If you want to know more about this have a look at the <a href="https://goodekat.github.io/ggResidpanel-tutorial/tutorial.html#overview">help documentation</a> or by using <code><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">?resid_panel</a></code>.</p>
@@ -1023,7 +1023,7 @@ Answer
 <p>Overall, I’d be happy that the assumption of normality has been adequately well met here. The suggested lack of normality in the <code>Pellets</code> was only just significant and we have to take into account that there are only 5 data points in that group. If there had been a lot more points in that group, or if the Q-Q plot was considerably worse then I wouldn’t be confident.</p>
 <p><strong>Equality of Variance</strong></p>
 <p>We’ll consider the Bartlett test and we’ll look at some diagnostic plots too.</p>
-<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># perform Bartlett's test</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/bartlett.test.html">bartlett.test</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>,
               data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span></code></pre></div>
@@ -1032,9 +1032,9 @@ Answer
 ## 
 ## data:  weight by diet
 ## Bartlett's K-squared = 0.71273, df = 2, p-value = 0.7002</code></pre>
-<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot the residuals and scale-location plots</span>
-<span class="va">lm_lobsters</span> <span class="op">%&gt;%</span> 
+<span class="va">lm_lobsters</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"resid"</span>, <span class="st">"ls"</span><span class="op">)</span>,
               smoother <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs2-practical-anova_files/figure-html/unnamed-chunk-19-1.png" width="672"></div>
@@ -1056,7 +1056,7 @@ Answer
 <span class="header-section-number">12.10.4</span> Carry out one-way ANOVA<a class="anchor" aria-label="anchor" href="#carry-out-one-way-anova"><i class="fas fa-link"></i></a>
 </h3>
 <p>With our assumptions of normality and equality of variance met we can be confident that a one-way ANOVA is an appropriate test.</p>
-<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_lobsters</span><span class="op">)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
@@ -1078,15 +1078,15 @@ Answer
 <h3>
 <span class="header-section-number">12.10.6</span> Post-hoc testing with Tukey<a class="anchor" aria-label="anchor" href="#post-hoc-testing-with-tukey"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">lm_lobsters</span> <span class="op">%&gt;%</span> 
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">lm_lobsters</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/tukey_hsd.html">tukey_hsd</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 9
-##   term  group1  group2  null.value estimate conf.low conf.high p.adj p.adj.signif
-## * &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       
-## 1 diet  Flakes  Mussels          0    21.9     -9.66      53.5 0.202 ns          
-## 2 diet  Flakes  Pellets          0    14.0    -20.3       48.4 0.551 ns          
-## 3 diet  Mussels Pellets          0    -7.85   -41.1       25.4 0.815 ns</code></pre>
+##   term  group1  group2 null.value estimate conf.low conf.high p.adj p.adj.signif
+## * &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       
+## 1 diet  Flakes  Musse…          0    21.9     -9.66      53.5 0.202 ns          
+## 2 diet  Flakes  Pelle…          0    14.0    -20.3       48.4 0.551 ns          
+## 3 diet  Mussels Pelle…          0    -7.85   -41.1       25.4 0.815 ns</code></pre>
 <p>Here we can see that actually, there is no significant difference between any of the pairs of groups in this dataset.</p>
 <div class="note">
 <p>I want to reiterate that carrying out the post-hoc test after getting a non-significant result with ANOVA is something that you have to think very carefully about and it all depends on what your research question it.</p>

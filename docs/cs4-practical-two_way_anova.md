@@ -452,15 +452,9 @@ tulip <- read_csv("data/tidy/CS4-tulip.csv")
 
 ```
 ## Rows: 27 Columns: 3
-```
-
-```
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: ","
 ## dbl (3): water, shade, blooms
-```
-
-```
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
