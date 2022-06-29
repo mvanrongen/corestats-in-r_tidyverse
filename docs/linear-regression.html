@@ -6,7 +6,7 @@
 <title>Chapter 17 Linear regression | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
 <meta name="description" content="17.1 Objectives  Questions When should I use a linear regression? How do I interpret the results? Objectives Be able to perform a linear regression in R Use ANOVA to check if the slope of the...">
-<meta name="generator" content="bookdown 0.25 with bs4_book()">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
 <meta property="og:title" content="Chapter 17 Linear regression | Core Statistics in R">
 <meta property="og:type" content="book">
 <meta property="og:description" content="17.1 Objectives  Questions When should I use a linear regression? How do I interpret the results? Objectives Be able to perform a linear regression in R Use ANOVA to check if the slope of the...">
@@ -417,7 +417,7 @@
 </h2>
 <p>Regression analysis not only tests for an association between two or more variables, but also allows one to investigate quantitatively the nature of any relationship which is present, and thus determine whether one variable may be used to predict values of another.
 Simple linear regression essentially models the dependence of a scalar dependent variable (y) on an independent (or explanatory) variable (x) according to the relationship:</p>
-<p><span class="math display">\[\begin{equation*} 
+<p><span class="math display">\[\begin{equation*}
 y = \beta_0 + \beta_1 x
 \end{equation*}\]</span></p>
 <p>where <span class="math inline">\(\beta_0\)</span> is the value of the intercept and <span class="math inline">\(\beta_1\)</span> is the slope of the fitted line. The aim of simple linear regression analysis to assess whether the coefficient of the slope, <span class="math inline">\(\beta_1\)</span>, is actually different from zero. If it is different from zero then we can say that <span class="math inline">\(x\)</span> has a significant effect on <span class="math inline">\(y\)</span> (since changing <span class="math inline">\(x\)</span> leads to a predicted change in <span class="math inline">\(y\)</span>), whereas if it isn’t significantly different from zero, then we say that there isn’t sufficient evidence of a relationship. Of course, in order to assess whether the slope is significantly different from zero we first need to calculate the values of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>.</p>
@@ -428,9 +428,9 @@ y = \beta_0 + \beta_1 x
 </h2>
 <p>No new commands used in this section.</p>
 </div>
-<div id="data-and-hypotheses-8" class="section level2" number="17.4">
+<div id="data-and-hypotheses-7" class="section level2" number="17.4">
 <h2>
-<span class="header-section-number">17.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-7"><i class="fas fa-link"></i></a>
 </h2>
 <p>We will perform a simple linear regression analysis on the two variables <code>murder</code> and <code>assault</code> from the <code>USArrests</code> dataset. We wish to determine whether the <code>assault</code> variable is a significant predictor of the <code>murder</code> variable. This means that we will need to find the coefficients <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> that best fit the following macabre equation:</p>
 <p><span class="math display">\[\begin{equation*}
@@ -446,12 +446,12 @@ Murder  = \beta_0 + \beta_1 \cdot Assault
 </li>
 </ul>
 </div>
-<div id="summarise-and-visualise-9" class="section level2" number="17.5">
+<div id="summarise-and-visualise-8" class="section level2" number="17.5">
 <h2>
-<span class="header-section-number">17.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-9"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-8"><i class="fas fa-link"></i></a>
 </h2>
 <p>You can visualise the data with:</p>
-<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create scatterplot of the data</span>
 <span class="va">USArrests</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">assault</span>, y <span class="op">=</span> <span class="va">murder</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -474,7 +474,7 @@ Murder  = \beta_0 + \beta_1 \cdot Assault
 </div>
 <p>Whether these assumptions are met can easily be checked visually by producing four key diagnostic plots.</p>
 <p>First we need to define the linear model:</p>
-<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lm_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">murder</span> <span class="op">~</span> <span class="va">assault</span>,
            data <span class="op">=</span> <span class="va">USArrests</span><span class="op">)</span></code></pre></div>
 <ul>
@@ -482,7 +482,7 @@ Murder  = \beta_0 + \beta_1 \cdot Assault
 <li>The second argument specifies which dataset to use</li>
 </ul>
 <p>Next, we can create diagnostic plots for the model:</p>
-<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lm_1</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"resid"</span>, <span class="st">"qq"</span>, <span class="st">"ls"</span>, <span class="st">"cookd"</span><span class="op">)</span>,
               smoother <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
@@ -503,7 +503,7 @@ Murder  = \beta_0 + \beta_1 \cdot Assault
 <span class="header-section-number">17.7</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-9"><i class="fas fa-link"></i></a>
 </h2>
 <p>We have already defined the linear model, so we can have a closer look at it:</p>
-<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># show the linear model</span>
 <span class="va">lm_1</span></code></pre></div>
 <pre><code>## 
@@ -519,7 +519,7 @@ Murder  = \beta_0 + \beta_1 \cdot Assault
 Murder = 0.63 + 0.042 \cdot Assault
 \end{equation*}\]</span></p>
 <p>Assess whether the slope is significantly different from zero:</p>
-<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_1</span><span class="op">)</span></code></pre></div>
 <p>Here, we again use the <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> command to assess significance. This shouldn’t be too surprising at this stage if the introductory lectures made any sense. From a mathematical perspective, one-way ANOVA and simple linear regression are exactly the same as each other and it makes sense that we should use the same command to analyse them in R.</p>
 </div>
@@ -556,7 +556,7 @@ Since the p-value is excruciatingly tiny we can reject our null hypothesis and s
 <p><br></p>
 <p><strong>Plotting the regression line</strong></p>
 <p>It can be very helpful to plot the regression line with the original data to see how far the data are from the predicted linear values. We can do this with:</p>
-<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot the data</span>
 <span class="va">USArrests</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">assault</span>, y <span class="op">=</span> <span class="va">murder</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -587,7 +587,7 @@ Since the p-value is excruciatingly tiny we can reject our null hypothesis and s
 Answer
 </summary><p><strong>Murder and Life Expectancy</strong></p>
 <p>Let’s see if the <code>murder</code> variable can be used to predict the <code>life_exp</code> variable. Let’s plot it first of all.</p>
-<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot the data and add the regression line</span>
 <span class="va">USAstate</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">murder</span>, y <span class="op">=</span> <span class="va">life_exp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -601,7 +601,7 @@ Answer
 <li>We check the assumptions (only roughly though as we’ll be doing this properly in a minute). Nothing immediately gives me cause for concern; the data appear linear, the spread of the data around the line appears homogeneous and symmetrical. No outliers either.</li>
 </ol>
 <p>Now, let’s check the assumptions with the diagnostic plots.</p>
-<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create a linear model</span>
 <span class="va">lm_murder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">life_exp</span> <span class="op">~</span> <span class="va">murder</span>,
            data <span class="op">=</span> <span class="va">USAstate</span><span class="op">)</span>
@@ -619,7 +619,7 @@ Answer
 </ol>
 <p>So in this case, because we have a large enough sample size and our deviation from normality isn’t too bad, we can just crack on with the standard analysis.</p>
 <p>So, let’s actually do the analysis:</p>
-<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_murder</span><span class="op">)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
@@ -632,7 +632,7 @@ Answer
 <p>And after all of that we find that the murder rate is a statistically significant predictor of life expectancy in US states. Woohoo!</p>
 <p><strong>High School Graduation and Frosty Days</strong></p>
 <p>Now let’s investigate the relationship between the proportion of High School Graduates a state has (<code>hs_grad</code>) and the mean number of days below freezing (<code>frost</code>) within each state.</p>
-<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot the data</span>
 <span class="va">USAstate</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">frost</span>, y <span class="op">=</span> <span class="va">hs_grad</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -647,7 +647,7 @@ Answer
 </ol>
 <p>Let’s check these out properly</p>
 <p>Now, let’s check the assumptions with the diagnostic plots.</p>
-<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># create a linear model</span>
 <span class="va">lm_frost</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">hs_grad</span> <span class="op">~</span> <span class="va">frost</span>,
                data <span class="op">=</span> <span class="va">USAstate</span><span class="op">)</span>
@@ -712,8 +712,8 @@ Answer
 <li><a class="nav-link" href="#objectives-6"><span class="header-section-number">17.1</span> Objectives</a></li>
 <li><a class="nav-link" href="#purpose-and-aim-5"><span class="header-section-number">17.2</span> Purpose and aim</a></li>
 <li><a class="nav-link" href="#section-commands-9"><span class="header-section-number">17.3</span> Section commands</a></li>
-<li><a class="nav-link" href="#data-and-hypotheses-8"><span class="header-section-number">17.4</span> Data and hypotheses</a></li>
-<li><a class="nav-link" href="#summarise-and-visualise-9"><span class="header-section-number">17.5</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses-7"><span class="header-section-number">17.4</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#summarise-and-visualise-8"><span class="header-section-number">17.5</span> Summarise and visualise</a></li>
 <li><a class="nav-link" href="#assumptions-15"><span class="header-section-number">17.6</span> Assumptions</a></li>
 <li><a class="nav-link" href="#implement-test-9"><span class="header-section-number">17.7</span> Implement test</a></li>
 <li><a class="nav-link" href="#interpret-output-and-report-results-8"><span class="header-section-number">17.8</span> Interpret output and report results</a></li>

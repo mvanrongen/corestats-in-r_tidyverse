@@ -6,7 +6,7 @@
 <title>Chapter 20 Two-way ANOVA | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
 <meta name="description" content="20.1 Objectives  Questions When is the use of a two-way ANOVA appropriate? How do I perform this in R? Objectives Be able to perform a two-way ANOVA in R Understand the concept of interaction...">
-<meta name="generator" content="bookdown 0.25 with bs4_book()">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
 <meta property="og:title" content="Chapter 20 Two-way ANOVA | Core Statistics in R">
 <meta property="og:type" content="book">
 <meta property="og:description" content="20.1 Objectives  Questions When is the use of a two-way ANOVA appropriate? How do I perform this in R? Objectives Be able to perform a two-way ANOVA in R Understand the concept of interaction...">
@@ -439,28 +439,28 @@
 </tr></tbody>
 </table></div>
 </div>
-<div id="data-and-hypotheses-9" class="section level2" number="20.4">
+<div id="data-and-hypotheses-8" class="section level2" number="20.4">
 <h2>
-<span class="header-section-number">20.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-9"><i class="fas fa-link"></i></a>
+<span class="header-section-number">20.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-8"><i class="fas fa-link"></i></a>
 </h2>
 <p>We will recreate the example analysis used in the lecture. The data are stored as a <code>.csv</code> file called <code>data/tidy/CS4-exercise.csv</code>.</p>
 </div>
-<div id="summarise-and-visualise-10" class="section level2" number="20.5">
+<div id="summarise-and-visualise-9" class="section level2" number="20.5">
 <h2>
-<span class="header-section-number">20.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-10"><i class="fas fa-link"></i></a>
+<span class="header-section-number">20.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-9"><i class="fas fa-link"></i></a>
 </h2>
 <p><code>exercise</code> is a data frame with three variables; <code>weight</code>, <code>sex</code> and <code>exercise.</code> <code>weight</code> is the continuous response variable, whereas <code>sex</code> and <code>exercise</code> are the categorical predictor variables.</p>
 <p>First, read in the data:</p>
-<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">exercise</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS4-exercise.csv"</span><span class="op">)</span></code></pre></div>
 <p>Then visualise:</p>
-<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># visualise the data, sex vs weight</span>
 <span class="va">exercise</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sex</span>, y <span class="op">=</span> <span class="va">weight</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-5-1.png" width="672"></div>
-<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># visualise the data, exercise vs weight</span>
 <span class="va">exercise</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">exercise</span>, y <span class="op">=</span> <span class="va">weight</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -469,7 +469,7 @@
 <p>These produce box plots showing the response variable (<code>weight</code>) only in terms of one of the predictor variables. The values of the other predictor variable in each case aren’t taken into account.</p>
 <p>(Optional) Add titles, axis labels and any other information that you see fit to the plots to make them presentable.</p>
 <p>Visualise both predictor variables together:</p>
-<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">exercise</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sex</span>, y <span class="op">=</span> <span class="va">weight</span>, fill <span class="op">=</span> <span class="va">exercise</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
@@ -481,7 +481,7 @@
 <p>In this example there are only four box plots and so it is relatively easy to compare them and look for any interactions between variables, but if there were more than two groups per categorical variable, it would become harder to spot what was going on.</p>
 <p>To compare categorical variables more easily we can just plot the group means which aids our ability to look for interactions and the main effects of each predictor variable.</p>
 <p>Create an interaction plot:</p>
-<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">exercise</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sex</span>,
              y <span class="op">=</span> <span class="va">weight</span>,
@@ -503,7 +503,7 @@
 </ul>
 <p>The choice of which categorical factor is plotted on the horizontal axis and which is plotted as different lines is completely arbitrary. Looking at the data both ways shouldn’t add anything but often you’ll find that you prefer one plot to another.</p>
 <p>Plot the interaction plot the other way round:</p>
-<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">exercise</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">exercise</span>,
              y <span class="op">=</span> <span class="va">weight</span>,
@@ -530,7 +530,7 @@
 <span class="header-section-number">20.6</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-16"><i class="fas fa-link"></i></a>
 </h2>
 <p>Before we can formally test these things we first need to define the model and check the underlying assumptions. We use the following code to define the model:</p>
-<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the linear model</span>
 <span class="va">lm_exercise</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">exercise</span> <span class="op">+</span> <span class="va">sex</span><span class="op">:</span><span class="va">exercise</span>,
                   data <span class="op">=</span> <span class="va">exercise</span><span class="op">)</span></code></pre></div>
@@ -543,7 +543,7 @@
 <li>The fit should not depend overly much on a single point (no point should have high leverage).</li>
 </ol>
 <p>Again, we will check these assumptions visually by producing four key diagnostic plots.</p>
-<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lm_exercise</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"resid"</span>, <span class="st">"qq"</span>, <span class="st">"ls"</span>, <span class="st">"cookd"</span><span class="op">)</span>,
               smoother <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
@@ -561,7 +561,7 @@
 <p><code>weight ~ sex * exercise</code></p>
 <p>Then R interprets it exactly the same way as writing all three terms.
 You can see this if you compare the output of the following two commands:</p>
-<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">exercise</span> <span class="op">+</span> <span class="va">sex</span><span class="op">:</span><span class="va">exercise</span>,
          data <span class="op">=</span> <span class="va">exercise</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
@@ -574,7 +574,7 @@ You can see this if you compare the output of the following two commands:</p>
 ## Residuals    16 225.34   14.08                      
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">sex</span> <span class="op">*</span> <span class="va">exercise</span>,
          data <span class="op">=</span> <span class="va">exercise</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
@@ -594,7 +594,7 @@ You can see this if you compare the output of the following two commands:</p>
 <span class="header-section-number">20.7</span> Implement the test<a class="anchor" aria-label="anchor" href="#implement-the-test-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>The assumptions appear to be met well enough, meaning we can implement the ANOVA. We do this as follows (this is probably the easiest bit!):</p>
-<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># perform the ANOVA</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_exercise</span><span class="op">)</span></code></pre></div>
 </div>
@@ -648,7 +648,7 @@ Answer
 <h3>
 <span class="header-section-number">20.9.1</span> Load the data<a class="anchor" aria-label="anchor" href="#load-the-data"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># read in the data</span>
 <span class="va">cells</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS4-cells.csv"</span><span class="op">)</span>
 
@@ -680,18 +680,18 @@ Answer
 <h3>
 <span class="header-section-number">20.9.2</span> Visualise the data<a class="anchor" aria-label="anchor" href="#visualise-the-data"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb205"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cells</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">concentration</span>, y <span class="op">=</span> <span class="va">cell_number</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-15-1.png" width="672"></div>
-<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cells</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">cell_type</span>, y <span class="op">=</span> <span class="va">cell_number</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-15-2.png" width="672"></div>
 <p>Let’s look at the interaction plots. We’re omitting the actual data and just plotting the mean values:</p>
-<div class="sourceCode" id="cb207"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb205"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># by cell type</span>
 <span class="va">cells</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">concentration</span>,
@@ -701,7 +701,7 @@ Answer
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="va">mean</span>, geom <span class="op">=</span> <span class="st">"line"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_colour_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-16-1.png" width="672"></div>
-<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># by concentration</span>
 <span class="va">cells</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">cell_type</span>,
@@ -718,12 +718,12 @@ Answer
 <span class="header-section-number">20.9.3</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-17"><i class="fas fa-link"></i></a>
 </h3>
 <p>First we need to define the model:</p>
-<div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb207"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the linear model, with interaction term</span>
 <span class="va">lm_cells</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">cell_number</span> <span class="op">~</span> <span class="va">concentration</span> <span class="op">*</span> <span class="va">cell_type</span>,
           data <span class="op">=</span> <span class="va">cells</span><span class="op">)</span></code></pre></div>
 <p>Next, we check the assumptions:</p>
-<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lm_cells</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"resid"</span>, <span class="st">"qq"</span>, <span class="st">"ls"</span>, <span class="st">"cookd"</span><span class="op">)</span>,
               smoother <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
@@ -735,7 +735,7 @@ Answer
 <span class="header-section-number">20.9.4</span> Implement the test<a class="anchor" aria-label="anchor" href="#implement-the-test-3"><i class="fas fa-link"></i></a>
 </h3>
 <p>Let’s carry out a two-way ANOVA:</p>
-<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># perform the ANOVA</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_cells</span><span class="op">)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
@@ -777,7 +777,7 @@ Answer
 </h3>
 <p>In this data set the watering regime (<code>water</code>) and shading regime (<code>shade</code>) are encoded with numerical values. However, these numbers are actually categories, representing the amount of water/shade.</p>
 <p>As such, we don’t want to treat these as numbers but as <em>factors</em>. We can convert the columns using the <code><a href="https://forcats.tidyverse.org/reference/as_factor.html">as_factor()</a></code> function. Because we’d like to keep referring to these columns as factors, we will update our existing data set.</p>
-<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># read in the data</span>
 <span class="va">tulip</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS4-tulip.csv"</span><span class="op">)</span></code></pre></div>
 <pre><code>## Rows: 27 Columns: 3
@@ -787,7 +787,7 @@ Answer
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># have a quick look at the data</span>
 <span class="va">tulip</span></code></pre></div>
 <pre><code>## # A tibble: 27 × 3
@@ -804,7 +804,7 @@ Answer
 ##  9     3     3  135. 
 ## 10     1     1   80.1
 ## # … with 17 more rows</code></pre>
-<div class="sourceCode" id="cb217"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># convert watering and shade regimes to factor</span>
 <span class="va">tulip</span> <span class="op">&lt;-</span> <span class="va">tulip</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>water <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/as_factor.html">as_factor</a></span><span class="op">(</span><span class="va">water</span><span class="op">)</span>,
@@ -816,19 +816,19 @@ Answer
 <span class="header-section-number">20.10.2</span> Visualise the data<a class="anchor" aria-label="anchor" href="#visualise-the-data-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>As always we’ll visualise the data first:</p>
-<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># by watering regime</span>
 <span class="va">tulip</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">water</span>, y <span class="op">=</span> <span class="va">blooms</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-21-1.png" width="672"></div>
-<div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb217"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># by shading regime</span>
 <span class="va">tulip</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">shade</span>, y <span class="op">=</span> <span class="va">blooms</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-21-2.png" width="672"></div>
-<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># interaction plot by watering regime</span>
 <span class="va">tulip</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">shade</span>,
@@ -838,7 +838,7 @@ Answer
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/stat_summary.html">stat_summary</a></span><span class="op">(</span>fun <span class="op">=</span> <span class="va">mean</span>, geom <span class="op">=</span> <span class="st">"line"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_colour_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-two_way_anova_files/figure-html/unnamed-chunk-21-3.png" width="672"></div>
-<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># interaction plot by shade regime</span>
 <span class="va">tulip</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">water</span>,
@@ -855,12 +855,12 @@ Answer
 <span class="header-section-number">20.10.3</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-18"><i class="fas fa-link"></i></a>
 </h3>
 <p>First we need to define the model:</p>
-<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the linear model</span>
 <span class="va">lm_tulip</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">blooms</span> <span class="op">~</span> <span class="va">water</span> <span class="op">*</span> <span class="va">shade</span>,
                data <span class="op">=</span> <span class="va">tulip</span><span class="op">)</span></code></pre></div>
 <p>Next, we check the assumptions:</p>
-<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lm_tulip</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"resid"</span>, <span class="st">"qq"</span>, <span class="st">"ls"</span>, <span class="st">"cookd"</span><span class="op">)</span>,
               smoother <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
@@ -872,7 +872,7 @@ Answer
 <span class="header-section-number">20.10.4</span> Implement the test<a class="anchor" aria-label="anchor" href="#implement-the-test-4"><i class="fas fa-link"></i></a>
 </h3>
 <p>Let’s carry out the two-way ANOVA.</p>
-<div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># perform the ANOVA</span>
 <span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_tulip</span><span class="op">)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
@@ -927,8 +927,8 @@ Answer
 <li><a class="nav-link" href="#objectives-8"><span class="header-section-number">20.1</span> Objectives</a></li>
 <li><a class="nav-link" href="#purpose-and-aim-6"><span class="header-section-number">20.2</span> Purpose and aim</a></li>
 <li><a class="nav-link" href="#section-commands-10"><span class="header-section-number">20.3</span> Section commands</a></li>
-<li><a class="nav-link" href="#data-and-hypotheses-9"><span class="header-section-number">20.4</span> Data and hypotheses</a></li>
-<li><a class="nav-link" href="#summarise-and-visualise-10"><span class="header-section-number">20.5</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses-8"><span class="header-section-number">20.4</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#summarise-and-visualise-9"><span class="header-section-number">20.5</span> Summarise and visualise</a></li>
 <li><a class="nav-link" href="#assumptions-16"><span class="header-section-number">20.6</span> Assumptions</a></li>
 <li><a class="nav-link" href="#implement-the-test-2"><span class="header-section-number">20.7</span> Implement the test</a></li>
 <li><a class="nav-link" href="#interpret-output-and-present-results"><span class="header-section-number">20.8</span> Interpret output and present results</a></li>

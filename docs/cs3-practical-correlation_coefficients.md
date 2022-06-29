@@ -196,7 +196,7 @@ USAstate %>%
 ## # A tibble: 64 × 8
 ##    var1       var2          cor     statistic      p conf.low conf.high method 
 ##    <chr>      <chr>       <dbl>         <dbl>  <dbl>    <dbl>     <dbl> <chr>  
-##  1 population population  1           Inf     0        1         1      Pearson
+##  1 population population  1     328764948.    0        1         1      Pearson
 ##  2 population income      0.21          1.47  0.147   -0.0744    0.460  Pearson
 ##  3 population illiteracy  0.11          0.750 0.457   -0.176     0.375  Pearson
 ##  4 population life_exp   -0.068        -0.473 0.639   -0.340     0.214  Pearson

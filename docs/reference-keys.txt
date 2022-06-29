@@ -132,8 +132,6 @@ cs2-anova
 objectives-2
 purpose-and-aim-2
 section-commands-6
-data-and-hypotheses-5
-summarise-and-visualise-6
 assumptions-11
 normality
 equality-of-variance-1
@@ -157,8 +155,8 @@ kruskal-wallis-test
 objectives-3
 purpose-and-aim-3
 section-commands-7
-data-and-hypotheses-6
-summarise-and-visualise-7
+data-and-hypotheses-5
+summarise-and-visualise-6
 assumptions-13
 equality-of-variance-2
 implement-test-6
@@ -180,9 +178,9 @@ correlation-coefficients
 objectives-5
 purpose-and-aim-4
 section-commands-8
-data-and-hypotheses-7
+data-and-hypotheses-6
 pearsons-product-moment-correlation-coefficient
-summarise-and-visualise-8
+summarise-and-visualise-7
 implement-test-7
 interpret-output-and-report-results-6
 exercise-state-data-pearson
@@ -198,8 +196,8 @@ linear-regression
 objectives-6
 purpose-and-aim-5
 section-commands-9
-data-and-hypotheses-8
-summarise-and-visualise-9
+data-and-hypotheses-7
+summarise-and-visualise-8
 assumptions-15
 implement-test-9
 interpret-output-and-report-results-8
@@ -214,8 +212,8 @@ two-way-anova
 objectives-8
 purpose-and-aim-6
 section-commands-10
-data-and-hypotheses-9
-summarise-and-visualise-10
+data-and-hypotheses-8
+summarise-and-visualise-9
 assumptions-16
 implement-the-test-2
 interpret-output-and-present-results
@@ -236,8 +234,8 @@ linear-regression-with-grouped-data
 objectives-9
 purpose-and-aim-7
 section-commands-11
-data-and-hypotheses-10
-summarise-and-visualise-11
+data-and-hypotheses-9
+summarise-and-visualise-10
 implement-the-test-5
 interpret-output-and-present-results-1
 finding-intercept-values
@@ -255,8 +253,8 @@ linear-models
 objectives-11
 purpose-and-aim-8
 section-commands-12
-data-and-hypotheses-11
-summarise-and-visualise-12
+data-and-hypotheses-10
+summarise-and-visualise-11
 implemention
 exploring-models
 additive-model
@@ -273,7 +271,7 @@ model-comparisons
 objectives-12
 purpose-and-aim-9
 section-commands-13
-data-and-hypotheses-12
+data-and-hypotheses-11
 backwards-stepwise-elimination
 comparing-models-with-aic-step-1
 comparing-models-with-aic-step-2
@@ -308,7 +306,7 @@ key-points-10
 statistical-reporting
 objectives-15
 purpose-and-aim-10
-data-and-hypotheses-13
+data-and-hypotheses-12
 analysis-methodology
 step-1---identify-the-variables-and-the-question-to-be-explored
 step-2-describe-the-data

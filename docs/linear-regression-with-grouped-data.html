@@ -6,7 +6,7 @@
 <title>Chapter 21 Linear regression with grouped data | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
 <meta name="description" content="21.1 Objectives  Questions How do I perform a linear regression on grouped data? Objectives Be able to perform a linear regression on grouped data in R Calculate the linear regression for...">
-<meta name="generator" content="bookdown 0.25 with bs4_book()">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
 <meta property="og:title" content="Chapter 21 Linear regression with grouped data | Core Statistics in R">
 <meta property="og:type" content="book">
 <meta property="og:description" content="21.1 Objectives  Questions How do I perform a linear regression on grouped data? Objectives Be able to perform a linear regression on grouped data in R Calculate the linear regression for...">
@@ -461,13 +461,13 @@ Essentially the analysis is identical to two-way ANOVA (and R doesn’t really n
 </tbody>
 </table></div>
 </div>
-<div id="data-and-hypotheses-10" class="section level2" number="21.4">
+<div id="data-and-hypotheses-9" class="section level2" number="21.4">
 <h2>
-<span class="header-section-number">21.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-10"><i class="fas fa-link"></i></a>
+<span class="header-section-number">21.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-9"><i class="fas fa-link"></i></a>
 </h2>
 <p>The data are stored in <code>data/tidy/CS4-treelight.csv</code>.</p>
 <p>Read in the data and inspect it:</p>
-<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># read in the data</span>
 <span class="va">treelight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS4-treelight.csv"</span><span class="op">)</span>
 
@@ -489,11 +489,11 @@ Essentially the analysis is identical to two-way ANOVA (and R doesn’t really n
 ## # … with 13 more rows</code></pre>
 <p><code>treelight</code> is a data frame with four variables; <code>id</code>, <code>light</code>, <code>depth</code> and <code>species</code>. <code>light</code> is the continuous response variable, <code>depth</code> is the continuous predictor variable and <code>species</code> is the categorical predictor variable.</p>
 </div>
-<div id="summarise-and-visualise-11" class="section level2" number="21.5">
+<div id="summarise-and-visualise-10" class="section level2" number="21.5">
 <h2>
-<span class="header-section-number">21.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-11"><i class="fas fa-link"></i></a>
+<span class="header-section-number">21.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-10"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot the data</span>
 <span class="va">treelight</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">depth</span>, y <span class="op">=</span> <span class="va">light</span>, colour <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -503,7 +503,7 @@ Essentially the analysis is identical to two-way ANOVA (and R doesn’t really n
        y <span class="op">=</span> <span class="st">"Light intensity (lux)"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-linear_regression_grouped_data_files/figure-html/unnamed-chunk-4-1.png" width="672"></div>
 <p>It looks like there is a slight negative correlation between depth and light intensity, with light intensity reducing as the canopy depth increases. It would be useful to plot the regression lines in this plot. We can do this as follows, by updating our code:</p>
-<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot the data</span>
 <span class="va">treelight</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">depth</span>, y <span class="op">=</span> <span class="va">light</span>, colour <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -522,7 +522,7 @@ Essentially the analysis is identical to two-way ANOVA (and R doesn’t really n
 </h2>
 <p>In this case we’re going to implement the test before checking the assumptions (I know, let’s live a little!). You’ll find out why soon…</p>
 <p>We can test for a possible interaction more formally:</p>
-<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">light</span> <span class="op">~</span> <span class="va">depth</span> <span class="op">*</span> <span class="va">species</span>,
          data <span class="op">=</span> <span class="va">treelight</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Remember that <code>depth * species</code> is a shorthand way of writing the full set of <code>depth + species + depth:species</code> terms in R <em>i.e.</em> both main effects and the interaction effect.</p>
@@ -551,7 +551,7 @@ Essentially the analysis is identical to two-way ANOVA (and R doesn’t really n
 </h3>
 <p>Unfortunately, R doesn’t make this obvious and easy for us and there is some deciphering required getting this right.
 For a simple straight line such as the linear regression for the conifer dataset by itself, the output is relatively straightforward.</p>
-<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># filter the Conifer data and fit a linear model</span>
 <span class="va">treelight</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">"Conifer"</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
@@ -570,7 +570,7 @@ Light = 5014 + -292.2 \cdot Depth
 \end{equation}\]</span></p>
 <p>This came from fitting a simple linear model using the conifer dataset, and has the meaning that for every extra 1 m of depth of forest canopy we lose 292.2 lux of light.</p>
 <p>When we looked at the full dataset, we found that interaction wasn’t important. This means that we will have a model with two distinct intercepts but only a single slope (that’s what you get for a linear regression without any interaction), so we need to ask R to calculate that specific combination. The command for that is simply:</p>
-<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">light</span> <span class="op">~</span> <span class="va">depth</span> <span class="op">+</span> <span class="va">species</span>,
    data <span class="op">=</span> <span class="va">treelight</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -614,7 +614,7 @@ Light = 4829 + -262.2 \cdot Depth
 <p>This is relatively straightforward if we understand the output of the model a bit better.</p>
 <p>First of all, we load the <code>broom</code> library. This is part of tidyverse, so you don’t have to install it. It is not loaded by default, hence us loading it. What broom does it changes the format of many common base R outputs into a more tidy format, so we can work with the output in our analyses more easily.</p>
 <p>The function we use here is called <code><a href="https://generics.r-lib.org/reference/augment.html">augment()</a></code>. What this does is take a model object and a dataset and adds information about each observation in the dataset.</p>
-<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the model without interaction term</span>
 <span class="va">lm_additive</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">light</span> <span class="op">~</span> <span class="va">species</span> <span class="op">+</span> <span class="va">depth</span>,
                   data <span class="op">=</span> <span class="va">treelight</span><span class="op">)</span>
@@ -641,7 +641,7 @@ Light = 4829 + -262.2 \cdot Depth
 <p>The output shows us lots of data. Our original <code>light</code> values are in the <code>light</code> column and it’s the same for <code>species</code> and <code>depth</code>. What has been added is information about the fitted (or predicted) values based on the <code>light ~ depth + species</code> model we defined.</p>
 <p>The fitted or predicted values are in the <code>.fitted</code> column, with corresponding residuals in the <code>.resid</code> column. Remember, your data = predicted values + error, so if you would add <code>.fitted</code> + <code>resid</code> then you would end up with your original data again.</p>
 <p>Using this information we can now plot the regression lines by <code>species</code>:</p>
-<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot the regression lines by species</span>
 <span class="va">lm_additive</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
@@ -650,7 +650,7 @@ Light = 4829 + -262.2 \cdot Depth
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_color_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-linear_regression_grouped_data_files/figure-html/unnamed-chunk-11-1.png" width="672"></div>
 <p>Lastly, if we would want to plot the data and regression lines together, we could change the code as follows:</p>
-<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot the regression lines</span>
 <span class="va">lm_additive</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://generics.r-lib.org/reference/augment.html">augment</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
@@ -671,7 +671,7 @@ Light = 4829 + -262.2 \cdot Depth
 </h2>
 <p>In this case we first wanted to check if the interaction was significant, prior to checking the assumptions. If we would have checked the assumptions first, then we would have done that one the full model (with the interaction), then done the ANOVA if everything was OK. We would have then found out that the interaction was not significant, meaning we’d have to re-check the assumptions with the new model. In what order you do it is a bit less important here. The main thing is that you check the assumptions and report on it!</p>
 <p>Anyway, hopefully you’ve got the gist of checking assumptions for linear models by now: diagnostic plots!</p>
-<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lm_additive</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"resid"</span>, <span class="st">"qq"</span>, <span class="st">"ls"</span>, <span class="st">"cookd"</span><span class="op">)</span>,
               smoother <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
@@ -690,11 +690,11 @@ Light = 4829 + -262.2 \cdot Depth
 </h2>
 <p>If there <em>had been</em> a significant interaction between the two predictor variables (for example, if light intensity had dropped off significantly faster in conifer woods than in broad leaf woods, in addition to being lower overall, then we would again be looking for two equations for the linear regression, but this time the gradients vary as well.
 In this case interaction is important and so we need the output from a linear regression that explicitly includes the interaction term:</p>
-<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">light</span> <span class="op">~</span> <span class="va">depth</span> <span class="op">+</span> <span class="va">species</span> <span class="op">+</span> <span class="va">depth</span><span class="op">:</span><span class="va">species</span>,
    data <span class="op">=</span> <span class="va">treelight</span><span class="op">)</span></code></pre></div>
 <p>or written using the short-hand:</p>
-<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">light</span> <span class="op">~</span> <span class="va">depth</span> <span class="op">*</span> <span class="va">species</span>,
    data <span class="op">=</span> <span class="va">treelight</span><span class="op">)</span></code></pre></div>
 <p>There really is absolutely no difference in the end result.
@@ -737,10 +737,10 @@ Light = 5014 + -292.2 \cdot Depth
 </ul>
 <details><summary>
 Answer
-</summary><div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
+</summary><div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">clover</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS4-clover.csv"</span><span class="op">)</span></code></pre></div>
 <p>This dataset has three variables; <code>yield</code> (which is the response variable), <code>yarrow</code> (which is a continuous predictor variable) and <code>farm</code> (which is the categorical predictor variables). As always we’ll visualise the data first:</p>
-<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot the data</span>
 <span class="va">clover</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">yarrow</span>, y <span class="op">=</span> <span class="va">yield</span>,
@@ -749,7 +749,7 @@ Answer
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_color_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-linear_regression_grouped_data_files/figure-html/unnamed-chunk-18-1.png" width="672"></div>
 <p>Looking at this plot as it stands, it’s pretty clear that yarrow density has a significant effect on yield, but it’s pretty hard to see from the plot whether there is any effect of <code>farm</code>, or whether there is any interaction. In order to work that out we’ll want to add the regression lines for each <code>farm</code> separately.</p>
-<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot the data</span>
 <span class="va">clover</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">yarrow</span>, y <span class="op">=</span> <span class="va">yield</span>,
@@ -759,7 +759,7 @@ Answer
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_color_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Dark2"</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs4-practical-linear_regression_grouped_data_files/figure-html/unnamed-chunk-19-1.png" width="672"></div>
 <p>The regression lines are very close together, and it looks very much as if there isn’t any interaction, but also that there isn’t any effect of <code>farm</code>. Let’s carry out the analysis:</p>
-<div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lm_clover</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">yield</span> <span class="op">~</span> <span class="va">yarrow</span> <span class="op">*</span> <span class="va">farm</span>,
                 data <span class="op">=</span> <span class="va">clover</span><span class="op">)</span>
 
@@ -776,7 +776,7 @@ Answer
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>This confirms our suspicions from looking at the plot. There isn’t any interaction between <code>yarrow</code> and <code>farm.</code> <code>yarrow</code> density has a statistically significant effect on <code>yield</code> but there isn’t any difference between the different farms on the yields of clover.</p>
 <p>Let’s check the assumptions:</p>
-<div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lm_clover</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"resid"</span>, <span class="st">"qq"</span>, <span class="st">"ls"</span>, <span class="st">"cookd"</span><span class="op">)</span>,
               smoother <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
@@ -800,7 +800,7 @@ Answer
 </li>
 </ol>
 <p>Let’s do a quick little transformation of the data, and repeat our analysis see if our assumptions are better met this time (just for the hell of it):</p>
-<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># plot log-transformed data</span>
 <span class="va">clover</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">yarrow</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">yield</span><span class="op">)</span>, colour <span class="op">=</span> <span class="va">farm</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
@@ -810,7 +810,7 @@ Answer
 <div class="inline-figure"><img src="cs4-practical-linear_regression_grouped_data_files/figure-html/unnamed-chunk-22-1.png" width="672"></div>
 <p>Again, this looks plausible. There’s a noticeable outlier from Farm B (data point at the bottom of the plot) but otherwise we see that: there probably isn’t an interaction; there is likely to be an effect of <code>yarrow</code> on <code>log(yield)</code>; and there probably isn’t any difference between the farms.</p>
 <p>Let’s do the analysis:</p>
-<div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define linear model</span>
 <span class="va">lm_log_clover</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">yield</span><span class="op">)</span> <span class="op">~</span> <span class="va">yarrow</span> <span class="op">*</span> <span class="va">farm</span>,
                     data <span class="op">=</span> <span class="va">clover</span><span class="op">)</span>
@@ -827,7 +827,7 @@ Answer
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>Woop. All good so far. We have the same conclusions as before in terms of what is significant and what isn’t. Now we just need to check the assumptions:</p>
-<div class="sourceCode" id="cb253"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lm_log_clover</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"resid"</span>, <span class="st">"qq"</span>, <span class="st">"ls"</span>, <span class="st">"cookd"</span><span class="op">)</span>,
               smoother <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
@@ -866,8 +866,8 @@ Answer
 <li><a class="nav-link" href="#objectives-9"><span class="header-section-number">21.1</span> Objectives</a></li>
 <li><a class="nav-link" href="#purpose-and-aim-7"><span class="header-section-number">21.2</span> Purpose and aim</a></li>
 <li><a class="nav-link" href="#section-commands-11"><span class="header-section-number">21.3</span> Section commands</a></li>
-<li><a class="nav-link" href="#data-and-hypotheses-10"><span class="header-section-number">21.4</span> Data and hypotheses</a></li>
-<li><a class="nav-link" href="#summarise-and-visualise-11"><span class="header-section-number">21.5</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses-9"><span class="header-section-number">21.4</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#summarise-and-visualise-10"><span class="header-section-number">21.5</span> Summarise and visualise</a></li>
 <li><a class="nav-link" href="#implement-the-test-5"><span class="header-section-number">21.6</span> Implement the test</a></li>
 <li>
 <a class="nav-link" href="#interpret-output-and-present-results-1"><span class="header-section-number">21.7</span> Interpret output and present results</a><ul class="nav navbar-nav">

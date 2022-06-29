@@ -6,7 +6,7 @@
 <title>Chapter 25 Model comparisons | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
 <meta name="description" content="25.1 Objectives  Questions How do I compare linear models? How do decide which one is the “best” model? Objectives Be able to compare models using the Akaike Information Criterion (AIC) Use AIC in...">
-<meta name="generator" content="bookdown 0.25 with bs4_book()">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
 <meta property="og:title" content="Chapter 25 Model comparisons | Core Statistics in R">
 <meta property="og:type" content="book">
 <meta property="og:description" content="25.1 Objectives  Questions How do I compare linear models? How do decide which one is the “best” model? Objectives Be able to compare models using the Akaike Information Criterion (AIC) Use AIC in...">
@@ -413,7 +413,7 @@
 <h2>
 <span class="header-section-number">25.2</span> Purpose and aim<a class="anchor" aria-label="anchor" href="#purpose-and-aim-9"><i class="fas fa-link"></i></a>
 </h2>
-<p>In the previous example we used a single dataset and fitted five linear models to it depending on which predictor variables we used. Whilst this was fun (seriously, what else would you be doing right now?) it seems that there should be a “better way.” Well, thankfully there is! In fact there a several methods that can be used to compare different models in order to help identify “the best” model. More specifically, we can determine if a full model (which uses all available predictor variables and interactions) is necessary to appropriately describe the dependent variable, or whether we can throw away some of the terms (e.g. an interaction term) because they don’t offer any useful predictive power.</p>
+<p>In the previous example we used a single dataset and fitted five linear models to it depending on which predictor variables we used. Whilst this was fun (seriously, what else would you be doing right now?) it seems that there should be a “better way”. Well, thankfully there is! In fact there a several methods that can be used to compare different models in order to help identify “the best” model. More specifically, we can determine if a full model (which uses all available predictor variables and interactions) is necessary to appropriately describe the dependent variable, or whether we can throw away some of the terms (e.g. an interaction term) because they don’t offer any useful predictive power.</p>
 <p>Here we will use the <strong>Akaike Information Criterion</strong> in order to compare different models.</p>
 </div>
 <div id="section-commands-13" class="section level2" number="25.3">
@@ -422,6 +422,10 @@
 </h2>
 <p>New commands in this section:</p>
 <div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">Function</th>
 <th align="left">Description</th>
@@ -438,9 +442,9 @@
 </tbody>
 </table></div>
 </div>
-<div id="data-and-hypotheses-12" class="section level2" number="25.4">
+<div id="data-and-hypotheses-11" class="section level2" number="25.4">
 <h2>
-<span class="header-section-number">25.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-12"><i class="fas fa-link"></i></a>
+<span class="header-section-number">25.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-11"><i class="fas fa-link"></i></a>
 </h2>
 <p>This section uses the <code>data/tidy/CS5-Ladybird.csv</code> data set. This data set comprises of 20 observations of three variables (one dependent and two predictor). This records the clutch size (<code>eggs</code>) in a species of ladybird alongside two potential predictor variables; the mass of the female (<code>weight</code>), and the colour of the male (<code>male</code>) which is a categorical variable.</p>
 </div>
@@ -449,9 +453,9 @@
 <span class="header-section-number">25.5</span> Backwards Stepwise Elimination<a class="anchor" aria-label="anchor" href="#backwards-stepwise-elimination"><i class="fas fa-link"></i></a>
 </h2>
 <p>First, load the data and store it in an object called <code>ladybird</code>. Then visualise the data.</p>
-<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ladybird</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS5-Ladybird.csv"</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb289"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># visualise the data</span>
 <span class="va">ladybird</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">weight</span>, y <span class="op">=</span> <span class="va">eggs</span>,
@@ -464,7 +468,7 @@
 <span class="header-section-number">25.5.1</span> Comparing models with AIC (step 1)<a class="anchor" aria-label="anchor" href="#comparing-models-with-aic-step-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>First, we construct the full linear model:</p>
-<div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the full model</span>
 <span class="va">lm_full</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">eggs</span> <span class="op">~</span> <span class="va">weight</span> <span class="op">*</span> <span class="va">male</span>,
               data <span class="op">=</span> <span class="va">ladybird</span><span class="op">)</span>
@@ -472,7 +476,7 @@
 <span class="co"># view the model summary</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lm_full</span><span class="op">)</span></code></pre></div>
 <p>Now we construct a reduced model (i.e. the next simplest model) which doesn’t have interactions:</p>
-<div class="sourceCode" id="cb293"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the model</span>
 <span class="va">lm_red</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">eggs</span> <span class="op">~</span> <span class="va">weight</span> <span class="op">+</span> <span class="va">male</span>,
              data <span class="op">=</span> <span class="va">ladybird</span><span class="op">)</span>
@@ -480,10 +484,10 @@
 <span class="co"># view the model summary</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lm_red</span><span class="op">)</span></code></pre></div>
 <p>To compare the two models we simply use the command <code><a href="https://rdrr.io/r/stats/extractAIC.html">extractAIC()</a></code> on each model.</p>
-<div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/extractAIC.html">extractAIC</a></span><span class="op">(</span><span class="va">lm_full</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1]  4.00000 41.28452</code></pre>
-<div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/extractAIC.html">extractAIC</a></span><span class="op">(</span><span class="va">lm_red</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1]  3.00000 40.43819</code></pre>
 <p>For each line the first number tells you how many parameters are in your model and the second number tells you the AIC score for that model. Here we can see that the full model has 4 parameters (the intercept, the coefficient for the continuous variable <code>weight</code>, the coefficient for the categorical variable <code>male</code> and a coefficient for the interaction term <code>weight:male</code>) and an AIC score of 41.3 (1dp). The reduced model has a lower AIC score of 40.4 (1dp) with only 3 parameters (since we’ve dropped the interaction term). There are different ways of interpreting AIC scores but the most widely used interpretation says that:</p>
@@ -500,7 +504,7 @@
 </h3>
 <p>Next, we see which of the remaining terms can be dropped. We will look at the models where we have dropped both <code>male</code> and <code>weight</code> (i.e. <code>eggs ~ weight</code> and <code>eggs ~ male</code>) and compare their AIC values with the AIC of our current minimal model (<code>eggs ~ weight + male</code>). If the AIC values of at least one of our new reduced models is lower (or at least no more than 2 greater) than the AIC of our current minimal model, then we can drop the relevant term and get ourselves a new minimal model. If we find ourselves in a situation where we can drop more than one term we will drop the term that gives us the model with the lowest AIC.</p>
 <p>Drop the variable <code>weight</code> and examine the AIC:</p>
-<div class="sourceCode" id="cb298"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the model</span>
 <span class="va">lm_male</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">eggs</span> <span class="op">~</span> <span class="va">male</span>,
               data <span class="op">=</span> <span class="va">ladybird</span><span class="op">)</span>
@@ -509,7 +513,7 @@
 <span class="fu"><a href="https://rdrr.io/r/stats/extractAIC.html">extractAIC</a></span><span class="op">(</span><span class="va">lm_male</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1]  2.00000 59.95172</code></pre>
 <p>Drop the variable <code>male</code> and examine the AIC:</p>
-<div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb298"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the model</span>
 <span class="va">lm_weight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">eggs</span> <span class="op">~</span> <span class="va">weight</span>,
                 data <span class="op">=</span> <span class="va">ladybird</span><span class="op">)</span>
@@ -526,7 +530,7 @@
 </h3>
 <p>Our final comparison is to drop the variable <code>weight</code> and compare this simple model with a null model (<code>eggs ~ 1</code>), which assumes that the brood size is constant across all parameters.</p>
 <p>Drop the variable <code>weight</code> and see if that has an effect:</p>
-<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the model</span>
 <span class="va">lm_null</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">eggs</span> <span class="op">~</span> <span class="fl">1</span>,
               data <span class="op">=</span> <span class="va">ladybird</span><span class="op">)</span>
@@ -605,7 +609,7 @@ Answer
 <span class="header-section-number">25.7.1</span> <code>trees</code> dataset<a class="anchor" aria-label="anchor" href="#trees-dataset"><i class="fas fa-link"></i></a>
 </h3>
 <p>We construct a full linear model with both <code>Height</code>, <code>Girth</code> and the interaction between them and then we run the <code><a href="https://rdrr.io/r/stats/step.html">step()</a></code> function:</p>
-<div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb304"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the full model</span>
 <span class="va">lm_trees</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Volume</span> <span class="op">~</span> <span class="va">Girth</span> <span class="op">*</span> <span class="va">Height</span>,
                data <span class="op">=</span> <span class="va">trees</span><span class="op">)</span>
@@ -640,7 +644,7 @@ Answer
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <p>We construct a full linear model with both <code>treatment_plant</code>, <code>daily_temp</code> and the interaction between them and then we run the step function:</p>
-<div class="sourceCode" id="cb310"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the full model</span>
 <span class="va">lm_airpoll</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">hydrogen_sulfide</span> <span class="op">~</span> <span class="va">treatment_plant</span> <span class="op">*</span> <span class="va">daily_temp</span>,
                  data <span class="op">=</span> <span class="va">airpoll</span><span class="op">)</span>
@@ -669,7 +673,7 @@ Answer
 <h3>
 <span class="header-section-number">25.7.3</span> <code>CO2</code> dataset<a class="anchor" aria-label="anchor" href="#co2-dataset"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb313"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb311"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># define the model, ignore the Plant variable</span>
 <span class="va">lm_co2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">uptake</span> <span class="op">~</span> <span class="va">Type</span> <span class="op">+</span> <span class="va">Treatment</span> <span class="op">+</span> <span class="va">conc</span>
              <span class="op">+</span> <span class="va">Type</span><span class="op">:</span><span class="va">Treatment</span> <span class="op">+</span> <span class="va">Type</span><span class="op">:</span><span class="va">conc</span> <span class="op">+</span> <span class="va">Treatment</span><span class="op">:</span><span class="va">conc</span>
@@ -746,7 +750,7 @@ Answer
 <li><a class="nav-link" href="#objectives-12"><span class="header-section-number">25.1</span> Objectives</a></li>
 <li><a class="nav-link" href="#purpose-and-aim-9"><span class="header-section-number">25.2</span> Purpose and aim</a></li>
 <li><a class="nav-link" href="#section-commands-13"><span class="header-section-number">25.3</span> Section commands</a></li>
-<li><a class="nav-link" href="#data-and-hypotheses-12"><span class="header-section-number">25.4</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses-11"><span class="header-section-number">25.4</span> Data and hypotheses</a></li>
 <li>
 <a class="nav-link" href="#backwards-stepwise-elimination"><span class="header-section-number">25.5</span> Backwards Stepwise Elimination</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#comparing-models-with-aic-step-1"><span class="header-section-number">25.5.1</span> Comparing models with AIC (step 1)</a></li>

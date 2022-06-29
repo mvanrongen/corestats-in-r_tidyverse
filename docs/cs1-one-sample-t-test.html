@@ -6,7 +6,7 @@
 <title>Chapter 4 One-sample t-test | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
 <meta name="description" content="4.1 Section commands New commands used in this section: Function &amp; libraries Description library(tidyverse) library(rstatix) library(ggResidpanel) t_test() Performs a one-sample t-test, Student’s...">
-<meta name="generator" content="bookdown 0.25 with bs4_book()">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
 <meta property="og:title" content="Chapter 4 One-sample t-test | Core Statistics in R">
 <meta property="og:type" content="book">
 <meta property="og:description" content="4.1 Section commands New commands used in this section: Function &amp; libraries Description library(tidyverse) library(rstatix) library(ggResidpanel) t_test() Performs a one-sample t-test, Student’s...">
@@ -427,6 +427,14 @@
 <td align="left"><code><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test()</a></code></td>
 <td align="left">Performs a Shapiro-Wilk test for normality.</td>
 </tr>
+<tr class="even">
+<td align="left"><code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code></td>
+<td align="left">Fits a linear model</td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel()</a></code></td>
+<td align="left">Creates diagnostic plots</td>
+</tr>
 </tbody>
 </table></div>
 </div>
@@ -499,7 +507,7 @@
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">river</span>, y <span class="op">=</span> <span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-one_sample_t_test_files/figure-html/cs1-one-sample-summary-1.png" width="672"></div>
-<p>The data do not appear to contain any obvious errors, and whilst both the mean and median are less than 20 (18.3 and 18.8 respectively) it is not absolutely certain that the sample mean is sufficiently different from this value to be “statistically significant,” although we may anticipate such a result.</p>
+<p>The data do not appear to contain any obvious errors, and whilst both the mean and median are less than 20 (18.3 and 18.8 respectively) it is not absolutely certain that the sample mean is sufficiently different from this value to be “statistically significant”, although we may anticipate such a result.</p>
 </div>
 <div id="assumptions" class="section level2" number="4.4">
 <h2>
@@ -646,7 +654,7 @@ There are three ways of checking for normality:</p>
 <li>a low p-value means that there is a low probability of observing a sample such as ours and the null hypothesis is probably not true.</li>
 </ul>
 <p>It is important to realise that the p-value is just an indication and there is no absolute certainty here in this interpretation.</p>
-<p>People, however like more definite answers and so we pick an artificial probability threshold (called a significance level) in order to be able to say something more decisive. The standard significance level is 0.05 and since our p-value is smaller than this we choose to say that “it is very unlikely that we would have this particular sample if the null hypothesis were true.” Consequently, we can reject our null hypothesis and state that:</p>
+<p>People, however like more definite answers and so we pick an artificial probability threshold (called a significance level) in order to be able to say something more decisive. The standard significance level is 0.05 and since our p-value is smaller than this we choose to say that “it is very unlikely that we would have this particular sample if the null hypothesis were true”. Consequently, we can reject our null hypothesis and state that:</p>
 <blockquote>
 <p>A one-sample t-test indicated that the mean body length of male guppies (<span class="math inline">\(\mu\)</span> = 18.29mm) differs significantly from 20 mm (t = -3.55, df = 28, p = 0.0014).</p>
 </blockquote>

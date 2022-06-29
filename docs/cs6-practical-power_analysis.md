@@ -728,10 +728,10 @@ summary(lm_mussel)
 ## Coefficients:
 ##                     Estimate Std. Error t value Pr(>|t|)    
 ## (Intercept)         0.078012   0.004454  17.517  < 2e-16 ***
-## locationNewport    -0.003213   0.006298  -0.510  0.61331    
+## locationNewport    -0.003212   0.006298  -0.510  0.61331    
 ## locationPetersburg  0.025430   0.006519   3.901  0.00043 ***
 ## locationTillamook   0.002187   0.005975   0.366  0.71656    
-## locationTvarminne   0.017687   0.006803   2.600  0.01370 *  
+## locationTvarminne   0.017688   0.006803   2.600  0.01370 *  
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 

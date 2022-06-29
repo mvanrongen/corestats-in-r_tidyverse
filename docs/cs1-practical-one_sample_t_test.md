@@ -12,6 +12,8 @@ New commands used in this section:
 |`library(ggResidpanel)`| | 
 |`t_test()`| Performs a one-sample t-test, Student's t-test and Welch's t-test in later sections.|
 |`shapiro_test()`| Performs a Shapiro-Wilk test for normality.|
+|`lm()`| Fits a linear model |
+|`resid_panel()`| Creates diagnostic plots|
 
 ## Data and hypotheses
 For example, suppose we measure the body lengths of male guppies (in mm) collected from the Guanapo River in Trinidad. We want to test whether the data support the hypothesis that the mean body is actually 20 mm. We form the following null and alternative hypotheses:
