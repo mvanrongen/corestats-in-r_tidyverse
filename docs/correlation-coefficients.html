@@ -375,12 +375,6 @@
 <li><a class="" href="introduction-4.html"><span class="header-section-number">23</span> Introduction</a></li>
 <li><a class="" href="linear-models.html"><span class="header-section-number">24</span> Linear models</a></li>
 <li><a class="" href="model-comparisons.html"><span class="header-section-number">25</span> Model comparisons</a></li>
-<li class="book-part">CoreStats 6: Power analysis</li>
-<li><a class="" href="cs6-intro.html"><span class="header-section-number">26</span> Introduction</a></li>
-<li class="book-part">CoreStats 6 (Practicals)</li>
-<li><a class="" href="introduction-5.html"><span class="header-section-number">27</span> Introduction</a></li>
-<li><a class="" href="power-analysis.html"><span class="header-section-number">28</span> Power analysis</a></li>
-<li><a class="" href="statistical-reporting.html"><span class="header-section-number">29</span> Statistical reporting</a></li>
 </ul>
 
         <div class="book-extra">
@@ -458,19 +452,19 @@
 </tbody>
 </table></div>
 </div>
-<div id="data-and-hypotheses-6" class="section level2" number="16.4">
+<div id="data-and-hypotheses-7" class="section level2" number="16.4">
 <h2>
-<span class="header-section-number">16.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-7"><i class="fas fa-link"></i></a>
 </h2>
 <p>We will use the <code>USArrests</code> dataset for this example. This rather bleak dataset contains statistics in arrests per 100,000 residents for assault, murder and robbery in each of the 50 US states in 1973, alongside the proportion of the population who lived in urban areas at that time. <code>USArrests</code> is a data frame with 50 observations of five variables: <code>state</code>, <code>murder</code>, <code>assault</code>, <code>urban_pop</code> and <code>robbery</code>.</p>
 <p>The data are stored in the file <code>data/tidy/CS3-usarrests.csv</code>.</p>
 <p>First we read in the data:</p>
-<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># load the data</span>
-<span class="va">USArrests</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS3-usarrests.csv"</span><span class="op">)</span>
-
-<span class="co"># have a look at the data</span>
-<span class="va">USArrests</span></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># load the data</span></span>
+<span><span class="va">USArrests</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS3-usarrests.csv"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># have a look at the data</span></span>
+<span><span class="va">USArrests</span></span></code></pre></div>
 <pre><code>## # A tibble: 50 × 5
 ##    state       murder assault urban_pop robbery
 ##    &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
@@ -492,22 +486,22 @@
 </h2>
 <p>Pearson’s r (as this quantity is also known) is a measure of the linear correlation between two variables. It has a value between -1 and +1, where +1 means a perfect positive correlation, -1 means a perfect negative correlation and 0 means no correlation at all.</p>
 <p>Before we can look at the correlations we need to reformat our data a little bit. The functions we’re going to use require data frames that contain only numbers input. Because we want to keep the <code>state</code> information linked to our data, we need to define the <code>state</code> column as the name of the rows.</p>
-<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># convert the state column to row names</span>
-<span class="va">USArrests</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># convert the state column to row names</span></span>
+<span><span class="va">USArrests</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span></span></code></pre></div>
 <p>We do not need to update our original <code>USArrests</code> data frame, so we’re just piping this through and displaying the output here so you can see what’s going on.</p>
 </div>
-<div id="summarise-and-visualise-7" class="section level2" number="16.6">
+<div id="summarise-and-visualise-8" class="section level2" number="16.6">
 <h2>
-<span class="header-section-number">16.6</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.6</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-8"><i class="fas fa-link"></i></a>
 </h2>
 <p>Knowing that the reformatting works, we can first visualise the data:</p>
-<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># create correlation plot</span>
-<span class="va">USArrests</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span>lower.panel <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># create correlation plot</span></span>
+<span><span class="va">USArrests</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span>lower.panel <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
 <ul>
 <li>The argument <code>lower.panel</code> tells R not to add the redundant reflected lower set of plots, below the diagonal</li>
@@ -519,11 +513,11 @@
 <span class="header-section-number">16.7</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-7"><i class="fas fa-link"></i></a>
 </h2>
 <p>We can calculate Pearson’s correlation coefficients for each pair of the variables (e.g. the coefficient between <code>murder</code> and <code>assault</code>). There are several functions that allow you to do this. There is the <code><a href="https://rdrr.io/r/stats/cor.html">cor()</a></code> function in base R and <code><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat()</a></code> from the <code>rstatix</code> package, that spit out the results in a matrix (grid) format. We’ll use <code><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat()</a></code> here so we can keep using our tibble data sets.</p>
-<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># calculate Pearson's correlation coefficients</span>
-<span class="va">USArrests</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># calculate Pearson's correlation coefficients</span></span>
+<span><span class="va">USArrests</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>First we create a matrix, keeping the <code>state</code> data linked as row names</li>
 <li>The <code>method</code> argument tells R which correlation coefficient to use (<code>pearson</code> (default), <code>kendall</code>, or <code>spearman</code>)</li>
@@ -563,11 +557,11 @@ Answer
 <h3>
 <span class="header-section-number">16.9.1</span> Read in the data<a class="anchor" aria-label="anchor" href="#read-in-the-data"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">USAstate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS3-statedata.csv"</span><span class="op">)</span>
-
-<span class="co"># have a look at the data</span>
-<span class="va">USAstate</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">USAstate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS3-statedata.csv"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># have a look at the data</span></span>
+<span><span class="va">USAstate</span></span></code></pre></div>
 <pre><code>## # A tibble: 50 × 9
 ##    state       population income illiteracy life_exp murder hs_grad frost   area
 ##    &lt;chr&gt;            &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
@@ -587,11 +581,11 @@ Answer
 <h3>
 <span class="header-section-number">16.9.2</span> Pair-wise comparisons (visual)<a class="anchor" aria-label="anchor" href="#pair-wise-comparisons-visual"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># visual comparisons of variables</span>
-<span class="va">USAstate</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span>lower.panel <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># visual comparisons of variables</span></span>
+<span><span class="va">USAstate</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span>lower.panel <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-6-1.png" width="672"></div>
 </div>
 <div id="calculate-the-correlation-coefficients" class="section level3" number="16.9.3">
@@ -599,11 +593,11 @@ Answer
 <span class="header-section-number">16.9.3</span> Calculate the correlation coefficients<a class="anchor" aria-label="anchor" href="#calculate-the-correlation-coefficients"><i class="fas fa-link"></i></a>
 </h3>
 <p>To get the correlation coefficients in a format that allows us to manipulate it, we use the <code><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_test.html">cor_test()</a></code> function. This does something similar to the <code><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat()</a></code> function - it calculates the pairwise correlation coefficients. However, it outputs the results in a table format, instead of a matrix.</p>
-<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># calculate Pearson's correlation coefficients</span>
-<span class="va">USAstate</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_test.html">cor_test</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># calculate Pearson's correlation coefficients</span></span>
+<span><span class="va">USAstate</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_test.html">cor_test</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 64 × 8
 ##    var1       var2          cor     statistic      p conf.low conf.high method 
 ##    &lt;chr&gt;      &lt;chr&gt;       &lt;dbl&gt;         &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;  
@@ -620,27 +614,27 @@ Answer
 ## # … with 54 more rows</code></pre>
 <p>The two variables that are compared are given in the <code>var1</code> and <code>var2</code> columns. The correlation coefficient is given in the <code>cor</code> column.</p>
 <p>To extract the maximum, minimum and least correlated pairs, it would be easy if we filter the correlation table a bit more, because each pair now appears twice (once in each orientation, such as <code>murder</code> &amp; <code>assault</code>, <code>assault</code> &amp; <code>murder</code>).</p>
-<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># calculate the correlation coefficients</span>
-<span class="co"># select the unique pairs</span>
-<span class="co"># and store in a new object</span>
-<span class="va">USAstate_cor</span> <span class="op">&lt;-</span> <span class="va">USAstate</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_test.html">cor_test</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="co"># filter out the self-pairs (e.g. murder &amp; murder)</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cor</span> <span class="op">!=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="co"># arrange the data by correlation coefficient</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="co"># each correlation appears twice</span>
-  <span class="co"># because the pairs are duplicated</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="co"># slice the first row of each group</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="co"># remove the grouping</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="co"># have a look at the ouput</span>
-<span class="va">USAstate_cor</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># calculate the correlation coefficients</span></span>
+<span><span class="co"># select the unique pairs</span></span>
+<span><span class="co"># and store in a new object</span></span>
+<span><span class="va">USAstate_cor</span> <span class="op">&lt;-</span> <span class="va">USAstate</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_test.html">cor_test</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># filter out the self-pairs (e.g. murder &amp; murder)</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cor</span> <span class="op">!=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># arrange the data by correlation coefficient</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># each correlation appears twice</span></span>
+<span>  <span class="co"># because the pairs are duplicated</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># slice the first row of each group</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># remove the grouping</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># have a look at the ouput</span></span>
+<span><span class="va">USAstate_cor</span></span></code></pre></div>
 <pre><code>## # A tibble: 28 × 8
 ##    var1       var2         cor statistic        p conf.low conf.high method 
 ##    &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;  
@@ -656,19 +650,19 @@ Answer
 ## 10 life_exp   area       -0.11    -0.748 4.58e- 1   -0.374    0.176  Pearson
 ## # … with 18 more rows</code></pre>
 <p>Now that we have the unique pairs with their corresponding correlation coefficients, we can extract the information that we need:</p>
-<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># get most positively correlated pair</span>
-<span class="va">USAstate_cor</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cor</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span><span class="op">)</span>
-
-<span class="co"># get most negatively correlated pair</span>
-<span class="va">USAstate_cor</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cor</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span><span class="op">)</span>
-
-<span class="co"># get least correlated pair</span>
-<span class="va">USAstate_cor</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span>
-  <span class="co"># abs() computes the absolute value</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cor</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># get most positively correlated pair</span></span>
+<span><span class="va">USAstate_cor</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cor</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># get most negatively correlated pair</span></span>
+<span><span class="va">USAstate_cor</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cor</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># get least correlated pair</span></span>
+<span><span class="va">USAstate_cor</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="co"># abs() computes the absolute value</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cor</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">cor</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>So taken together:</p>
 <ol style="list-style-type: decimal">
 <li>The most <strong>positively</strong> correlated variables are illiteracy and murder</li>
@@ -690,10 +684,10 @@ Answer
 <span class="header-section-number">16.11</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-8"><i class="fas fa-link"></i></a>
 </h2>
 <p>We are using the same <code>USArrests</code> data set as before, so run this command:</p>
-<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">USArrests</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">USArrests</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>Remember that <code><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat()</a></code> requires a matrix, so we use the <code>state</code> column as row names</li>
 <li>The argument <code>method</code> tells R which correlation coefficient to use</li>
@@ -732,10 +726,10 @@ Hint
 <li>The <code><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_plot.html">cor_plot()</a></code> function can be very useful to visualise matrices</li>
 </ol></details><details><summary>
 Answer
-</summary><div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">USAstate</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span></code></pre></div>
+</summary><div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">USAstate</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 8 × 9
 ##   rowname    population income illiteracy life_exp murder hs_grad frost   area
 ## * &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
@@ -750,58 +744,58 @@ Answer
 <p>In order to determine which variables are most affected by the choice of Spearman vs Pearson you could just plot both matrices out side by side and try to spot what was going on, but one of the reasons we’re using R is that we can be a bit more <strong>programmatic</strong> about these things. Also, our eyes aren’t that good at processing and parsing this sort of information display. A better way would be to somehow visualise the data.</p>
 <p>Let’s calculate the difference between the two correlation matrices. We create a correlation matrix using <code><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat()</a></code>. Next we remove the <code>rowname</code>, so we’re left with just a data frame containing numbers. That way we can subtract the values of the two data frames.</p>
 <p>Lastly, we use the <code><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_plot.html">cor_plot()</a></code> function to plot a heatmap of the differences.</p>
-<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># create a data frame that contains all the Pearson's coefficients</span>
-<span class="va">USAstate_pear</span> <span class="op">&lt;-</span> <span class="va">USAstate</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="co"># remove the row names</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">rowname</span><span class="op">)</span>
-
-<span class="co"># create a data frame that contains all the Pearson's coefficients</span>
-<span class="va">USAstate_spear</span> <span class="op">&lt;-</span> <span class="va">USAstate</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="co"># remove the row names</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">rowname</span><span class="op">)</span>
-
-<span class="co"># calculate the difference between Pearson's and Spearman's</span>
-<span class="va">USAstate_diff</span> <span class="op">&lt;-</span> <span class="va">USAstate_pear</span> <span class="op">-</span> <span class="va">USAstate_spear</span>
-
-<span class="co"># use the column names of the data set as rownames</span>
-<span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames</a></span><span class="op">(</span><span class="va">USAstate_diff</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">USAstate_diff</span><span class="op">)</span>
-
-<span class="va">USAstate_diff</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_plot.html">cor_plot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># create a data frame that contains all the Pearson's coefficients</span></span>
+<span><span class="va">USAstate_pear</span> <span class="op">&lt;-</span> <span class="va">USAstate</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># remove the row names</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">rowname</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># create a data frame that contains all the Pearson's coefficients</span></span>
+<span><span class="va">USAstate_spear</span> <span class="op">&lt;-</span> <span class="va">USAstate</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_mat.html">cor_mat</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="co"># remove the row names</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">rowname</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># calculate the difference between Pearson's and Spearman's</span></span>
+<span><span class="va">USAstate_diff</span> <span class="op">&lt;-</span> <span class="va">USAstate_pear</span> <span class="op">-</span> <span class="va">USAstate_spear</span></span>
+<span></span>
+<span><span class="co"># use the column names of the data set as rownames</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">USAstate_diff</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">USAstate_diff</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">USAstate_diff</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_plot.html">cor_plot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-11-1.png" width="672"></div>
 <div class="note">
 <p>This is one of those cases where using tidyverse is actually not necessarily the easiest way. We could do a similar thing using base R syntax:</p>
-<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># read in the data with the base R read.csv function</span>
-<span class="co"># and assign the first column as row names</span>
-<span class="va">USAstate_base</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS3-statedata.csv"</span>, row.names <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>
-
-<span class="co"># calculate a correlation matrix using Pearson's</span>
-<span class="va">corPear</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">USAstate_base</span>, method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span>
-
-<span class="co"># calculate a correlation matrix using Spearman</span>
-<span class="va">corSpea</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">USAstate_base</span>, method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span>
-
-<span class="co"># calculate the difference between the two matrices</span>
-<span class="va">corDiff</span> <span class="op">&lt;-</span> <span class="va">corPear</span> <span class="op">-</span> <span class="va">corSpea</span>
-
-<span class="co"># and plot it, like before</span>
-<span class="va">corDiff</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_plot.html">cor_plot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># read in the data with the base R read.csv function</span></span>
+<span><span class="co"># and assign the first column as row names</span></span>
+<span><span class="va">USAstate_base</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS3-statedata.csv"</span>, row.names <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># calculate a correlation matrix using Pearson's</span></span>
+<span><span class="va">corPear</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">USAstate_base</span>, method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># calculate a correlation matrix using Spearman</span></span>
+<span><span class="va">corSpea</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">USAstate_base</span>, method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># calculate the difference between the two matrices</span></span>
+<span><span class="va">corDiff</span> <span class="op">&lt;-</span> <span class="va">corPear</span> <span class="op">-</span> <span class="va">corSpea</span></span>
+<span></span>
+<span><span class="co"># and plot it, like before</span></span>
+<span><span class="va">corDiff</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cor_plot.html">cor_plot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <p>The plot itself is coloured from blue to red, indicating the biggest positive differences in correlation coefficients in blue. The biggest negative differences are coloured in red, whereas the least difference is indicated in white.</p>
 <p>The plot is symmetric along the leading diagonal (hopefully for obvious reasons) and we can see that the majority of squares are light blue or light red in colour, which means that there isn’t much difference between Spearman and Pearson for the vast majority of variables. The squares appear darkest when we look along the <code>area</code> row/column suggesting that there’s a big difference in the correlation coefficients there.</p>
 <p>We can now revisit the pairwise scatter plot from before to see if this makes sense:</p>
-<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># visual comparisons of variables</span>
-<span class="va">USAstate</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span>lower.panel <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># visual comparisons of variables</span></span>
+<span><span class="va">USAstate</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span>var <span class="op">=</span> <span class="st">"state"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/pairs.html">pairs</a></span><span class="op">(</span>lower.panel <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="cs3-practical-correlation_coefficients_files/figure-html/unnamed-chunk-13-1.png" width="672"></div>
 <p>What we can see clearly is that these correspond to plots with noticeable outliers. For example, Alaska is over twice as big as the next biggest state, Texas. Big outliers in the data can have a large impact on the Pearson coefficient, whereas the Spearman coefficient is more robust to the effects of outliers. We can see this in more detail if we look at the <code>area</code> vs <code>income</code> graph and coefficients. Pearson gives a value of 0.36, a slight positive correlation, whereas Spearman gives a value of 0.057, basically uncorrelated. That single outlier (Alaska) in the top-right of the scatter plot has a big effect for Pearson but is practically ignored for Spearman.</p>
 <p>Well done, <a href="https://en.wikipedia.org/wiki/Charles_Spearman">Mr. Spearman</a>.</p>
@@ -834,9 +828,9 @@ Answer
 <li><a class="nav-link" href="#objectives-5"><span class="header-section-number">16.1</span> Objectives</a></li>
 <li><a class="nav-link" href="#purpose-and-aim-4"><span class="header-section-number">16.2</span> Purpose and aim</a></li>
 <li><a class="nav-link" href="#section-commands-8"><span class="header-section-number">16.3</span> Section commands</a></li>
-<li><a class="nav-link" href="#data-and-hypotheses-6"><span class="header-section-number">16.4</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses-7"><span class="header-section-number">16.4</span> Data and hypotheses</a></li>
 <li><a class="nav-link" href="#pearsons-product-moment-correlation-coefficient"><span class="header-section-number">16.5</span> Pearson’s product moment correlation coefficient</a></li>
-<li><a class="nav-link" href="#summarise-and-visualise-7"><span class="header-section-number">16.6</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#summarise-and-visualise-8"><span class="header-section-number">16.6</span> Summarise and visualise</a></li>
 <li><a class="nav-link" href="#implement-test-7"><span class="header-section-number">16.7</span> Implement test</a></li>
 <li><a class="nav-link" href="#interpret-output-and-report-results-6"><span class="header-section-number">16.8</span> Interpret output and report results</a></li>
 <li>

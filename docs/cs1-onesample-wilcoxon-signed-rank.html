@@ -375,12 +375,6 @@
 <li><a class="" href="introduction-4.html"><span class="header-section-number">23</span> Introduction</a></li>
 <li><a class="" href="linear-models.html"><span class="header-section-number">24</span> Linear models</a></li>
 <li><a class="" href="model-comparisons.html"><span class="header-section-number">25</span> Model comparisons</a></li>
-<li class="book-part">CoreStats 6: Power analysis</li>
-<li><a class="" href="cs6-intro.html"><span class="header-section-number">26</span> Introduction</a></li>
-<li class="book-part">CoreStats 6 (Practicals)</li>
-<li><a class="" href="introduction-5.html"><span class="header-section-number">27</span> Introduction</a></li>
-<li><a class="" href="power-analysis.html"><span class="header-section-number">28</span> Power analysis</a></li>
-<li><a class="" href="statistical-reporting.html"><span class="header-section-number">29</span> Statistical reporting</a></li>
 </ul>
 
         <div class="book-extra">
@@ -435,15 +429,15 @@
 <p>Whilst there are formal statistical tests for symmetry we will opt for a simple visual inspection using both a boxplot and a histogram.</p>
 <p>Plot a histogram and a boxplot of the data:</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># create a histogram</span>
-<span class="va">fishlengthDF</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
-
-<span class="co"># create boxplot</span>
-<span class="va">fishlengthDF</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># create a histogram</span></span>
+<span><span class="va">fishlengthDF</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># create boxplot</span></span>
+<span><span class="va">fishlengthDF</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>You get the following plots (we’ll learn how to create panels like this later!):</p>
 <div class="inline-figure"><img src="cs1-practical-one_sample_wilcoxon_files/figure-html/cs1-one-sample-wilcoxon-assumptions2-1.png" width="672"></div>
 <p>Here we can see that whilst the distribution isn’t perfectly symmetric, neither is it heavily skewed to the left or right and we can make the call that the distribution is <em>symmetric enough</em> for us to be happy with the results of the test.</p>
@@ -454,10 +448,10 @@
 </h2>
 <p>Perform a one-sample, two-tailed Wilcoxon signed-rank test:</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">fishlengthDF</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_test.html">wilcox_test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="fl">1</span>,
-              mu <span class="op">=</span> <span class="fl">20</span>,
-              alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">fishlengthDF</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_test.html">wilcox_test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="fl">1</span>,</span>
+<span>              mu <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>              alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></span></code></pre></div>
 <p>The syntax is identical to the one-sample t-test we carried out earlier.</p>
 <ol style="list-style-type: decimal">
 <li>the <code>formula</code>, here we give it <code>length ~ 1</code> to indicate it is a one-sample test on <code>length</code>
@@ -518,10 +512,10 @@ Answer
 <span class="header-section-number">5.6.3</span> Wilcoxon signed-rank test<a class="anchor" aria-label="anchor" href="#wilcoxon-signed-rank-test"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dissolving</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_test.html">wilcox_test</a></span><span class="op">(</span><span class="va">dissolving_time</span> <span class="op">~</span> <span class="fl">1</span>,
-              mu <span class="op">=</span> <span class="fl">45</span>,
-              alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">dissolving</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_test.html">wilcox_test</a></span><span class="op">(</span><span class="va">dissolving_time</span> <span class="op">~</span> <span class="fl">1</span>,</span>
+<span>              mu <span class="op">=</span> <span class="fl">45</span>,</span>
+<span>              alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 6
 ##   .y.             group1 group2         n statistic     p
 ## * &lt;chr&gt;           &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;

@@ -375,12 +375,6 @@
 <li><a class="" href="introduction-4.html"><span class="header-section-number">23</span> Introduction</a></li>
 <li><a class="" href="linear-models.html"><span class="header-section-number">24</span> Linear models</a></li>
 <li><a class="" href="model-comparisons.html"><span class="header-section-number">25</span> Model comparisons</a></li>
-<li class="book-part">CoreStats 6: Power analysis</li>
-<li><a class="" href="cs6-intro.html"><span class="header-section-number">26</span> Introduction</a></li>
-<li class="book-part">CoreStats 6 (Practicals)</li>
-<li><a class="" href="introduction-5.html"><span class="header-section-number">27</span> Introduction</a></li>
-<li><a class="" href="power-analysis.html"><span class="header-section-number">28</span> Power analysis</a></li>
-<li><a class="" href="statistical-reporting.html"><span class="header-section-number">29</span> Statistical reporting</a></li>
 </ul>
 
         <div class="book-extra">
@@ -428,9 +422,9 @@ y = \beta_0 + \beta_1 x
 </h2>
 <p>No new commands used in this section.</p>
 </div>
-<div id="data-and-hypotheses-7" class="section level2" number="17.4">
+<div id="data-and-hypotheses-8" class="section level2" number="17.4">
 <h2>
-<span class="header-section-number">17.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-8"><i class="fas fa-link"></i></a>
 </h2>
 <p>We will perform a simple linear regression analysis on the two variables <code>murder</code> and <code>assault</code> from the <code>USArrests</code> dataset. We wish to determine whether the <code>assault</code> variable is a significant predictor of the <code>murder</code> variable. This means that we will need to find the coefficients <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> that best fit the following macabre equation:</p>
 <p><span class="math display">\[\begin{equation*}
@@ -446,16 +440,16 @@ Murder  = \beta_0 + \beta_1 \cdot Assault
 </li>
 </ul>
 </div>
-<div id="summarise-and-visualise-8" class="section level2" number="17.5">
+<div id="summarise-and-visualise-9" class="section level2" number="17.5">
 <h2>
-<span class="header-section-number">17.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-9"><i class="fas fa-link"></i></a>
 </h2>
 <p>You can visualise the data with:</p>
-<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># create scatterplot of the data</span>
-<span class="va">USArrests</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">assault</span>, y <span class="op">=</span> <span class="va">murder</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># create scatterplot of the data</span></span>
+<span><span class="va">USArrests</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">assault</span>, y <span class="op">=</span> <span class="va">murder</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="cs3-practical-linear_regression_files/figure-html/unnamed-chunk-3-1.png" width="672"></div>
 <p>There appears to be a relatively strong positive relationship between these two variables and whilst there is a reasonable scatter of the points around any trend line, we would probably expect a significant result in this case.</p>
 </div>
@@ -474,18 +468,18 @@ Murder  = \beta_0 + \beta_1 \cdot Assault
 </div>
 <p>Whether these assumptions are met can easily be checked visually by producing four key diagnostic plots.</p>
 <p>First we need to define the linear model:</p>
-<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">lm_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">murder</span> <span class="op">~</span> <span class="va">assault</span>,
-           data <span class="op">=</span> <span class="va">USArrests</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">lm_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">murder</span> <span class="op">~</span> <span class="va">assault</span>,</span>
+<span>           data <span class="op">=</span> <span class="va">USArrests</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>The first argument to <code>lm</code> is a formula saying that <code>murder</code> depends on <code>assaults</code>. As we have seen before, the syntax is generally <code>dependent variable</code> ~ <code>independent variable</code>.</li>
 <li>The second argument specifies which dataset to use</li>
 </ul>
 <p>Next, we can create diagnostic plots for the model:</p>
-<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">lm_1</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"resid"</span>, <span class="st">"qq"</span>, <span class="st">"ls"</span>, <span class="st">"cookd"</span><span class="op">)</span>,
-              smoother <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">lm_1</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"resid"</span>, <span class="st">"qq"</span>, <span class="st">"ls"</span>, <span class="st">"cookd"</span><span class="op">)</span>,</span>
+<span>              smoother <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="cs3-practical-linear_regression_files/figure-html/cs3-lm-diagnostics-1.png" width="672"></div>
 <ul>
 <li>The top left graph plots the <strong>Residuals plot</strong>. If the data are best explained by a straight line then there should be a uniform distribution of points above and below the horizontal blue line (and if there are sufficient points then the red line, which is a smoother line, should be on top of the blue line). This plot is pretty good.</li>
@@ -503,9 +497,9 @@ Murder  = \beta_0 + \beta_1 \cdot Assault
 <span class="header-section-number">17.7</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-9"><i class="fas fa-link"></i></a>
 </h2>
 <p>We have already defined the linear model, so we can have a closer look at it:</p>
-<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># show the linear model</span>
-<span class="va">lm_1</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># show the linear model</span></span>
+<span><span class="va">lm_1</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = murder ~ assault, data = USArrests)
@@ -519,8 +513,8 @@ Murder  = \beta_0 + \beta_1 \cdot Assault
 Murder = 0.63 + 0.042 \cdot Assault
 \end{equation*}\]</span></p>
 <p>Assess whether the slope is significantly different from zero:</p>
-<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_1</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_1</span><span class="op">)</span></span></code></pre></div>
 <p>Here, we again use the <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> command to assess significance. This shouldn’t be too surprising at this stage if the introductory lectures made any sense. From a mathematical perspective, one-way ANOVA and simple linear regression are exactly the same as each other and it makes sense that we should use the same command to analyse them in R.</p>
 </div>
 <div id="interpret-output-and-report-results-8" class="section level2" number="17.8">
@@ -556,12 +550,12 @@ Since the p-value is excruciatingly tiny we can reject our null hypothesis and s
 <p><br></p>
 <p><strong>Plotting the regression line</strong></p>
 <p>It can be very helpful to plot the regression line with the original data to see how far the data are from the predicted linear values. We can do this with:</p>
-<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># plot the data</span>
-<span class="va">USArrests</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">assault</span>, y <span class="op">=</span> <span class="va">murder</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># plot the data</span></span>
+<span><span class="va">USArrests</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">assault</span>, y <span class="op">=</span> <span class="va">murder</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="cs3-practical-linear_regression_files/figure-html/cs3-usarrests-abline-1.png" width="672"></div>
 <ul>
 <li>We plot all the data using <code><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point()</a></code>
@@ -587,12 +581,12 @@ Since the p-value is excruciatingly tiny we can reject our null hypothesis and s
 Answer
 </summary><p><strong>Murder and Life Expectancy</strong></p>
 <p>Let’s see if the <code>murder</code> variable can be used to predict the <code>life_exp</code> variable. Let’s plot it first of all.</p>
-<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># plot the data and add the regression line</span>
-<span class="va">USAstate</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">murder</span>, y <span class="op">=</span> <span class="va">life_exp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># plot the data and add the regression line</span></span>
+<span><span class="va">USAstate</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">murder</span>, y <span class="op">=</span> <span class="va">life_exp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="cs3-practical-linear_regression_files/figure-html/unnamed-chunk-7-1.png" width="672"></div>
 <p>We visualise for the same reasons:</p>
 <ol style="list-style-type: decimal">
@@ -601,15 +595,15 @@ Answer
 <li>We check the assumptions (only roughly though as we’ll be doing this properly in a minute). Nothing immediately gives me cause for concern; the data appear linear, the spread of the data around the line appears homogeneous and symmetrical. No outliers either.</li>
 </ol>
 <p>Now, let’s check the assumptions with the diagnostic plots.</p>
-<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># create a linear model</span>
-<span class="va">lm_murder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">life_exp</span> <span class="op">~</span> <span class="va">murder</span>,
-           data <span class="op">=</span> <span class="va">USAstate</span><span class="op">)</span>
-
-<span class="co"># create the diagnostic plots</span>
-<span class="va">lm_murder</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"resid"</span>, <span class="st">"qq"</span>, <span class="st">"ls"</span>, <span class="st">"cookd"</span><span class="op">)</span>,
-              smoother <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># create a linear model</span></span>
+<span><span class="va">lm_murder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">life_exp</span> <span class="op">~</span> <span class="va">murder</span>,</span>
+<span>           data <span class="op">=</span> <span class="va">USAstate</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># create the diagnostic plots</span></span>
+<span><span class="va">lm_murder</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"resid"</span>, <span class="st">"qq"</span>, <span class="st">"ls"</span>, <span class="st">"cookd"</span><span class="op">)</span>,</span>
+<span>              smoother <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="cs3-practical-linear_regression_files/figure-html/unnamed-chunk-8-1.png" width="672"></div>
 <p>The Residuals plot appears symmetric enough (similar distribution of points above and below the horizontal blue line) for me to happy with linearity. Similarly the red line in the Location-Scale plot looks horizontal enough for me to be happy with homogeneity of variance. There aren’t any influential points in the Cook’s distance plot. The only plot that does give me a bit of concern is the Q-Q plot. Here we see clear evidence of snaking, although the degree of snaking isn’t actually that bad. This just means that we can be pretty certain that the distribution of residuals isn’t normal, but also that it isn’t <em>very</em> non-normal. What do we do in this situation? Well, there are three possible options:</p>
 <ol style="list-style-type: decimal">
@@ -619,8 +613,8 @@ Answer
 </ol>
 <p>So in this case, because we have a large enough sample size and our deviation from normality isn’t too bad, we can just crack on with the standard analysis.</p>
 <p>So, let’s actually do the analysis:</p>
-<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_murder</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_murder</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: life_exp
@@ -632,12 +626,12 @@ Answer
 <p>And after all of that we find that the murder rate is a statistically significant predictor of life expectancy in US states. Woohoo!</p>
 <p><strong>High School Graduation and Frosty Days</strong></p>
 <p>Now let’s investigate the relationship between the proportion of High School Graduates a state has (<code>hs_grad</code>) and the mean number of days below freezing (<code>frost</code>) within each state.</p>
-<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># plot the data</span>
-<span class="va">USAstate</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">frost</span>, y <span class="op">=</span> <span class="va">hs_grad</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># plot the data</span></span>
+<span><span class="va">USAstate</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">frost</span>, y <span class="op">=</span> <span class="va">hs_grad</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="cs3-practical-linear_regression_files/figure-html/unnamed-chunk-10-1.png" width="672"></div>
 <p>Once again, we look at the data.</p>
 <ol style="list-style-type: decimal">
@@ -647,15 +641,15 @@ Answer
 </ol>
 <p>Let’s check these out properly</p>
 <p>Now, let’s check the assumptions with the diagnostic plots.</p>
-<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># create a linear model</span>
-<span class="va">lm_frost</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">hs_grad</span> <span class="op">~</span> <span class="va">frost</span>,
-               data <span class="op">=</span> <span class="va">USAstate</span><span class="op">)</span>
-
-<span class="co"># create the diagnostic plots</span>
-<span class="va">lm_frost</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"resid"</span>, <span class="st">"qq"</span>, <span class="st">"ls"</span>, <span class="st">"cookd"</span><span class="op">)</span>,
-              smoother <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># create a linear model</span></span>
+<span><span class="va">lm_frost</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">hs_grad</span> <span class="op">~</span> <span class="va">frost</span>,</span>
+<span>               data <span class="op">=</span> <span class="va">USAstate</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># create the diagnostic plots</span></span>
+<span><span class="va">lm_frost</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"resid"</span>, <span class="st">"qq"</span>, <span class="st">"ls"</span>, <span class="st">"cookd"</span><span class="op">)</span>,</span>
+<span>              smoother <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="cs3-practical-linear_regression_files/figure-html/unnamed-chunk-11-1.png" width="672"></div>
 <p>We can see that what we suspected from before is backed up by the Residuals plot. The data aren’t linear and there appears to be some sort of odd down-up pattern here. Given the lack of linearity it just isn’t worth worrying about the other plots because our model is <strong>misspecified</strong>: a straight line just doesn’t represent our data at all.</p>
 <p>Just for reference, and as practice for looking at diagnostic plots, if we ignore the lack of linearity then we can say that</p>
@@ -712,8 +706,8 @@ Answer
 <li><a class="nav-link" href="#objectives-6"><span class="header-section-number">17.1</span> Objectives</a></li>
 <li><a class="nav-link" href="#purpose-and-aim-5"><span class="header-section-number">17.2</span> Purpose and aim</a></li>
 <li><a class="nav-link" href="#section-commands-9"><span class="header-section-number">17.3</span> Section commands</a></li>
-<li><a class="nav-link" href="#data-and-hypotheses-7"><span class="header-section-number">17.4</span> Data and hypotheses</a></li>
-<li><a class="nav-link" href="#summarise-and-visualise-8"><span class="header-section-number">17.5</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses-8"><span class="header-section-number">17.4</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#summarise-and-visualise-9"><span class="header-section-number">17.5</span> Summarise and visualise</a></li>
 <li><a class="nav-link" href="#assumptions-15"><span class="header-section-number">17.6</span> Assumptions</a></li>
 <li><a class="nav-link" href="#implement-test-9"><span class="header-section-number">17.7</span> Implement test</a></li>
 <li><a class="nav-link" href="#interpret-output-and-report-results-8"><span class="header-section-number">17.8</span> Interpret output and report results</a></li>

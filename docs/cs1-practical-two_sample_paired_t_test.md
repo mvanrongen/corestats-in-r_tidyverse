@@ -174,11 +174,10 @@ cortisol_diff %>%
 
 ```r
 # and create the Q-Q plot
-lm_cortisol_diff <- lm(cortisol_change ~ 1,
-                       data = cortisol_diff)
-
-lm_cortisol_diff %>% 
-  resid_panel(plots = "qq")
+cortisol_diff %>% 
+  ggplot(aes(sample = cortisol_change)) +
+  stat_qq() +
+  stat_qq_line(colour = "red")
 ```
 
 <img src="cs1-practical-two_sample_paired_t_test_files/figure-html/unnamed-chunk-3-1.png" width="672" />

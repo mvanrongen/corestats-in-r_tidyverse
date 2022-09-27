@@ -375,12 +375,6 @@
 <li><a class="" href="introduction-4.html"><span class="header-section-number">23</span> Introduction</a></li>
 <li><a class="" href="linear-models.html"><span class="header-section-number">24</span> Linear models</a></li>
 <li><a class="" href="model-comparisons.html"><span class="header-section-number">25</span> Model comparisons</a></li>
-<li class="book-part">CoreStats 6: Power analysis</li>
-<li><a class="" href="cs6-intro.html"><span class="header-section-number">26</span> Introduction</a></li>
-<li class="book-part">CoreStats 6 (Practicals)</li>
-<li><a class="" href="introduction-5.html"><span class="header-section-number">27</span> Introduction</a></li>
-<li><a class="" href="power-analysis.html"><span class="header-section-number">28</span> Power analysis</a></li>
-<li><a class="" href="statistical-reporting.html"><span class="header-section-number">29</span> Statistical reporting</a></li>
 </ul>
 
         <div class="book-extra">
@@ -439,9 +433,9 @@
 </tbody>
 </table></div>
 </div>
-<div id="data-and-hypotheses-5" class="section level2" number="13.4">
+<div id="data-and-hypotheses-6" class="section level2" number="13.4">
 <h2>
-<span class="header-section-number">13.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.4</span> Data and hypotheses<a class="anchor" aria-label="anchor" href="#data-and-hypotheses-6"><i class="fas fa-link"></i></a>
 </h2>
 <p>For example, suppose a behavioural ecologist records the rate at which <a href="https://en.wikipedia.org/wiki/Spider_monkey">spider monkeys</a> behaved aggressively towards one another as a function of closely related the two monkeys are. The familiarity of the two monkeys involved in each interaction is classified as <code>high</code>, <code>low</code> or <code>none.</code> We want to test if the data support the hypothesis that aggression rates differ according to strength of relatedness. We form the following null and alternative hypotheses:</p>
 <ul>
@@ -451,18 +445,18 @@
 <span class="math inline">\(H_1\)</span>: The median aggression rates are not all equal</li>
 </ul>
 <p>We will use a Kruskal-Wallis test to check this.</p>
-<p>The data are stored in the file <code>data/tidy/CS2-spidermonkey.csv</code>.</p>
+<p>The data are stored in the file <code>data/raw/CS2-spidermonkey.csv</code>.</p>
 <p>First we read the data in:</p>
-<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">spidermonkey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS2-spidermonkey.csv"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">spidermonkey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS2-spidermonkey.csv"</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="summarise-and-visualise-6" class="section level2" number="13.5">
+<div id="summarise-and-visualise-7" class="section level2" number="13.5">
 <h2>
-<span class="header-section-number">13.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-7"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># look at the data</span>
-<span class="va">spidermonkey</span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># look at the data</span></span>
+<span><span class="va">spidermonkey</span></span></code></pre></div>
 <pre><code>## # A tibble: 21 × 3
 ##       id aggression familiarity
 ##    &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;      
@@ -477,23 +471,23 @@
 ##  9     9        0.4 low        
 ## 10    10        0.3 low        
 ## # … with 11 more rows</code></pre>
-<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># summarise the data</span>
-<span class="va">spidermonkey</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">id</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">familiarity</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/get_summary_stats.html">get_summary_stats</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"common"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># summarise the data</span></span>
+<span><span class="va">spidermonkey</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">familiarity</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/get_summary_stats.html">get_summary_stats</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"common"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 × 11
 ##   familiarity variable       n   min   max median   iqr  mean    sd    se    ci
 ##   &lt;chr&gt;       &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1 high        aggression     7   0.1   0.8    0.3  0.25 0.357 0.237 0.09  0.219
 ## 2 low         aggression     7   0.3   1.2    0.5  0.3  0.629 0.315 0.119 0.291
 ## 3 none        aggression     7   0.9   1.6    1.2  0.25 1.26  0.23  0.087 0.213</code></pre>
-<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># create boxplot</span>
-<span class="va">spidermonkey</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">familiarity</span>, y <span class="op">=</span> <span class="va">aggression</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># create boxplot</span></span>
+<span><span class="va">spidermonkey</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">familiarity</span>, y <span class="op">=</span> <span class="va">aggression</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="cs2-practical-kruskal_files/figure-html/cs2-kruskal-sumvisual-1.png" width="672"></div>
 <p>The data appear to show a very significant difference in aggression rates between the three types of familiarity. We would probably expect a reasonably significant result here.</p>
 </div>
@@ -513,10 +507,10 @@
 <span class="header-section-number">13.6.1</span> Equality of variance<a class="anchor" aria-label="anchor" href="#equality-of-variance-2"><i class="fas fa-link"></i></a>
 </h3>
 <p>We test for equality of variance using Levene’s test (since we can’t assume normal parent distributions which rules out Bartlett’s test).</p>
-<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># perform Levene's test</span>
-<span class="va">spidermonkey</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/levene_test.html">levene_test</a></span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># perform Levene's test</span></span>
+<span><span class="va">spidermonkey</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/levene_test.html">levene_test</a></span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Warning in leveneTest.default(y = y, group = group, ...): group coerced to
 ## factor.</code></pre>
 <pre><code>## # A tibble: 1 × 4
@@ -532,12 +526,12 @@
 <span class="header-section-number">13.7</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-6"><i class="fas fa-link"></i></a>
 </h2>
 <p>Perform a Kruskal-Wallis test on the data:</p>
-<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># implement Kruskal-Wallis test</span>
-<span class="va">spidermonkey</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/kruskal_test.html">kruskal_test</a></span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/stats/kruskal.test.html">kruskal.test</a></span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span>, data <span class="op">=</span> <span class="va">spidermonkey</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># implement Kruskal-Wallis test</span></span>
+<span><span class="va">spidermonkey</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/kruskal_test.html">kruskal_test</a></span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/kruskal.test.html">kruskal.test</a></span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span>, data <span class="op">=</span> <span class="va">spidermonkey</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>The <code><a href="https://rpkgs.datanovia.com/rstatix/reference/kruskal_test.html">kruskal_test()</a></code> takes the formula in the following format: <code>variable ~ category</code>
 </li>
@@ -570,10 +564,10 @@
 </h2>
 <p>The equivalent of Tukey’s range test for non-normal data is <strong>Dunn’s test</strong>.</p>
 <p>Dunn’s test is used to check for significant differences in group medians:</p>
-<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># perform Dunn's test</span>
-<span class="va">spidermonkey</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/dunn_test.html">dunn_test</a></span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># perform Dunn's test</span></span>
+<span><span class="va">spidermonkey</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/dunn_test.html">dunn_test</a></span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span><span class="op">)</span></span></code></pre></div>
 <p>This will give the following output:</p>
 <pre><code>## # A tibble: 3 × 9
 ##   .y.        group1 group2    n1    n2 statistic        p    p.adj p.adj.signif
@@ -583,7 +577,7 @@
 ## 3 aggression low    none       7     7      2.25 0.0245   0.0490   *</code></pre>
 <p>The <code><a href="https://rpkgs.datanovia.com/rstatix/reference/dunn_test.html">dunn_test()</a></code> function performs a Kruskal-Wallis test on the data, followed by a post-hoc pairwise multiple comparison.</p>
 <p>The comparison between the pairs of groups is reported in the table at the bottom. Each row contains a single comparison. We are interested in the <code>p</code> and <code>p.adj</code> columns, which contain the the p-values that we want. This table shows that there isn’t a significant difference between the high and low groups, as the p-value (0.1598) is too high. The other two comparisons between the high familiarity and no familiarity groups and between the low and no groups are significant though.</p>
-<p>The <code><a href="https://rpkgs.datanovia.com/rstatix/reference/dunn_test.html">dunn_test()</a></code> function has several arguments, of which the <code>p.adjust.method</code> is likely to be of interest. Here you can define which method needs to be used to account for multiple comparisons. The default is <code>"holm"</code>. We’ll cover more about this in the chapter on <a href="cs6-intro.html#cs6-intro">Power analysis</a>.</p>
+<p>The <code><a href="https://rpkgs.datanovia.com/rstatix/reference/dunn_test.html">dunn_test()</a></code> function has several arguments, of which the <code>p.adjust.method</code> is likely to be of interest. Here you can define which method needs to be used to account for multiple comparisons. The default is <code>"holm"</code>. We’ll cover more about this in the chapter on <a href="#cs6-intro">Power analysis</a>.</p>
 </div>
 <div id="exercise-lobster-weight-1" class="section level2" number="13.10">
 <h2>
@@ -616,9 +610,9 @@ Answer
 <span class="header-section-number">13.10.3</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-14"><i class="fas fa-link"></i></a>
 </h3>
 <p>From before, since the data are normal enough they are definitely similar enough for a Kruskal-Wallis test and they do all have equality of variance from out assessment of the diagnostic plots. For completeness though we will look at Levene’s test</p>
-<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">lobsters</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/levene_test.html">levene_test</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">lobsters</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/levene_test.html">levene_test</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 4
 ##     df1   df2 statistic     p
 ##   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
@@ -629,10 +623,10 @@ Answer
 <h3>
 <span class="header-section-number">13.10.4</span> Kruskal-Wallis test<a class="anchor" aria-label="anchor" href="#kruskal-wallis-test-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># implement Kruskal-Wallis test</span>
-<span class="va">lobsters</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/kruskal_test.html">kruskal_test</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># implement Kruskal-Wallis test</span></span>
+<span><span class="va">lobsters</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/kruskal_test.html">kruskal_test</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 6
 ##   .y.        n statistic    df     p method        
 ## * &lt;chr&gt;  &lt;int&gt;     &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;         
@@ -647,10 +641,10 @@ Answer
 <span class="header-section-number">13.10.5</span> Post-hoc Dunn’s test<a class="anchor" aria-label="anchor" href="#post-hoc-dunns-test"><i class="fas fa-link"></i></a>
 </h3>
 <p>Although rather unnecessary (and likely unwanted, since we don’t want to be p-hacking), because we did not detect any significant differences between diets, we can perform the non-parametric equivalent of Tukey’s range test: Dunn’s test.</p>
-<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># perform Dunn's test</span>
-<span class="va">lobsters</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/dunn_test.html">dunn_test</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># perform Dunn's test</span></span>
+<span><span class="va">lobsters</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/dunn_test.html">dunn_test</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 × 9
 ##   .y.    group1  group2     n1    n2 statistic      p p.adj p.adj.signif
 ## * &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       
@@ -697,8 +691,8 @@ Answer
 <li><a class="nav-link" href="#objectives-3"><span class="header-section-number">13.1</span> Objectives</a></li>
 <li><a class="nav-link" href="#purpose-and-aim-3"><span class="header-section-number">13.2</span> Purpose and aim</a></li>
 <li><a class="nav-link" href="#section-commands-7"><span class="header-section-number">13.3</span> Section commands</a></li>
-<li><a class="nav-link" href="#data-and-hypotheses-5"><span class="header-section-number">13.4</span> Data and hypotheses</a></li>
-<li><a class="nav-link" href="#summarise-and-visualise-6"><span class="header-section-number">13.5</span> Summarise and visualise</a></li>
+<li><a class="nav-link" href="#data-and-hypotheses-6"><span class="header-section-number">13.4</span> Data and hypotheses</a></li>
+<li><a class="nav-link" href="#summarise-and-visualise-7"><span class="header-section-number">13.5</span> Summarise and visualise</a></li>
 <li>
 <a class="nav-link" href="#assumptions-13"><span class="header-section-number">13.6</span> Assumptions</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#equality-of-variance-2"><span class="header-section-number">13.6.1</span> Equality of variance</a></li></ul>
 </li>

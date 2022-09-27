@@ -375,12 +375,6 @@
 <li><a class="" href="introduction-4.html"><span class="header-section-number">23</span> Introduction</a></li>
 <li><a class="" href="linear-models.html"><span class="header-section-number">24</span> Linear models</a></li>
 <li><a class="" href="model-comparisons.html"><span class="header-section-number">25</span> Model comparisons</a></li>
-<li class="book-part">CoreStats 6: Power analysis</li>
-<li><a class="" href="cs6-intro.html"><span class="header-section-number">26</span> Introduction</a></li>
-<li class="book-part">CoreStats 6 (Practicals)</li>
-<li><a class="" href="introduction-5.html"><span class="header-section-number">27</span> Introduction</a></li>
-<li><a class="" href="power-analysis.html"><span class="header-section-number">28</span> Power analysis</a></li>
-<li><a class="" href="statistical-reporting.html"><span class="header-section-number">29</span> Statistical reporting</a></li>
 </ul>
 
         <div class="book-extra">
@@ -431,10 +425,10 @@
 <span class="header-section-number">7.5</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>Perform a two-tailed, Mann-Whitney U test:</p>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">rivers</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_test.html">wilcox_test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>,
-              alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rivers</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_test.html">wilcox_test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>,</span>
+<span>              alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 7
 ##   .y.    group1 group2     n1    n2 statistic        p
 ## * &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;    &lt;dbl&gt;
@@ -495,10 +489,10 @@ Answer
 <h3>
 <span class="header-section-number">7.7.4</span> Carry out a Mann-Whitney test<a class="anchor" aria-label="anchor" href="#carry-out-a-mann-whitney-test"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">turtle</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_test.html">wilcox_test</a></span><span class="op">(</span><span class="va">serum</span> <span class="op">~</span> <span class="va">sex</span>,
-              alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">turtle</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/wilcox_test.html">wilcox_test</a></span><span class="op">(</span><span class="va">serum</span> <span class="op">~</span> <span class="va">sex</span>,</span>
+<span>              alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 7
 ##   .y.   group1 group2    n1    n2 statistic     p
 ## * &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;

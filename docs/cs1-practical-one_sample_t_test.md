@@ -5,15 +5,12 @@
 ## Section commands
 New commands used in this section:
 
-| Function & libraries| Description|
+| Function| Description|
 |:- |:- |
-|`library(tidyverse)`| |
-|`library(rstatix)`| |
-|`library(ggResidpanel)`| | 
 |`t_test()`| Performs a one-sample t-test, Student's t-test and Welch's t-test in later sections.|
+|`stat_qq()`| Plots a Q-Q plot for comparison with a normal distribution.|
+|`stat_qqline()`| Adds a comparison line to the Q-Q plot.|
 |`shapiro_test()`| Performs a Shapiro-Wilk test for normality.|
-|`lm()`| Fits a linear model |
-|`resid_panel()`| Creates diagnostic plots|
 
 ## Data and hypotheses
 For example, suppose we measure the body lengths of male guppies (in mm) collected from the Guanapo River in Trinidad. We want to test whether the data support the hypothesis that the mean body is actually 20 mm. We form the following null and alternative hypotheses:
@@ -38,9 +35,6 @@ library(tidyverse)
 
 # load rstatix, a tidyverse-friendly stats package
 library(rstatix)
-
-# load ggResidpanel, for diagnostic plots
-library(ggResidpanel)
 ```
 
 We then read in the data and create a vector containing the data.
@@ -143,20 +137,16 @@ NB. By even looking at this distribution to assess the assumption of normality w
 ### Q-Q plot of the data
 Q-Q plot is the short for quantile-quantile plot. This **diagnostic** plot (as it is sometimes called) is a way of comparing two distributions. How Q-Q plots work won’t be explained here but ask a demonstrator if you really want to know what is going on.
 
-To construct a Q-Q Plot of the quantiles of the data against the quantiles of a normal distribution we use the `ggResidPanel` library. This library contains a function `resid_panel()` that allows us to plot all kinds of diagnostic plots.
-
-The diagnostic plots require a "model" of the data. For now, all we need to know is that we can use the `lm()` function to create this model. We'll come back to that in a lot more detail in later sessions. For the one-sample t-test we define the model as `length ~ 1`, which means that `length` is equal to the mean value of `length` (the `~ 1` tells R this).
-
-We store the resulting output in an object (`lm_fishlength`), which we then use to create the diagnostic plot:
+Construct a Q-Q Plot of the quantiles of the data against the quantiles of a normal distribution:
 
 
 ```r
-# define the model of the data
-lm_fishlength <- lm(length ~ 1, data = fishlengthDF)
-
-# create the diagnostic plot, indicating a QQ-plot
-lm_fishlength %>% 
-  resid_panel(plots = "qq")
+# pipe the data to ggplot()
+# then construct a Q-Q plot
+fishlengthDF %>%
+  ggplot(aes(sample = length)) +
+  stat_qq() +
+  stat_qq_line(colour = "red")
 ```
 
 <img src="cs1-practical-one_sample_t_test_files/figure-html/cs1-one-sample-t-test-qqplot-1.png" width="672" />
@@ -173,7 +163,7 @@ Below are four examples of QQ plots for different types of distributions:
 
 <img src="cs1-practical-one_sample_t_test_files/figure-html/cs1-one-sample-qqplot-normal-dist-1.png" width="672" />
 
-These two graphs relate to 200 data points that have been drawn from a normal distribution. Even here you can see that the points do not all lie perfectly on the diagonal line in the QQ plot, and a certain amount of deviation at the top and bottom of the graph can happen just by chance (if I were to draw a different set of points then the graph would look slightly different).
+These two graphs relate to 200 data points that have been drawn from a normal distribution. Even here you can see that the points do not all lie perfectly on the diagonal line in the QQ plot, and a certain amount of deviation at the top and bottom of the graph can happen just by chance (if I were to draw a different set of point then the graph would look slightly different).
 
 <img src="cs1-practical-one_sample_t_test_files/figure-html/cs1-one-sample-qqplot-uniform-dist-1.png" width="672" />
 
@@ -386,12 +376,11 @@ dissolving %>%
 
 
 ```r
-# define the model of the data
-lm_dissolving <- lm(dissolving_time ~ 1, data = dissolving)
-
 # create a Q-Q plot
-lm_dissolving %>% 
-  resid_panel(plots = "qq")
+dissolving %>% 
+  ggplot(aes(sample = dissolving_time)) +
+  stat_qq() +
+  stat_qq_line(colour = "red")
 ```
 
 <img src="cs1-practical-one_sample_t_test_files/figure-html/unnamed-chunk-6-1.png" width="672" />

@@ -236,12 +236,10 @@ leg_diff %>%
 
 ```r
 # and create a Q-Q plot
-lm_leg_diff <- lm(leg_diff ~ 1,
-                  data = leg_diff)
-
-
-lm_leg_diff %>% 
-  resid_panel(plots = "qq")
+leg_diff %>% 
+  ggplot(aes(sample = leg_diff)) +
+  stat_qq() +
+  stat_qq_line(colour = "red")
 ```
 
 <img src="cs1-practical-two_sample_wilcoxon_files/figure-html/unnamed-chunk-10-1.png" width="672" />

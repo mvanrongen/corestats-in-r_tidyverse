@@ -21,19 +21,20 @@
 Analysis of variance or ANOVA is a test than can be used when we have multiple samples of continuous data. Whilst it is possible to use ANOVA with only two samples, it is generally used when we have three or more groups. It is used to find out if the samples came from parent distributions with the same mean. It can be thought of as a generalisation of the two-sample Student’s t-test.
 
 ## Section commands
-We'll be using several libraries in this section. Make sure that you have installed them with `install.packages("name_of_package")`.
+New commands used in this section.
 
-After installation, make sure to _load_ them with the `library()` command, as shown below.
-
-New functions used in this section are also shown.
-
-| Function & libraries| Description|
+| Function| Description|
 |:- |:- |
-|`library(tidyverse)`| |
-|`library(rstatix)`| |
-|`library(ggResidpanel)`| | 
+|`lm()`| Fits a linear model |
 |`anova()`| Carries out an ANOVA on a linear model |
+|`resid_panel()`| Creates diagnostic plots|
 
+We also use functionality from a new library, `ggResidPanel`:
+
+
+```r
+# load ggResidPanel, for ggplot-friendly diagnostics plots
+library(ggResidpanel)
 ```
 
 
@@ -119,7 +120,7 @@ oystercatcher %>%
   geom_boxplot()
 ```
 
-<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 Looking at the data, there appears to be a noticeable difference in feeding rates between the three sites. We would probably expect a reasonably significant statistical result here.
 
@@ -214,7 +215,7 @@ plot(model_name)
 par(mfrow = c(1,1))
 ```
 
-In the first session we already created diagnostic Q-Q plots from our data, using `residpanel(plots = "qq")`, using the `ggResidPanel` package. For consistency with the `tidyverse` syntax used, we will use this from now on, but it is equally valid to use the base R functions.
+In the first session we already created diagnostic Q-Q plots directly from our data, using `stat_qq()` and `stat_qq_line()`. For more specific plots this becomes a bit cumbersome. There is an option to create ggplot-friendly diagnostic plots, using the `ggResidPanel` package. For consistency with the `tidyverse` syntax used, we will use this from now on, but it is equally valid to use the base R functions.
 :::
 
 Create the standard set diagnostic plots using `ggResidPanel`:
@@ -222,15 +223,15 @@ Create the standard set diagnostic plots using `ggResidPanel`:
 
 ```r
 lm_oystercatcher %>% 
-  resid_panel(plots = c("resid", "qq", "ls", "cookd"),
-              smoother = TRUE)
+  resid_panel()
 ```
 
 <img src="cs2-practical-anova_files/figure-html/cs2-anova-oyster-diagnostic-1.png" width="672" />
-*	The top left graph plots the **Residuals plot**. If the data are best explained by a straight line then there should be a uniform distribution of points above and below the horizontal blue line (and if there are sufficient points then the red line, which is a smoother line, should be on top of the blue line).
-*	The top right graph shows the **Q-Q plot** which allows a visual inspection of normality. If the residuals are normally distributed, then the points should lie on the diagonal dotted line.
-*	The bottom left **Location-scale** graph allows us to investigate whether there is any correlation between the residuals and the predicted values and whether the variance of the residuals changes significantly. If not, then the red line should be horizontal. If there is any correlation or change in variance then the red line will not be horizontal.
-*	The last graph shows the **Cook's distance** and tests if any one point has an unnecessarily large effect on the fit. The important aspect here is to see if any points are larger than 0.5 (meaning you'd have to be careful) or 1.0 (meaning you'd definitely have to check if that point has an large effect on the model). If not, then no point has undue influence.
+
+* **Residual Plot**: creates a plot of the residuals versus the predicted values. We want the points to be spread symmetrically around the blue line.
+* **Q-Q Plot**: creates a normal quantile plot of residuals
+* **Index Plot**: creates a plot of the residuals versus the observation numbers. A solid blue horizontal line through 0 is included for reference. This plot can be used to look for patterns in the data
+* **Histogram**: creates a histogram of the residuals, using `bins = 30` as default
 
 The default equivalent in base R is as follows:
 
@@ -272,6 +273,10 @@ Perform an ANOVA test on the data:
 anova(lm_oystercatcher)
 ```
 
+The first line fits a linear model to the data (i.e. finds the means of the three groups and calculates a load of intermediary data that we need for the statistical analysis) and stores this information in an R object (which I’ve called `lm_oystercatchers`, but which you can call what you like). The second line actually carries out the ANOVA analysis.
+
+-	The first argument must be in the formula format: `response ~ predictor`
+-	If the data are stored in stacked format, then the second argument must be the name of the data frame
 -	The `anova()` command takes a linear model object as its main argument
 
 ## Interpret output and report results
@@ -304,13 +309,12 @@ Since the p-value is very small (much smaller than the standard significance lev
 
 > A one-way ANOVA showed that the mean feeding rate of oystercatchers differed significantly between locations (F = 21.51, df = 2, 12, p = 0.00011).
 
-<br />
 Note that we have included (in brackets) information on the test statistic (F = 21.51), both degrees of freedom (df = 2, 12), and the p-value (p = 0.00011).
 
 ## Post-hoc testing (Tukey's rank test)
 One drawback with using an ANOVA test is that it only tests to see if all of the means are the same, and if we get a significant result using ANOVA then all we can say is that not all of the means are the same, rather than anything about how the pairs of groups differ. For example, consider the following boxplot for three samples.
 
-<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 Each group is a random sample of 20 points from a normal distribution with variance 1. Groups 1 and 2 come from a parent population with mean 0 whereas group 3 come from a parent population with mean 2. The data clearly satisfy the assumptions of an ANOVA test.
 
@@ -350,7 +354,7 @@ tukey %>%
   geom_boxplot()
 ```
 
-<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 ### Test for a significant difference in group means
 
@@ -554,7 +558,7 @@ lobsters %>%
   geom_boxplot()
 ```
 
-<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
 
 As always we use the plot and summary to assess three things:
@@ -625,7 +629,7 @@ lm_lobsters %>%
   resid_panel(plots = "qq")
 ```
 
-<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
 Here, I've used an extra argument to the normal diagnostic plots call. The default option is to plot 4 diagnostic plots. You can tell `resid_panel()` to only plot a specific one, using the `plots =` arguments. If you want to  know more about this have a look at the [help documentation](https://goodekat.github.io/ggResidpanel-tutorial/tutorial.html#overview) or by using `?resid_panel`.
 
@@ -659,7 +663,7 @@ lm_lobsters %>%
               smoother = TRUE)
 ```
 
-<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+<img src="cs2-practical-anova_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 
 In the above code I've specified which diagnostic plots I wanted. I have also added a loess smoother line (`smoother = TRUE`) to the plots
 
