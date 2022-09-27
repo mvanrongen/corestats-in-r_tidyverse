@@ -166,10 +166,12 @@ leg_diff %>%
   shapiro_test(leg_diff)
 
 # and create a Q-Q plot
-leg_diff %>% 
-  ggplot(aes(sample = leg_diff)) +
-  stat_qq() +
-  stat_qq_line(colour = "red")
+lm_leg_diff <- lm(leg_diff ~ 1,
+                  data = leg_diff)
+
+
+lm_leg_diff %>% 
+  resid_panel(plots = "qq")
 ```
 
 Both our Shapiro-Wilk test and our Q-Q plot suggest that the difference data aren't normally distributed, which rules out a paired t-test. We should therefore consider a paired Wilcoxon test next. Remember that this test requires that the distribution of differences be symmetric, whereas our box-plot from before suggested that the data were very much skewed.

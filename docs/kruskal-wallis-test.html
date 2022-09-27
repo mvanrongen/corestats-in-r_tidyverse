@@ -445,16 +445,16 @@
 <span class="math inline">\(H_1\)</span>: The median aggression rates are not all equal</li>
 </ul>
 <p>We will use a Kruskal-Wallis test to check this.</p>
-<p>The data are stored in the file <code>data/raw/CS2-spidermonkey.csv</code>.</p>
+<p>The data are stored in the file <code>data/tidy/CS2-spidermonkey.csv</code>.</p>
 <p>First we read the data in:</p>
-<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spidermonkey</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS2-spidermonkey.csv"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="summarise-and-visualise-7" class="section level2" number="13.5">
 <h2>
 <span class="header-section-number">13.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-7"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># look at the data</span></span>
 <span><span class="va">spidermonkey</span></span></code></pre></div>
 <pre><code>## # A tibble: 21 × 3
@@ -471,7 +471,7 @@
 ##  9     9        0.4 low        
 ## 10    10        0.3 low        
 ## # … with 11 more rows</code></pre>
-<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># summarise the data</span></span>
 <span><span class="va">spidermonkey</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -483,7 +483,7 @@
 ## 1 high        aggression     7   0.1   0.8    0.3  0.25 0.357 0.237 0.09  0.219
 ## 2 low         aggression     7   0.3   1.2    0.5  0.3  0.629 0.315 0.119 0.291
 ## 3 none        aggression     7   0.9   1.6    1.2  0.25 1.26  0.23  0.087 0.213</code></pre>
-<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create boxplot</span></span>
 <span><span class="va">spidermonkey</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">familiarity</span>, y <span class="op">=</span> <span class="va">aggression</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -507,7 +507,7 @@
 <span class="header-section-number">13.6.1</span> Equality of variance<a class="anchor" aria-label="anchor" href="#equality-of-variance-2"><i class="fas fa-link"></i></a>
 </h3>
 <p>We test for equality of variance using Levene’s test (since we can’t assume normal parent distributions which rules out Bartlett’s test).</p>
-<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># perform Levene's test</span></span>
 <span><span class="va">spidermonkey</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/levene_test.html">levene_test</a></span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span><span class="op">)</span></span></code></pre></div>
@@ -526,7 +526,7 @@
 <span class="header-section-number">13.7</span> Implement test<a class="anchor" aria-label="anchor" href="#implement-test-6"><i class="fas fa-link"></i></a>
 </h2>
 <p>Perform a Kruskal-Wallis test on the data:</p>
-<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># implement Kruskal-Wallis test</span></span>
 <span><span class="va">spidermonkey</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/kruskal_test.html">kruskal_test</a></span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span><span class="op">)</span></span>
@@ -564,7 +564,7 @@
 </h2>
 <p>The equivalent of Tukey’s range test for non-normal data is <strong>Dunn’s test</strong>.</p>
 <p>Dunn’s test is used to check for significant differences in group medians:</p>
-<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># perform Dunn's test</span></span>
 <span><span class="va">spidermonkey</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/dunn_test.html">dunn_test</a></span><span class="op">(</span><span class="va">aggression</span> <span class="op">~</span> <span class="va">familiarity</span><span class="op">)</span></span></code></pre></div>
@@ -610,7 +610,7 @@ Answer
 <span class="header-section-number">13.10.3</span> Assumptions<a class="anchor" aria-label="anchor" href="#assumptions-14"><i class="fas fa-link"></i></a>
 </h3>
 <p>From before, since the data are normal enough they are definitely similar enough for a Kruskal-Wallis test and they do all have equality of variance from out assessment of the diagnostic plots. For completeness though we will look at Levene’s test</p>
-<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lobsters</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/levene_test.html">levene_test</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 4
@@ -623,7 +623,7 @@ Answer
 <h3>
 <span class="header-section-number">13.10.4</span> Kruskal-Wallis test<a class="anchor" aria-label="anchor" href="#kruskal-wallis-test-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># implement Kruskal-Wallis test</span></span>
 <span><span class="va">lobsters</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/kruskal_test.html">kruskal_test</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span><span class="op">)</span></span></code></pre></div>
@@ -641,7 +641,7 @@ Answer
 <span class="header-section-number">13.10.5</span> Post-hoc Dunn’s test<a class="anchor" aria-label="anchor" href="#post-hoc-dunns-test"><i class="fas fa-link"></i></a>
 </h3>
 <p>Although rather unnecessary (and likely unwanted, since we don’t want to be p-hacking), because we did not detect any significant differences between diets, we can perform the non-parametric equivalent of Tukey’s range test: Dunn’s test.</p>
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># perform Dunn's test</span></span>
 <span><span class="va">lobsters</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/dunn_test.html">dunn_test</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span><span class="op">)</span></span></code></pre></div>

@@ -437,7 +437,7 @@
 <span class="header-section-number">24.5</span> Summarise and visualise<a class="anchor" aria-label="anchor" href="#summarise-and-visualise-12"><i class="fas fa-link"></i></a>
 </h2>
 <p>Let’s first load the data:</p>
-<div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#load the data</span></span>
 <span><span class="va">airpoll</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS5-H2S.csv"</span><span class="op">)</span></span>
 <span></span>
@@ -474,7 +474,7 @@
 <code>hydrogen_sulfide</code> contains H<sub>2</sub>S production (ppm)</li>
 </ol>
 <p>Next, visualise the data:</p>
-<div class="sourceCode" id="cb253"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plot the data</span></span>
 <span><span class="va">airpoll</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">daily_temp</span>,</span>
@@ -493,7 +493,7 @@
 <span class="header-section-number">24.6</span> Implemention<a class="anchor" aria-label="anchor" href="#implemention"><i class="fas fa-link"></i></a>
 </h2>
 <p>Construct and analyse a full linear model.</p>
-<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># define the linear model with all terms and interactions</span></span>
 <span><span class="va">lm_full</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">hydrogen_sulfide</span> <span class="op">~</span> <span class="va">treatment_plant</span> <span class="op">*</span> <span class="va">daily_temp</span>,</span>
 <span>              data <span class="op">=</span> <span class="va">airpoll</span><span class="op">)</span></span>
@@ -532,7 +532,7 @@ treatment\_plantA = 6.20495 - 0.05448 \cdot daily\_temp
 treatment\_plantB = 3.4742 + 0.12693 \cdot daily\_temp
 \end{equation}\]</span></p>
 <p>Performing an ANOVA on the full linear model gives the following output:</p>
-<div class="sourceCode" id="cb257"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb258"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_full</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
@@ -546,7 +546,7 @@ treatment\_plantB = 3.4742 + 0.12693 \cdot daily\_temp
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>Here we can see that the interaction term appears to be marginally significant, implying that the effect of temperature on hydrogen sulfide production is different for the two different treatment plants.</p>
 <p>We check the assumptions of <code>lm_full</code> using the diagnostic plots:</p>
-<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lm_full</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"resid"</span>, <span class="st">"qq"</span>, <span class="st">"ls"</span>, <span class="st">"cookd"</span><span class="op">)</span>,</span>
 <span>              smoother <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -594,7 +594,7 @@ treatment\_plantB = 3.4742 + 0.12693 \cdot daily\_temp
 <span class="header-section-number">24.7.1</span> Additive model<a class="anchor" aria-label="anchor" href="#additive-model"><i class="fas fa-link"></i></a>
 </h3>
 <p>Construct and analyse the additive linear model.</p>
-<div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># define the linear model</span></span>
 <span><span class="va">lm_add</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">hydrogen_sulfide</span> <span class="op">~</span> <span class="va">treatment_plant</span> <span class="op">+</span> <span class="va">daily_temp</span>,</span>
 <span>             data <span class="op">=</span> <span class="va">airpoll</span><span class="op">)</span></span>
@@ -659,7 +659,7 @@ H_2S(treatment\_plantB) = 5.7 + 0.036 \cdot daily\_temp
 <span class="header-section-number">24.7.2</span> Revisiting ANOVA<a class="anchor" aria-label="anchor" href="#revisiting-anova"><i class="fas fa-link"></i></a>
 </h3>
 <p>Construct and analyse only the effect of <code>treatment_plant</code>:</p>
-<div class="sourceCode" id="cb264"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb265"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># visualise the data</span></span>
 <span><span class="va">airpoll</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">treatment_plant</span>, y <span class="op">=</span> <span class="va">hydrogen_sulfide</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -668,7 +668,7 @@ H_2S(treatment\_plantB) = 5.7 + 0.036 \cdot daily\_temp
 <span>  <span class="co"># so they do not overlap</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html">geom_jitter</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="cs5-practical-linear_models_files/figure-html/unnamed-chunk-12-1.png" width="672"></div>
-<div class="sourceCode" id="cb265"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># define the linear model</span></span>
 <span><span class="va">lm_plant</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">hydrogen_sulfide</span> <span class="op">~</span> <span class="va">treatment_plant</span>,</span>
 <span>               data <span class="op">=</span> <span class="va">airpoll</span><span class="op">)</span></span>
@@ -709,14 +709,14 @@ H_2S(treatment\_plantB) = 5.7 + 0.036 \cdot daily\_temp
 <span class="header-section-number">24.7.3</span> Revisiting regression<a class="anchor" aria-label="anchor" href="#revisiting-regression"><i class="fas fa-link"></i></a>
 </h3>
 <p>Construct a simple linear regression model, where H2S depends only on the average daily temperature:</p>
-<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb269"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># plot the data</span></span>
 <span><span class="va">airpoll</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">daily_temp</span>, y <span class="op">=</span> <span class="va">hydrogen_sulfide</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="cs5-practical-linear_models_files/figure-html/unnamed-chunk-15-1.png" width="672"></div>
-<div class="sourceCode" id="cb269"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># define the linear model</span></span>
 <span><span class="va">lm_temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">hydrogen_sulfide</span> <span class="op">~</span> <span class="va">daily_temp</span>,</span>
 <span>              data <span class="op">=</span> <span class="va">airpoll</span><span class="op">)</span></span>
@@ -756,13 +756,13 @@ H_2S(treatment\_plantB) = 5.7 + 0.036 \cdot daily\_temp
 <span class="header-section-number">24.7.4</span> The null model<a class="anchor" aria-label="anchor" href="#the-null-model"><i class="fas fa-link"></i></a>
 </h3>
 <p>Construct and analyse the null model:</p>
-<div class="sourceCode" id="cb272"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb273"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># visualise the data</span></span>
 <span><span class="va">airpoll</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">hydrogen_sulfide</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="cs5-practical-linear_models_files/figure-html/unnamed-chunk-18-1.png" width="672"></div>
-<div class="sourceCode" id="cb273"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># define the null model</span></span>
 <span><span class="va">lm_null</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">hydrogen_sulfide</span> <span class="op">~</span> <span class="fl">1</span>,</span>
 <span>              data <span class="op">=</span> <span class="va">airpoll</span><span class="op">)</span></span>
@@ -817,7 +817,7 @@ Answer
 <span class="header-section-number">24.8.1</span> Full model<a class="anchor" aria-label="anchor" href="#full-model"><i class="fas fa-link"></i></a>
 </h3>
 <p>The r commands are:</p>
-<div class="sourceCode" id="cb275"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># define the model</span></span>
 <span><span class="va">lm_tree_full</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Volume</span> <span class="op">~</span> <span class="va">Height</span> <span class="op">*</span> <span class="va">Girth</span>,</span>
 <span>                   data <span class="op">=</span> <span class="va">trees</span><span class="op">)</span></span>
@@ -838,7 +838,7 @@ Answer
 <p>Volume = 45.81</p>
 <p>Here we note that the interaction term just requires us to multiple the three numbers together (we haven’t looked at continuous predictors before in the examples and this exercise was included as a check to see if this whole process was making sense).</p>
 <p>If we look at the diagnostic plots for the model using the following commands we get:</p>
-<div class="sourceCode" id="cb277"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lm_tree_full</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"resid"</span>, <span class="st">"qq"</span>, <span class="st">"ls"</span>, <span class="st">"cookd"</span><span class="op">)</span>,</span>
 <span>              smoother <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -855,7 +855,7 @@ Answer
 <span class="header-section-number">24.8.2</span> Additive model<a class="anchor" aria-label="anchor" href="#additive-model-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>The r commands are:</p>
-<div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb279"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># define the model</span></span>
 <span><span class="va">lm_tree_add</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Volume</span> <span class="op">~</span> <span class="va">Height</span> <span class="op">+</span> <span class="va">Girth</span>,</span>
 <span>                  data <span class="op">=</span> <span class="va">trees</span><span class="op">)</span></span>
@@ -875,7 +875,7 @@ Answer
 <p>Volume = -57.99 + 0.34 <span class="math inline">\(\cdot\)</span> 67 + 4.71 <span class="math inline">\(\cdot\)</span> 20</p>
 <p>Volume = 58.91</p>
 <p>If we look at the diagnostic plots for the model using the following commands we get the following:</p>
-<div class="sourceCode" id="cb280"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lm_tree_add</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"resid"</span>, <span class="st">"qq"</span>, <span class="st">"ls"</span>, <span class="st">"cookd"</span><span class="op">)</span>,</span>
 <span>              smoother <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -893,7 +893,7 @@ Answer
 <span class="header-section-number">24.8.3</span> Height-only model<a class="anchor" aria-label="anchor" href="#height-only-model"><i class="fas fa-link"></i></a>
 </h3>
 <p>The r commands are:</p>
-<div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># define the model</span></span>
 <span><span class="va">lm_height</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Volume</span> <span class="op">~</span> <span class="va">Height</span>,</span>
 <span>              data <span class="op">=</span> <span class="va">trees</span><span class="op">)</span></span>
@@ -913,7 +913,7 @@ Answer
 <p>Volume = -87.12 + 1.54 <span class="math inline">\(\cdot\)</span> 67</p>
 <p>Volume = 16.28</p>
 <p>If we look at the diagnostic plots for the model using the following commands we get the following:</p>
-<div class="sourceCode" id="cb283"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lm_height</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"resid"</span>, <span class="st">"qq"</span>, <span class="st">"ls"</span>, <span class="st">"cookd"</span><span class="op">)</span>,</span>
 <span>              smoother <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -930,7 +930,7 @@ Answer
 <span class="header-section-number">24.8.4</span> Girth-only model<a class="anchor" aria-label="anchor" href="#girth-only-model"><i class="fas fa-link"></i></a>
 </h3>
 <p>The r commands are:</p>
-<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb285"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># define the model</span></span>
 <span><span class="va">lm_girth</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Volume</span> <span class="op">~</span> <span class="va">Girth</span>,</span>
 <span>               data <span class="op">=</span> <span class="va">trees</span><span class="op">)</span></span>
@@ -950,7 +950,7 @@ Answer
 <p>Volume = -36.94 + 5.07 <span class="math inline">\(\cdot\)</span> 20</p>
 <p>Volume = 64.37</p>
 <p>If we look at the diagnostic plots for the model using the following commands we get the following:</p>
-<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb287"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lm_girth</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"resid"</span>, <span class="st">"qq"</span>, <span class="st">"ls"</span>, <span class="st">"cookd"</span><span class="op">)</span>,</span>
 <span>              smoother <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>

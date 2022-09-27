@@ -114,22 +114,40 @@ Create the Q-Q plots for the two samples and discuss with your neighbour what yo
 
 <details><summary>Answer</summary>
 
+To create the Q-Q plots we need to filter out the relevant data first. If we want to use the `lm()` function in pipes, we still need to tell it where the data is coming from. Long story short: because the `data =` argument is not at the beginning we need to add a `.` (dot):
+
 
 ```r
-# we group the data by river
-# then create a panel per river
-# containing the Q-Q plot for that river
-rivers %>% 
-  group_by(river) %>%
-  ggplot(aes(sample = length)) +
-  stat_qq() +
-  stat_qq_line(colour = "red") +
-  facet_wrap(facets = vars(river))
+# filter out the Guanapo data
+# and define the model
+lm_guanapo <- rivers %>% 
+  filter(river == "Guanapo") %>% 
+  lm(length ~ 1, data = .)
+
+# filter out the Aripo data
+# and define the model
+lm_aripo <- rivers %>% 
+  filter(river == "Aripo") %>% 
+  lm(length ~ 1, data = .)
+
+# Q-Q plot Guanapo
+lm_guanapo %>% 
+  resid_panel(plots = "qq")
 ```
 
 <img src="cs1-practical-two_sample_t_test_files/figure-html/cs1-twosample-qqplot-1.png" width="672" />
 
-The Q-Q plots mirror what we found with the Shapiro-Wilk tests: the data for Aripo are pretty normally distributed, whereas the assumption of normality for the Guanapo data is less certain.
+```r
+# Q-Q plot Aripo
+lm_aripo %>% 
+  resid_panel(plots = "qq")
+```
+
+<img src="cs1-practical-two_sample_t_test_files/figure-html/cs1-twosample-qqplot-2.png" width="672" />
+
+The Q-Q plots highlight the issue with the Shapiro-Wilk tests: the data for Aripo look pretty normally distributed, whereas the Shapiro-Wilk test suggested that they are not. This is because it's easy for the test to fail when there is sufficient data. Based on the Q-Q plot I would argue that the assumption of normality for the Guanapo data is less certain than for Aripo, whereas the Shapiro-Wilk test tells us they are likely to be normally distributed.
+
+What to do? Well, I would rely more on the graphical interpretation that the output of the Shapiro-Wilk test. There is only one data point in the Aripo data set that deviates from the line, but there is no clear snaking around the line. For the Guanapo data there is some drifting away from the Q-Q line at the bottom but no clear snaking. There are a reasonable number of data points too, so I'd be happy to argue that the data are normal _enough_ for me to perform a t-test.
 
 </details>
 :::
@@ -414,14 +432,31 @@ The p-values for both Shapiro-Wilk tests are non-significant which suggests that
 
 ```r
 # create Q-Q plots for both groups
-turtle %>% 
-  ggplot(aes(sample = serum)) +
-  stat_qq() +
-  stat_qq_line(colour = "red") +
-  facet_wrap(facets = vars(sex))
+
+# Females
+lm_turtle_females <- turtle %>% 
+  filter(sex == "Female") %>% 
+  lm(serum ~ 1, data = .)
+
+# Males
+lm_turtle_males <- turtle %>% 
+  filter(sex == "Male") %>% 
+  lm(serum ~ 1, data = .)
+
+# Q-Q plot Females
+lm_turtle_females %>% 
+  resid_panel(plots = "qq")
 ```
 
 <img src="cs1-practical-two_sample_t_test_files/figure-html/cs1-twosample-turtle-qqplot-1.png" width="672" />
+
+```r
+# Q-Q plot Males
+lm_turtle_males %>% 
+  resid_panel(plots = "qq")
+```
+
+<img src="cs1-practical-two_sample_t_test_files/figure-html/cs1-twosample-turtle-qqplot-2.png" width="672" />
 
 The results from the Q-Q plots echo what we've already seen from the Shapiro-Wilk analyses. The Male group doesn't look too bad whereas the Female group looks somewhat dodgy.
 

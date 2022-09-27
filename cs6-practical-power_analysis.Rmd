@@ -451,14 +451,16 @@ Find the effect size from this study and perform a power calculation (at 0.8 and
 Let's load in the data:
 
 ```{r, }
-musseldat <- read.csv("data/raw/CS6-shelllength.csv")
+musseldat <- read_csv("data/tidy/CS6-shelllength.csv")
 ```
 
 Let's just have a quick look at the data to see what we're dealing with:
 
 ```{r}
-boxplot(length ~ location,
-        data = musseldat)
+musseldat %>% 
+  ggplot(aes(x = location,
+             y = length)) +
+  geom_boxplot()
 ```
 
 So we are effectively looking at a one-way ANOVA with five groups. This will be useful to know later.
@@ -467,11 +469,11 @@ Now we fit a linear model:
 
 ```{r}
 # define the model
-lm.mussel <- lm(length ~ location,
+lm_mussel <- lm(length ~ location,
                 data = musseldat)
 
 # summarise the model
-summary(lm.mussel)
+summary(lm_mussel)
 ```
 From this we get that the $R^2$ value is 0.4559 and we can use this to calculate Cohen's $f^2$ value using the formula in the notes:
 
@@ -507,14 +509,16 @@ b. If there would be a relationship that large between age and seizure rate how 
 Let's load in the data:
 
 ```{r}
-epilepsydat <- read.csv("data/raw/CS6-epilepsy1.csv")
+epilepsydat <- read_csv("data/tidy/CS6-epilepsy1.csv")
 ```
 
 Let's just have a quick look at the data to see what we're dealing with:
 
 ```{r}
-plot(seizure ~ age,
-     data = epilepsydat)
+epilepsydat %>% 
+  ggplot(aes(x = age,
+             y = seizure)) +
+  geom_point()
 ```
 
 So we are effectively looking at a simple linear regression here.
@@ -523,11 +527,11 @@ Now we fit a linear model:
 
 ```{r}
 # define the model
-lm.epilepsy <- lm(seizure ~ age,
+lm_epilepsy <- lm(seizure ~ age,
                   data = epilepsydat)
 
 # summarise the model
-summary(lm.epilepsy)
+summary(lm_epilepsy)
 ```
 
 From this we get that the $R^2$ value is 0.0009134 (which is tiny!) and we can use this to calculate Cohen's $f^2$ value using the formula in the notes:

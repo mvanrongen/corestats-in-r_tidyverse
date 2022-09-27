@@ -5,14 +5,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Chapter 4 One-sample t-test | Core Statistics in R</title>
 <meta name="author" content="Matt Castle and Martin van Rongen">
-<meta name="description" content="4.1 Section commands New commands used in this section: Function Description t_test() Performs a one-sample t-test, Student’s t-test and Welch’s t-test in later sections. stat_qq() Plots a Q-Q...">
+<meta name="description" content="4.1 Section commands New commands used in this section: Function &amp; libraries Description library(tidyverse) library(rstatix) library(ggResidpanel) t_test() Performs a one-sample t-test, Student’s...">
 <meta name="generator" content="bookdown 0.26 with bs4_book()">
 <meta property="og:title" content="Chapter 4 One-sample t-test | Core Statistics in R">
 <meta property="og:type" content="book">
-<meta property="og:description" content="4.1 Section commands New commands used in this section: Function Description t_test() Performs a one-sample t-test, Student’s t-test and Welch’s t-test in later sections. stat_qq() Plots a Q-Q...">
+<meta property="og:description" content="4.1 Section commands New commands used in this section: Function &amp; libraries Description library(tidyverse) library(rstatix) library(ggResidpanel) t_test() Performs a one-sample t-test, Student’s...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 4 One-sample t-test | Core Statistics in R">
-<meta name="twitter:description" content="4.1 Section commands New commands used in this section: Function Description t_test() Performs a one-sample t-test, Student’s t-test and Welch’s t-test in later sections. stat_qq() Plots a Q-Q...">
+<meta name="twitter:description" content="4.1 Section commands New commands used in this section: Function &amp; libraries Description library(tidyverse) library(rstatix) library(ggResidpanel) t_test() Performs a one-sample t-test, Student’s...">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references --><link rel="shortcut icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -397,25 +397,37 @@
 <col width="50%">
 </colgroup>
 <thead><tr class="header">
-<th align="left">Function</th>
+<th align="left">Function &amp; libraries</th>
 <th align="left">Description</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
+<td align="left"><code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="https://rpkgs.datanovia.com/rstatix/">library(rstatix)</a></code></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="https://goodekat.github.io/ggResidpanel/">library(ggResidpanel)</a></code></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
 <td align="left"><code><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test()</a></code></td>
 <td align="left">Performs a one-sample t-test, Student’s t-test and Welch’s t-test in later sections.</td>
 </tr>
-<tr class="even">
-<td align="left"><code><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq()</a></code></td>
-<td align="left">Plots a Q-Q plot for comparison with a normal distribution.</td>
-</tr>
 <tr class="odd">
-<td align="left"><code>stat_qqline()</code></td>
-<td align="left">Adds a comparison line to the Q-Q plot.</td>
-</tr>
-<tr class="even">
 <td align="left"><code><a href="https://rpkgs.datanovia.com/rstatix/reference/shapiro_test.html">shapiro_test()</a></code></td>
 <td align="left">Performs a Shapiro-Wilk test for normality.</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code></td>
+<td align="left">Fits a linear model</td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel()</a></code></td>
+<td align="left">Creates diagnostic plots</td>
 </tr>
 </tbody>
 </table></div>
@@ -444,7 +456,10 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># load rstatix, a tidyverse-friendly stats package</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># load ggResidpanel, for diagnostic plots</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://goodekat.github.io/ggResidpanel/">ggResidpanel</a></span><span class="op">)</span></span></code></pre></div>
 <p>We then read in the data and create a vector containing the data.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># import the data</span></span>
@@ -533,14 +548,16 @@ There are three ways of checking for normality:</p>
 <span class="header-section-number">4.4.2</span> Q-Q plot of the data<a class="anchor" aria-label="anchor" href="#q-q-plot-of-the-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>Q-Q plot is the short for quantile-quantile plot. This <strong>diagnostic</strong> plot (as it is sometimes called) is a way of comparing two distributions. How Q-Q plots work won’t be explained here but ask a demonstrator if you really want to know what is going on.</p>
-<p>Construct a Q-Q Plot of the quantiles of the data against the quantiles of a normal distribution:</p>
+<p>To construct a Q-Q Plot of the quantiles of the data against the quantiles of a normal distribution we use the <code>ggResidPanel</code> library. This library contains a function <code><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel()</a></code> that allows us to plot all kinds of diagnostic plots.</p>
+<p>The diagnostic plots require a “model” of the data. For now, all we need to know is that we can use the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function to create this model. We’ll come back to that in a lot more detail in later sessions. For the one-sample t-test we define the model as <code>length ~ 1</code>, which means that <code>length</code> is equal to the mean value of <code>length</code> (the <code>~ 1</code> tells R this).</p>
+<p>We store the resulting output in an object (<code>lm_fishlength</code>), which we then use to create the diagnostic plot:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># pipe the data to ggplot()</span></span>
-<span><span class="co"># then construct a Q-Q plot</span></span>
-<span><span class="va">fishlengthDF</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>sample <span class="op">=</span> <span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq_line</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># define the model of the data</span></span>
+<span><span class="va">lm_fishlength</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">fishlengthDF</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># create the diagnostic plot, indicating a QQ-plot</span></span>
+<span><span class="va">lm_fishlength</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="st">"qq"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-one_sample_t_test_files/figure-html/cs1-one-sample-t-test-qqplot-1.png" width="672"></div>
 <p>What is important to know is that if the data were normally distributed then all of the points should lie on (or close to) the diagonal line in this graph.</p>
 <p>In this case, the points lie quite close to the line for the most part but the sample quantiles (points) from either end of the sample distribution are either smaller (below the line on the left) or larger (above the line on the right) than expected if they were supposed to be normally distributed. This suggests that the sample distribution is a bit more spread out than would be expected if it came from a normal distribution.</p>
@@ -548,7 +565,7 @@ There are three ways of checking for normality:</p>
 <p>It is a very rare situation indeed where the assumptions necessary for a test will be met unequivocally and a certain degree of personal interpretation is always needed. Here you have to ask yourself whether the data are normal “enough” for you to be confident in the validity of the test.</p>
 <p>Below are four examples of QQ plots for different types of distributions:</p>
 <div class="inline-figure"><img src="cs1-practical-one_sample_t_test_files/figure-html/cs1-one-sample-qqplot-normal-dist-1.png" width="672"></div>
-<p>These two graphs relate to 200 data points that have been drawn from a normal distribution. Even here you can see that the points do not all lie perfectly on the diagonal line in the QQ plot, and a certain amount of deviation at the top and bottom of the graph can happen just by chance (if I were to draw a different set of point then the graph would look slightly different).</p>
+<p>These two graphs relate to 200 data points that have been drawn from a normal distribution. Even here you can see that the points do not all lie perfectly on the diagonal line in the QQ plot, and a certain amount of deviation at the top and bottom of the graph can happen just by chance (if I were to draw a different set of points then the graph would look slightly different).</p>
 <div class="inline-figure"><img src="cs1-practical-one_sample_t_test_files/figure-html/cs1-one-sample-qqplot-uniform-dist-1.png" width="672"></div>
 <p>These two graphs relate to 200 data points that have been drawn from a uniform distribution. Uniform distributions are more condensed than normal distributions, and this is reflected in the QQ plot having a very pronounced S-shaped pattern to it (this is colloquially known as <strong>snaking</strong>).</p>
 <div class="inline-figure"><img src="cs1-practical-one_sample_t_test_files/figure-html/cs1-one-sample-qqplot-t-dist-1.png" width="672"></div>
@@ -735,11 +752,12 @@ Answer
 ##   &lt;chr&gt;               &lt;dbl&gt; &lt;dbl&gt;
 ## 1 dissolving_time     0.980 0.964</code></pre>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># create a Q-Q plot</span></span>
-<span><span class="va">dissolving</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>sample <span class="op">=</span> <span class="va">dissolving_time</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_qq.html">stat_qq_line</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># define the model of the data</span></span>
+<span><span class="va">lm_dissolving</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">dissolving_time</span> <span class="op">~</span> <span class="fl">1</span>, data <span class="op">=</span> <span class="va">dissolving</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># create a Q-Q plot</span></span>
+<span><span class="va">lm_dissolving</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://goodekat.github.io/ggResidpanel/reference/resid_panel.html">resid_panel</a></span><span class="op">(</span>plots <span class="op">=</span> <span class="st">"qq"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="cs1-practical-one_sample_t_test_files/figure-html/unnamed-chunk-6-1.png" width="672"></div>
 <ul>
 <li>The Shapiro test has a p-value of 0.964 which (given that it is bigger than 0.05) suggests that the data are normal enough.</li>

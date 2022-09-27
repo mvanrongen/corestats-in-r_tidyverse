@@ -138,10 +138,11 @@ cortisol_diff %>%
   shapiro_test(cortisol_change)
 
 # and create the Q-Q plot
-cortisol_diff %>% 
-  ggplot(aes(sample = cortisol_change)) +
-  stat_qq() +
-  stat_qq_line(colour = "red")
+lm_cortisol_diff <- lm(cortisol_change ~ 1,
+                       data = cortisol_diff)
+
+lm_cortisol_diff %>% 
+  resid_panel(plots = "qq")
 ```
 
 The Shapiro-Wilk test says that the data are normal enough and whilst the Q-Q plot is mostly fine, there is some suggestion of snaking at the bottom left. I'm actually OK with this because the suggestion of snaking is actually only due to a single point (the last point on the left). If you cover that point up with your thumb (or finger of your choice) then the remaining points in the Q-Q plot look pretty good, and so the suggestion of snaking is actually driven by only a single point (which can happen by chance). As such I'm actually happy that the assumption of normality is well met in this case. This **single point** check is a useful thing to remember when assessing diagnostic plots.

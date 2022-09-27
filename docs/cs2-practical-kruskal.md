@@ -36,7 +36,7 @@ For example, suppose a behavioural ecologist records the rate at which [spider m
 
 We will use a Kruskal-Wallis test to check this.
 
-The data are stored in the file `data/raw/CS2-spidermonkey.csv`.
+The data are stored in the file `data/tidy/CS2-spidermonkey.csv`.
 
 First we read the data in:
 

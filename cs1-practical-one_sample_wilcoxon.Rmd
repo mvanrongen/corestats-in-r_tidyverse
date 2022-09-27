@@ -155,5 +155,5 @@ In terms of choosing between the two test we can see that both meet their respec
 - The t-test assumes that the data are normally distributed and independent of each other
 - The Wilcoxon signed-rank test does not assume a normal distribution, but does require independent samples
 - The `t_test()` compares if the _mean_ of the parent distribution differs from a hypothesised value, whereas `wilcox_test()` compares the _median_.
-- A good way of assessing assumptions is to visually check by looking at the distribution with `geom_histogram()` and quantile-quantile plots with `stat_qq()` and `stat_qqline()`
+- A good way of assessing assumptions is to visually check by looking at the distribution of the data and quantile-quantile plots
 :::
