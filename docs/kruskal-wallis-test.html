@@ -375,6 +375,12 @@
 <li><a class="" href="introduction-4.html"><span class="header-section-number">23</span> Introduction</a></li>
 <li><a class="" href="linear-models.html"><span class="header-section-number">24</span> Linear models</a></li>
 <li><a class="" href="model-comparisons.html"><span class="header-section-number">25</span> Model comparisons</a></li>
+<li class="book-part">CoreStats 6: Power analysis</li>
+<li><a class="" href="cs6-intro.html"><span class="header-section-number">26</span> Introduction</a></li>
+<li class="book-part">CoreStats 6 (Practicals)</li>
+<li><a class="" href="introduction-5.html"><span class="header-section-number">27</span> Introduction</a></li>
+<li><a class="" href="power-analysis.html"><span class="header-section-number">28</span> Power analysis</a></li>
+<li><a class="" href="statistical-reporting.html"><span class="header-section-number">29</span> Statistical reporting</a></li>
 </ul>
 
         <div class="book-extra">
@@ -577,7 +583,7 @@
 ## 3 aggression low    none       7     7      2.25 0.0245   0.0490   *</code></pre>
 <p>The <code><a href="https://rpkgs.datanovia.com/rstatix/reference/dunn_test.html">dunn_test()</a></code> function performs a Kruskal-Wallis test on the data, followed by a post-hoc pairwise multiple comparison.</p>
 <p>The comparison between the pairs of groups is reported in the table at the bottom. Each row contains a single comparison. We are interested in the <code>p</code> and <code>p.adj</code> columns, which contain the the p-values that we want. This table shows that there isn’t a significant difference between the high and low groups, as the p-value (0.1598) is too high. The other two comparisons between the high familiarity and no familiarity groups and between the low and no groups are significant though.</p>
-<p>The <code><a href="https://rpkgs.datanovia.com/rstatix/reference/dunn_test.html">dunn_test()</a></code> function has several arguments, of which the <code>p.adjust.method</code> is likely to be of interest. Here you can define which method needs to be used to account for multiple comparisons. The default is <code>"holm"</code>. We’ll cover more about this in the chapter on <a href="#cs6-intro">Power analysis</a>.</p>
+<p>The <code><a href="https://rpkgs.datanovia.com/rstatix/reference/dunn_test.html">dunn_test()</a></code> function has several arguments, of which the <code>p.adjust.method</code> is likely to be of interest. Here you can define which method needs to be used to account for multiple comparisons. The default is <code>"holm"</code>. We’ll cover more about this in the chapter on <a href="cs6-intro.html#cs6-intro">Power analysis</a>.</p>
 </div>
 <div id="exercise-lobster-weight-1" class="section level2" number="13.10">
 <h2>

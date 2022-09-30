@@ -35,10 +35,10 @@ rmd_files: [
   "cs5-practical-linear_models.Rmd",
   "cs5-practical-model_comparison.Rmd",
 
-  #"cs6-intro.Rmd",
-  #"cs6-practical-introduction.Rmd",
-  #"cs6-practical-power_analysis.Rmd",
-  #"cs6-practical-statistical_reporting.Rmd",
+  "cs6-intro.Rmd",
+  "cs6-practical-introduction.Rmd",
+  "cs6-practical-power_analysis.Rmd",
+  "cs6-practical-statistical_reporting.Rmd",
 ]
 
 language:

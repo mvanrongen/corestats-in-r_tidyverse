@@ -515,10 +515,10 @@
 <p>We will be using the <code>pwr</code> package during this section, which contains functions that allow us to perform power calculations. Please install it now.</p>
 <p>You can do this by running the following code in your console:</p>
 <div class="sourceCode" id="cb314"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"pwr"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"pwr"</span><span class="op">)</span></span></code></pre></div>
 <p>Next, load it by running:</p>
 <div class="sourceCode" id="cb315"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/heliosdrm/pwr">pwr</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/heliosdrm/pwr">pwr</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="section-commands-14" class="section level2" number="28.4">
 <h2>
@@ -566,7 +566,7 @@
 </h3>
 <p>Now we need to work out what a “medium” effect size would be. In the absence of any other information we appeal to Cohen’s conventional values:</p>
 <div class="sourceCode" id="cb316"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/cohen.ES.html">cohen.ES</a></span><span class="op">(</span>test <span class="op">=</span> <span class="st">"t"</span>, size <span class="op">=</span> <span class="st">"medium"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/cohen.ES.html">cohen.ES</a></span><span class="op">(</span>test <span class="op">=</span> <span class="st">"t"</span>, size <span class="op">=</span> <span class="st">"medium"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##      Conventional effect size from Cohen (1982) 
 ## 
@@ -594,8 +594,8 @@ For this sort of study effect size is measured in terms of Cohen’s d statistic
 </h3>
 <p>We do this as follows:</p>
 <div class="sourceCode" id="cb318"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.5</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span>,
-           type <span class="op">=</span> <span class="st">"two.sample"</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.5</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span>,</span>
+<span>           type <span class="op">=</span> <span class="st">"two.sample"</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##      Two-sample t test power calculation 
 ## 
@@ -628,8 +628,8 @@ For this sort of study effect size is measured in terms of Cohen’s d statistic
 </blockquote>
 <p>Let’s see how we do this:</p>
 <div class="sourceCode" id="cb320"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">30</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span>,
-           type <span class="op">=</span> <span class="st">"two.sample"</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">30</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span>,</span>
+<span>           type <span class="op">=</span> <span class="st">"two.sample"</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##      Two-sample t test power calculation 
 ## 
@@ -644,11 +644,11 @@ For this sort of study effect size is measured in terms of Cohen’s d statistic
 <p>In both of the previous two examples we were a little bit context-free in terms of effect size. Let’s look at how we can use a pilot study with real data to calculate effect sizes and perform a power analysis to inform a future study.</p>
 <p>Let’s look again at the <code>fishlength</code> data we saw in the first practical relating to the lengths of fish from two separate rivers. This is saved as <code>data/tidy/CS6-fishlength.csv</code>.</p>
 <div class="sourceCode" id="cb322"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># read in the data</span>
-<span class="va">fishlength</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS6-fishlength.csv"</span><span class="op">)</span>
-
-<span class="co"># look at the data</span>
-<span class="va">fishlength</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># read in the data</span></span>
+<span><span class="va">fishlength</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS6-fishlength.csv"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># look at the data</span></span>
+<span><span class="va">fishlength</span></span></code></pre></div>
 <pre><code>## # A tibble: 68 × 3
 ##       id river   length
 ##    &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;
@@ -664,26 +664,26 @@ For this sort of study effect size is measured in terms of Cohen’s d statistic
 ## 10    10 Guanapo   18.8
 ## # … with 58 more rows</code></pre>
 <div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># summarise the data</span>
-<span class="va">fishlength</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">id</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">river</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/get_summary_stats.html">get_summary_stats</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"common"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># summarise the data</span></span>
+<span><span class="va">fishlength</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">river</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/get_summary_stats.html">get_summary_stats</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"common"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 2 × 11
 ##   river   variable     n   min   max median   iqr  mean    sd    se    ci
 ##   &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1 Aripo   length      39  17.5  26.4   20.1   2.2  20.3  1.78 0.285 0.577
 ## 2 Guanapo length      29  11.2  23.3   18.8   2.2  18.3  2.58 0.48  0.983</code></pre>
 <div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># visualise the data</span>
-<span class="va">fishlength</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">river</span>, y <span class="op">=</span> <span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># visualise the data</span></span>
+<span><span class="va">fishlength</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">river</span>, y <span class="op">=</span> <span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="cs6-practical-power_analysis_files/figure-html/unnamed-chunk-7-1.png" width="672"></div>
 <div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># perform t-test</span>
-<span class="va">fishlength</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># perform t-test</span></span>
+<span><span class="va">fishlength</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 8
 ##   .y.    group1 group2     n1    n2 statistic    df       p
 ## * &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;   &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
@@ -692,8 +692,8 @@ For this sort of study effect size is measured in terms of Cohen’s d statistic
 <p>Can we use this information to design a more efficient experiment? One that we would be confident was powerful enough to pick up a difference in means as big as was observed in this study but with fewer observations?</p>
 <p>Let’s first work out exactly what the effect size of this previous study really was by estimating Cohen’s d using this data.</p>
 <div class="sourceCode" id="cb329"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">fishlength</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cohens_d.html">cohens_d</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>, var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">fishlength</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cohens_d.html">cohens_d</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">river</span>, var.equal <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 7
 ##   .y.    group1 group2  effsize    n1    n2 magnitude
 ## * &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;ord&gt;    
@@ -701,8 +701,8 @@ For this sort of study effect size is measured in terms of Cohen’s d statistic
 <p>The <code><a href="https://rpkgs.datanovia.com/rstatix/reference/cohens_d.html">cohens_d()</a></code> function calculates the effect size using the formula of the test. The <code>effsize</code> column contains the information that we want, in this case 0.94 .</p>
 <p>We can know actually answer our question and see how many fish we really need to catch in the future:</p>
 <div class="sourceCode" id="cb331"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.94</span>, power <span class="op">=</span> <span class="fl">0.8</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>,
-           type <span class="op">=</span> <span class="st">"two.sample"</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="fl">0.94</span>, power <span class="op">=</span> <span class="fl">0.8</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>           type <span class="op">=</span> <span class="st">"two.sample"</span>, alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##      Two-sample t test power calculation 
 ## 
@@ -734,13 +734,13 @@ For this sort of study effect size is measured in terms of Cohen’s d statistic
 Answer
 </summary><p>First, read in the data:</p>
 <div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">fish_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS6-onesample.csv"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">fish_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS6-onesample.csv"</span><span class="op">)</span></span></code></pre></div>
 <p>Let’s run the one-sample t-test as we did before:</p>
 <div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">fish_data</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="fl">1</span>,
-         mu <span class="op">=</span> <span class="fl">20</span>,
-         alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">fish_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/t_test.html">t_test</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="fl">1</span>,</span>
+<span>         mu <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>         alternative <span class="op">=</span> <span class="st">"two.sided"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 7
 ##   .y.    group1 group2         n statistic    df       p
 ## * &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;      &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
@@ -748,8 +748,8 @@ Answer
 <p>There does appear to be a statistically significant result here; the mean length of the fish appears to be different from 20 cm.</p>
 <p>Let’s calculate the effect size using these data. This gives us the following output for the effect size in terms of the Cohen’s d metric.</p>
 <div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">fish_data</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cohens_d.html">cohens_d</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="fl">1</span>, mu <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">fish_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cohens_d.html">cohens_d</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="fl">1</span>, mu <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 6
 ##   .y.    group1 group2     effsize     n magnitude
 ## * &lt;chr&gt;  &lt;chr&gt;  &lt;chr&gt;        &lt;dbl&gt; &lt;int&gt; &lt;ord&gt;    
@@ -760,8 +760,8 @@ Answer
 </div>
 <p>So, let’s do the power analysis to actually calculate the minimum sample size required:</p>
 <div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="op">-</span><span class="fl">0.6590669</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span>,
-           type <span class="op">=</span> <span class="st">"one.sample"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="op">-</span><span class="fl">0.6590669</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span>,</span>
+<span>           type <span class="op">=</span> <span class="st">"one.sample"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##      One-sample t test power calculation 
 ## 
@@ -772,8 +772,8 @@ Answer
 ##     alternative = two.sided</code></pre>
 <p>We would need 21 (you round up the n value) observations in our experimental protocol in order to be able to detect an effect size this big (small?) at a 5% significance level and 80% power. Let’s see what would happen if we wanted to be even more stringent:</p>
 <div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="op">-</span><span class="fl">0.6590669</span>, sig.level <span class="op">=</span> <span class="fl">0.01</span>, power <span class="op">=</span> <span class="fl">0.9</span>,
-           type <span class="op">=</span> <span class="st">"one.sample"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="op">-</span><span class="fl">0.6590669</span>, sig.level <span class="op">=</span> <span class="fl">0.01</span>, power <span class="op">=</span> <span class="fl">0.9</span>,</span>
+<span>           type <span class="op">=</span> <span class="st">"one.sample"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##      One-sample t test power calculation 
 ## 
@@ -802,11 +802,11 @@ Answer
 Answer
 </summary><p>First, read in the data:</p>
 <div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">cortisol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS6-twopaired.csv"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">cortisol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS6-twopaired.csv"</span><span class="op">)</span></span></code></pre></div>
 <p>We have a paired dataset with 20 pairs of observations, what sort of effect size could we detect at a significance level of 0.05 and power of 0.8?</p>
 <div class="sourceCode" id="cb343"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">20</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span>,
-           type <span class="op">=</span> <span class="st">"paired"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">20</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span>,</span>
+<span>           type <span class="op">=</span> <span class="st">"paired"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##      Paired t test power calculation 
 ## 
@@ -820,16 +820,16 @@ Answer
 <p>Remember that we get effect size measured in Cohen’s d metric. So here this experimental design would be able to detect a d value of 0.66 (2dp) which is a medium to large effect size.</p>
 <p>Now let’s look at the actual data and work out what the effect size actually is:</p>
 <div class="sourceCode" id="cb345"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">cortisol</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cohens_d.html">cohens_d</a></span><span class="op">(</span><span class="va">cortisol</span> <span class="op">~</span> <span class="va">time</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">cortisol</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/cohens_d.html">cohens_d</a></span><span class="op">(</span><span class="va">cortisol</span> <span class="op">~</span> <span class="va">time</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 1 × 7
 ##   .y.      group1  group2  effsize    n1    n2 magnitude
 ## * &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;ord&gt;    
 ## 1 cortisol evening morning   -1.16    20    20 large</code></pre>
 <p>This value, -1.16, is a massive effect size. It’s quite likely that we actually have more participants in this study than we actually need given such a large effect. Let calculate how many individuals we would actually need:</p>
 <div class="sourceCode" id="cb347"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="op">-</span><span class="fl">1.159019</span>, sig.level <span class="op">=</span> <span class="fl">0.01</span>, power <span class="op">=</span> <span class="fl">0.8</span>,
-           type <span class="op">=</span> <span class="st">"paired"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.t.test.html">pwr.t.test</a></span><span class="op">(</span>d <span class="op">=</span> <span class="op">-</span><span class="fl">1.159019</span>, sig.level <span class="op">=</span> <span class="fl">0.01</span>, power <span class="op">=</span> <span class="fl">0.8</span>,</span>
+<span>           type <span class="op">=</span> <span class="st">"paired"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##      Paired t test power calculation 
 ## 
@@ -853,21 +853,21 @@ Answer
 <p>Read in <code>data/tidy/CS6-lobsters.csv</code>. This dataset was used in an earlier practical and describes the effect on lobster weight of three different food sources.</p>
 <p>Type this in:</p>
 <div class="sourceCode" id="cb349"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># read in the data</span>
-<span class="va">lobsters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS6-lobsters.csv"</span><span class="op">)</span>
-
-<span class="co"># visualise the data</span>
-<span class="va">lobsters</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">diet</span>, y <span class="op">=</span> <span class="va">weight</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># read in the data</span></span>
+<span><span class="va">lobsters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS6-lobsters.csv"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># visualise the data</span></span>
+<span><span class="va">lobsters</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">diet</span>, y <span class="op">=</span> <span class="va">weight</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="cs6-practical-power_analysis_files/figure-html/unnamed-chunk-19-1.png" width="672"></div>
 <div class="sourceCode" id="cb350"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># define the linear model</span>
-<span class="va">lm_lobster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>,
-                 data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span>
-
-<span class="co"># perform ANOVA on model</span>
-<span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_lobster</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># define the linear model</span></span>
+<span><span class="va">lm_lobster</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">diet</span>,</span>
+<span>                 data <span class="op">=</span> <span class="va">lobsters</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># perform ANOVA on model</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_lobster</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: weight
@@ -888,23 +888,23 @@ f^2 = \frac{R^2}{1-R^2}
 \end{equation}\]</span></p>
 <p>We find R<sup>2</sup> from the anova on <code>lm_lobster</code> and then we can calculate Cohen’s f^2:</p>
 <div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># get the effect size for ANOVA</span>
-<span class="va">R2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/eta_squared.html">eta_squared</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_lobster</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">R2</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># get the effect size for ANOVA</span></span>
+<span><span class="va">R2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/eta_squared.html">eta_squared</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">lm_lobster</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">R2</span></span></code></pre></div>
 <pre><code>##      diet 
 ## 0.1797219</code></pre>
 <div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># calculate Cohen's f2</span>
-<span class="va">R2</span> <span class="op">/</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">R2</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># calculate Cohen's f2</span></span>
+<span><span class="va">R2</span> <span class="op">/</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">R2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##      diet 
 ## 0.2190987</code></pre>
 <p>So now we’ve got Cohen’s f<sup>2</sup>. There’s one more thing that we need for the power calculation for a linear model (and this is where it gets a bit arbitrary); the degrees of freedom. We can either read those off the very bottom line of the <code>anova(lm_lobster)</code> output or we can extract them as follows:</p>
 <div class="sourceCode" id="cb356"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># get degrees of freedom</span>
-<span class="va">lm_lobster</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/anova_summary.html">anova_summary</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># get degrees of freedom</span></span>
+<span><span class="va">lm_lobster</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/anova_summary.html">anova_summary</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##   Effect DFn DFd     F     p p&lt;.05  ges
 ## 1   diet   2  15 1.643 0.226       0.18</code></pre>
 <p>We have two different degrees of freedom: the <strong>numerator degrees of freedom</strong> (<code>DFn</code>) and the <strong>denominator degrees of freedom</strong> (<code>DFd</code>).Here the numerator degrees of freedom is 2. This is the number that we want. It is simply the number of parameters in the model minus 1. In this model there are three parameters for the three groups, so 3 - 1 = 2 (see the maths isn’t too bad). The other number is called the denominator degrees of freedom, which in this case is 15. This is actually the number we want the power analysis to calculate as it’s a proxy for the number of observations used in the model, and we’ll see how in a minute.</p>
@@ -923,8 +923,8 @@ f^2 = \frac{R^2}{1-R^2}
 <code>f2</code> to represent Cohen’s f<sup>2</sup> effect size value</li>
 </ul>
 <div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.f2.test.html">pwr.f2.test</a></span><span class="op">(</span>u <span class="op">=</span> <span class="fl">2</span>, f2 <span class="op">=</span> <span class="fl">0.219</span>,
-            sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.f2.test.html">pwr.f2.test</a></span><span class="op">(</span>u <span class="op">=</span> <span class="fl">2</span>, f2 <span class="op">=</span> <span class="fl">0.219</span>,</span>
+<span>            sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##      Multiple regression power calculation 
 ## 
@@ -999,7 +999,7 @@ There are two questions you might now ask (if you’re still following all of th
 Answer
 </summary><p>Let’s load in the data:</p>
 <div class="sourceCode" id="cb360"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">musseldat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS6-shelllength.csv"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">musseldat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS6-shelllength.csv"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Rows: 39 Columns: 2
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: ","
@@ -1010,20 +1010,20 @@ Answer
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <p>Let’s just have a quick look at the data to see what we’re dealing with:</p>
 <div class="sourceCode" id="cb362"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">musseldat</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">location</span>,
-             y <span class="op">=</span> <span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">musseldat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">location</span>,</span>
+<span>             y <span class="op">=</span> <span class="va">length</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="cs6-practical-power_analysis_files/figure-html/unnamed-chunk-24-1.png" width="672"></div>
 <p>So we are effectively looking at a one-way ANOVA with five groups. This will be useful to know later.</p>
 <p>Now we fit a linear model:</p>
 <div class="sourceCode" id="cb363"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># define the model</span>
-<span class="va">lm_mussel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">location</span>,
-                data <span class="op">=</span> <span class="va">musseldat</span><span class="op">)</span>
-
-<span class="co"># summarise the model</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lm_mussel</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># define the model</span></span>
+<span><span class="va">lm_mussel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">length</span> <span class="op">~</span> <span class="va">location</span>,</span>
+<span>                data <span class="op">=</span> <span class="va">musseldat</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># summarise the model</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lm_mussel</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = length ~ location, data = musseldat)
@@ -1047,13 +1047,13 @@ Answer
 ## F-statistic: 7.121 on 4 and 34 DF,  p-value: 0.0002812</code></pre>
 <p>From this we get that the <span class="math inline">\(R^2\)</span> value is 0.4559 and we can use this to calculate Cohen’s <span class="math inline">\(f^2\)</span> value using the formula in the notes:</p>
 <div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">f2</span> <span class="op">&lt;-</span> <span class="fl">0.4559</span> <span class="op">/</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fl">0.4559</span><span class="op">)</span>
-<span class="va">f2</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">f2</span> <span class="op">&lt;-</span> <span class="fl">0.4559</span> <span class="op">/</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fl">0.4559</span><span class="op">)</span></span>
+<span><span class="va">f2</span></span></code></pre></div>
 <pre><code>## [1] 0.8378974</code></pre>
 <p>Now, our model has 5 parameters (because we have 5 groups) and so the numerator degrees of freedom will be 4 <span class="math inline">\((5 - 1 = 4)\)</span>. This means that we can now carry our our power analysis:</p>
 <div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.f2.test.html">pwr.f2.test</a></span><span class="op">(</span>u <span class="op">=</span> <span class="fl">4</span>, f2 <span class="op">=</span> <span class="fl">0.8378974</span>,
-            sig.level <span class="op">=</span> <span class="fl">0.05</span> , power <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.f2.test.html">pwr.f2.test</a></span><span class="op">(</span>u <span class="op">=</span> <span class="fl">4</span>, f2 <span class="op">=</span> <span class="fl">0.8378974</span>,</span>
+<span>            sig.level <span class="op">=</span> <span class="fl">0.05</span> , power <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##      Multiple regression power calculation 
 ## 
@@ -1081,7 +1081,7 @@ Answer
 Answer
 </summary><p>Let’s load in the data:</p>
 <div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">epilepsydat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS6-epilepsy1.csv"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">epilepsydat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"data/tidy/CS6-epilepsy1.csv"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Rows: 236 Columns: 2
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: ","
@@ -1091,20 +1091,20 @@ Answer
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <p>Let’s just have a quick look at the data to see what we’re dealing with:</p>
 <div class="sourceCode" id="cb371"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">epilepsydat</span> <span class="op"><a href="https://rpkgs.datanovia.com/rstatix/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">age</span>,
-             y <span class="op">=</span> <span class="va">seizure</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">epilepsydat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">age</span>,</span>
+<span>             y <span class="op">=</span> <span class="va">seizure</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="cs6-practical-power_analysis_files/figure-html/unnamed-chunk-29-1.png" width="672"></div>
 <p>So we are effectively looking at a simple linear regression here.</p>
 <p>Now we fit a linear model:</p>
 <div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># define the model</span>
-<span class="va">lm_epilepsy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">seizure</span> <span class="op">~</span> <span class="va">age</span>,
-                  data <span class="op">=</span> <span class="va">epilepsydat</span><span class="op">)</span>
-
-<span class="co"># summarise the model</span>
-<span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lm_epilepsy</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># define the model</span></span>
+<span><span class="va">lm_epilepsy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">seizure</span> <span class="op">~</span> <span class="va">age</span>,</span>
+<span>                  data <span class="op">=</span> <span class="va">epilepsydat</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># summarise the model</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">lm_epilepsy</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = seizure ~ age, data = epilepsydat)
@@ -1125,14 +1125,14 @@ Answer
 ## F-statistic: 0.2139 on 1 and 234 DF,  p-value: 0.6441</code></pre>
 <p>From this we get that the <span class="math inline">\(R^2\)</span> value is 0.0009134 (which is tiny!) and we can use this to calculate Cohen’s <span class="math inline">\(f^2\)</span> value using the formula in the notes:</p>
 <div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">f2</span> <span class="op">&lt;-</span> <span class="fl">0.0009134</span> <span class="op">/</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fl">0.0009134</span><span class="op">)</span>
-<span class="va">f2</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">f2</span> <span class="op">&lt;-</span> <span class="fl">0.0009134</span> <span class="op">/</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="fl">0.0009134</span><span class="op">)</span></span>
+<span><span class="va">f2</span></span></code></pre></div>
 <pre><code>## [1] 0.0009142351</code></pre>
 <p>This effect size is absolutely tiny. If we really wanted to design an experiment to pick up an effect size this small then we would expect that we’ll need 1000s of participants.</p>
 <p>Now, our model has 2 parameters (an intercept and a slope) and so the numerator degrees of freedom (<code>u</code>) will be 1 (2 - 1 = 1!). This means that we can now carry our our power analysis:</p>
 <div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.f2.test.html">pwr.f2.test</a></span><span class="op">(</span>u <span class="op">=</span> <span class="fl">1</span>, f2 <span class="op">=</span> <span class="fl">0.0009142351</span>,
-            sig.level <span class="op">=</span> <span class="fl">0.05</span> , power <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.f2.test.html">pwr.f2.test</a></span><span class="op">(</span>u <span class="op">=</span> <span class="fl">1</span>, f2 <span class="op">=</span> <span class="fl">0.0009142351</span>,</span>
+<span>            sig.level <span class="op">=</span> <span class="fl">0.05</span> , power <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##      Multiple regression power calculation 
 ## 
@@ -1169,7 +1169,7 @@ Answer
 </ol>
 <p>The effect size is easy to get:</p>
 <div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/cohen.ES.html">cohen.ES</a></span><span class="op">(</span>test <span class="op">=</span> <span class="st">"f2"</span>, size <span class="op">=</span> <span class="st">"medium"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/cohen.ES.html">cohen.ES</a></span><span class="op">(</span>test <span class="op">=</span> <span class="st">"f2"</span>, size <span class="op">=</span> <span class="st">"medium"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##      Conventional effect size from Cohen (1982) 
 ## 
@@ -1196,8 +1196,8 @@ Answer
 <p>Rather boring that all of them were 1 to be honest. Anyway, given that the denominator degrees of freedom is just the sum of all of these, we can see that <span class="math inline">\(u = 6\)</span>.</p>
 <p>We now have all of the information to carry out the power analysis:</p>
 <div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.f2.test.html">pwr.f2.test</a></span><span class="op">(</span>u <span class="op">=</span> <span class="fl">6</span>, f2 <span class="op">=</span> <span class="fl">0.15</span>,
-            sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/pwr/man/pwr.f2.test.html">pwr.f2.test</a></span><span class="op">(</span>u <span class="op">=</span> <span class="fl">6</span>, f2 <span class="op">=</span> <span class="fl">0.15</span>,</span>
+<span>            sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##      Multiple regression power calculation 
 ## 
